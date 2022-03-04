@@ -3,6 +3,9 @@
   
   
 }
+body {
+  overflow-x: hidden;
+}
 
 .logo{
   display:inline-block;
@@ -343,18 +346,18 @@ height: 650px;
   margin-top: 15px;
 }
 /* -----scroll bar customizing-------- */
-::-webkit-scrollbar {
+.side_bar ::-webkit-scrollbar {
   width: 12px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.side_bar ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 100px black;
   border-radius: 10px;
 }
  
 /* Handle */
-::-webkit-scrollbar-thumb {
+.side_bar ::-webkit-scrollbar-thumb {
   background:#bd960a;
   border-radius: 10px;
 }

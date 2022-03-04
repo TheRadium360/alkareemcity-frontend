@@ -5,7 +5,7 @@ const FormScrollBar = () => {
     return (
         <>
         <div className='row'>
-            <div className='col-3'>
+          <div className='col-3 side_bar'>
                 <div className='text'>
                    <div className='form_scrollbar'>
                     <div  className='scrollbar_value'> Lorem Ipsum </div>
