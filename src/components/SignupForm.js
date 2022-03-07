@@ -7,7 +7,7 @@ const SignupForm = () => {
         <div className='container ' >
           <h1 className='formHeading'>Sign Up</h1>
             <form className='form1'>
-  <div className="mb-3" >
+       <div className="mb-3" >
 
     <input type="text"  id="exampleInputEmail1" aria-describedby="emailHelp"
      placeholder='Full Name'  className='signUpInput' />
