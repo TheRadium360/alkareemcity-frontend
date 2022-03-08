@@ -1,23 +1,28 @@
-import './App.css';
-
+import '../css/App.css';
 import { FaEye } from "react-icons/fa";
-
+import Api from '../Api';
 import React, { useContext, useState } from 'react';
 import UsersContext from '../context/users/UsersContext';
 
 
 
 
+const endPoint='users/login';
+
 const SignInForm = () => {
-  const { login } = useContext(UsersContext);
+  const { cookies,setCookie } = useContext(UsersContext);
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
   });
-  const handleLogin = (e) => {
+  
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    login(credentials)
+    const res = await Api.post(endPoint,credentials)
+    await setCookie("jwt",res.data.token);
   }
+  
   const onChange = (e)=>{
     setCredentials({...credentials,[e.target.name]: e.target.value})
   }

@@ -1,5 +1,5 @@
-import './welcome.css'
-// import './index.css'
+import '../../css/welcome.css';
+
 import React from 'react';
 import Welcome1 from './Welcom';
 import Navbar from '../Navbar';
