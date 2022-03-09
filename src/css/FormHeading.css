@@ -1,0 +1,15 @@
+.headingBox{
+  width: fit-content;
+  margin: auto;
+  
+}
+
+.formHeading{
+  color: black; 
+  padding-bottom: .3rem;
+  border-bottom: 2px solid #bd960a;
+ text-align: center;
+ letter-spacing: 1px;
+ font-size: 2.5rem;
+
+}

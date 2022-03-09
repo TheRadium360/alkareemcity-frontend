@@ -9,7 +9,7 @@ import UserState from './context/users/UserState';
 import AppState from './context/appState/AppState';
 import ProtectedRoute from './components/ProtectedRoute';
 import ComplaintForm from './components/complaintForm/ComplaintForm';
-
+import { Digitalpages } from './components/DigitalPages';
 
 import {
   Routes,
@@ -30,13 +30,14 @@ function App() {
             <Route exact path="login" element={<SignInForm />} />
             <Route exact path="signup" element={<SignupForm />} />
             <Route exact path="complaintform" element={<ComplaintForm />} />
+            <Route exact path="digitalpages" element={<Digitalpages />} />
 
 
             <Route
               exact path="/"
               element={
                 <ProtectedRoute redirectPath="/signup" >
-                  <Welcome />
+                
                 </ProtectedRoute>
               }
 
