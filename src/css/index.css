@@ -17,9 +17,6 @@ top: 30%; */
 
   background-color: black;
   padding-top: 220px;
-  height: 825px;
+  height: fit-content;
   
-  
-  
-  /* height: 100vh; */
 }

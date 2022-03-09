@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../css/App.css';
 /* <i class="fa-solid fa-square-left"></i> */
 
 const Residential = () => {
