@@ -2,10 +2,9 @@ import React from 'react';
 
 const Input = (props) => {
     return (
-        <div >
-            <input type="text" id="fname" name="fname" className='input' placeholder={props.placeholder} />
 
-        </div>
+        <input type={props.type} id="fname" name={props.name} className='input' placeholder={props.placeholder} style={{ width: props.width }} onChange={props.onChange} />
+
     );
 };
 

@@ -72,7 +72,8 @@ const SignupForm=() => {
         CNIC: cnic,
         passwordConfirm: mpassword
       } );
-      console.log( res.data );
+
+
       if ( res.data.status==="success" ) {
         setCookie( "jwt", res.data.token )
         navigate( "/" );
@@ -84,6 +85,8 @@ const SignupForm=() => {
     catch ( err ) {
       console.log( err );
     }
+
+
   };
 
 
