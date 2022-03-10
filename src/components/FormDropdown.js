@@ -17,7 +17,7 @@ export const FormDropdown = (props) => {
   <button value={name===props.name?'':name} className="btn btn_name" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor:props.backgroundColor,color:props.color}}>
     {name}
   </button>
-  <ul className="dropdown-menu list"  style={{width:props.width}} onClick={handleSelection}>
+  <ul className="dropdown-menu list"  style={{width:'100%'}} onClick={handleSelection}>
 
   {
     props.list.map((e)=><li className='list_item' value={e}>{e}</li>)
