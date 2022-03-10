@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
+import Api from '../../Api'
 import AppContext from '../../context/appState/AppContext'
+import UsersContext from '../../context/users/UsersContext'
 import Input from '../Input'
 import TextArea from '../TextArea'
 
@@ -15,32 +17,35 @@ function ComplaintForm() {
 
   const [ complaintFormCred, setComplaintFormCred ]=useState( { name: "", email: "", subject: "", description: "" } )
   const { onChangeGeneric }=useContext( AppContext );
+  const { user }=useContext( UsersContext );
 
   const onChange=onChangeGeneric( complaintFormCred, setComplaintFormCred );
 
-  const handleSubmit=() => {
-
+  const handleSubmit=async ( e ) => {
+    e.preventDefault();
+    const res=await Api.post( '/complaints', complaintFormCred )
+    console.log( res );
 
   }
 
-
+  console.log( user );
 
 
 
   return (
     <>
 
-      <form>
+      <form onSubmit={handleSubmit}>
 
         <div className="container">
           <div className="row">
 
             <div className="col-6">
-              <Input placeholder="Name" width="100%" name="name" type="text" onChange={onChange} />
+              <Input placeholder="Name" width="100%" name="name" type="text" onChange={onChange} value={user.name} />
             </div>
 
             <div className="col-6">
-              <Input placeholder="Email" width="100%" name="email" type="email" onChange={onChange} />
+              <Input placeholder="Email" width="100%" name="email" type="email" onChange={onChange} value={user.value} />
             </div>
 
             <div className="col-12">

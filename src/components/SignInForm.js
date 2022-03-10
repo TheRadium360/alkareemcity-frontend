@@ -25,6 +25,7 @@ const SignInForm=() => {
     e.preventDefault();
     const res=await Api.post( endPoint, credentials );
     console.log( res.data );
+    console.log( res.data.status==="success" );
 
     if ( res.data.status==="success" ) {
       setCookie( "jwt", res.data.token );
