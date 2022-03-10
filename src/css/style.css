@@ -6,15 +6,14 @@ body {
     overflow-x: hidden;
 }
 
-.logo {
+.logoo {
     display: inline-block;
     margin-top: 1px;
     margin-left: -25px;
     z-index: 5;
 }
 
-
-/* .navbar {
+.nav_bar {
     background-color: #bd960a;
     color: white;
     border-radius: 30px;
@@ -25,12 +24,12 @@ body {
     height: 65px;
     width: 61rem;
     z-index: 5;
-} */
+}
 
 
 /* a:hover {
-   color: red;
-} */
+     color: red;
+  } */
 
 .nav-item {
     /* font-variant: normal; */
@@ -388,8 +387,8 @@ a:hover {
 
 
 /* ::-webkit-scrollbar-thumb:hover {
-  background: #e48a8a; 
-} */
+    background: #e48a8a; 
+  } */
 
 
 /* ------------------Form detail------------------------- */
@@ -537,11 +536,11 @@ a:hover {
 
 
 /* .timeline{
-  margin:90px auto;
-  width: 360px;
-  border-left: 2px solid rgb(194, 20, 20);
-  padding: 0 20px 0 30px;
-} */
+    margin:90px auto;
+    width: 360px;
+    border-left: 2px solid rgb(194, 20, 20);
+    padding: 0 20px 0 30px;
+  } */
 
 
 /* ----------------Checkbox Components-------------- */
@@ -567,54 +566,11 @@ a:hover {
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
-    /* border-bottom-style: groove; */
+    border-bottom-style: groove;
     border-color: #bd960a;
-    margin-top: 2rem;
-    /* margin-left: 10px;
-    margin-top: 5px; */
-    /* width: 19rem; */
-}
-
-.input:focus {
-    /* border: none; */
-    outline: none;
-}
-
-.textArea {
-    border: 2px solid #bd960a;
-    margin-top: 2rem;
-    border-radius: 10px;
-    padding: 5px 15px;
-}
-
-.textArea:focus,
-.textArea:active {
-    border: 2px solid #bd960a !important;
-    outline: none;
-}
-
-.form_btn {
-    color: white;
-    background-color: #bd960a;
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
-.form_btn:hover {
-    background-color: #e6b60a;
-    color: white;
-}
-
-.reset_btn {
-    background-color: #020100;
-    color: white;
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
-.reset_btn:hover {
-    background-color: #000000da;
-    color: white;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 19rem;
 }
 
 
