@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Navigate } from 'react-router-dom';
 import UsersContext from "../context/users/UsersContext";
+import Cookies from 'js-cookie';
 
 const ProtectedRoute=( {
   redirectPath='/signup',
@@ -8,10 +9,12 @@ const ProtectedRoute=( {
 } ) => {
 
   // Check user token here
-  const { cookies }=useContext( UsersContext );
 
+  const { user }=useContext( UsersContext );
+  const jwt=Cookies.get( 'jwt' );
+  console.log( user )
 
-  if ( !cookies.jwt ) {
+  if ( !jwt ) {
 
     return <Navigate to={redirectPath} replace />;
 

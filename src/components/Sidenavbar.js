@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useContext } from "react";
 import { Link, Outlet } from 'react-router-dom'
 import './../css/sideNavbar.css'
 import { useLocation } from 'react-router-dom'
+import UsersContext from '../context/users/UsersContext';
 
 
 export default function Sidenavbar() {
     const location = useLocation();
-       
+  const { user }=useContext( UsersContext )
+  console.log( user );
   return (
    
   <>
    <div className="wrapper d-flex align-items-stretch">
   <nav id="sidebar">
     <div className="p-3">
-      <a href="#" className="img_img logo  rounded-circle mb-5" />
-      <ul className="list-unstyled components mb-5">
+            <a href="#" className="img_img logo  rounded-circle mb-5" />
+
+            <ul className="list-unstyled components mb-5">
         <li className={`${location.pathname.endsWith("installments") || location.pathname.endsWith('/') || location.pathname.endsWith('d') ? "active": ''}`}>
           <Link to='/dashboard/installments'>Installments</Link>
         </li>
@@ -41,7 +44,11 @@ export default function Sidenavbar() {
           <ul className="nav navbar-nav ms-auto">
             <li className="nav-item">
               <a className="nav-link" href="#">Logout</a>
-            </li>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">{user.firstName}</a>
+                  </li>
+
           </ul>
         </div>
       </div>

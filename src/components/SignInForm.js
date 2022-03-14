@@ -2,16 +2,16 @@ import '../css/App.css';
 import '../css/index.css'
 import { FaEye } from "react-icons/fa";
 import Api from '../Api';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import UsersContext from '../context/users/UsersContext';
 import { useNavigate } from 'react-router-dom';
-
-
+import jwtDecode from 'jwt-decode'
+// import Cookies from 'js-cookie';
 
 const endPoint='users/login';
 
 const SignInForm=() => {
-  const { cookies, setCookie }=useContext( UsersContext );
+  const { retrieveUserInfo, user, Cookies }=useContext( UsersContext );
   const [ credentials, setCredentials ]=useState( {
     email: "",
     password: ""
@@ -24,12 +24,15 @@ const SignInForm=() => {
   const handleLogin=async ( e ) => {
     e.preventDefault();
     const res=await Api.post( endPoint, credentials );
-    console.log( res.data );
-    console.log( res.data.status==="success" );
+    // console.log( res.data );
 
     if ( res.data.status==="success" ) {
-      setCookie( "jwt", res.data.token );
-      navigate( "/" );
+
+      Cookies.set( 'jwt', res.data.token );
+      const userId=jwtDecode( res.data.token ).id;
+      const userData=await retrieveUserInfo( userId );
+      navigate( '/dashboard' )
+
     }
 
 

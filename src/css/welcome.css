@@ -5,7 +5,7 @@ background-image: url('https://images.pexels.com/photos/290275/pexels-photo-2902
 
 position:relative;
 /* z-index:1; */
-margin-top: -225px;
+/* margin-top: -225px; */
 
 /* background-color: black;
 position: absolute;
@@ -18,7 +18,8 @@ top: 30%; */
   background-color: black;
   opacity: 0.8;
   padding-top: 220px;
-  height: 825px;
+  /* height: 940px; */
+  height: 100vh;
   
   
   

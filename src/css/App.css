@@ -1,5 +1,5 @@
 .container {
-    margin-top: 25px;
+    /* margin-top: 25px; */
 }
 
 body {
@@ -61,7 +61,7 @@ body {
 
 .formHeading {
     color: white;
-    margin-left: 85px;
+    /* margin-left: 85px; */
     margin-bottom: 2rem;
 }
 
@@ -192,7 +192,7 @@ a:hover {
 }
 
 .welcome_container {
-    margin-top: 6rem;
+    /* margin-top: 6rem; */
 }
 
 .welcome_button {

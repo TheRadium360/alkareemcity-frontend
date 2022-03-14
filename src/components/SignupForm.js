@@ -57,7 +57,7 @@ const SignupForm=() => {
   useEffect( () => fnameRef.current.focus(), [] );
 
 
-  const { cookies, setCookie }=useContext( UsersContext );
+  const { Cookies }=useContext( UsersContext );
   const navigate=useNavigate();
 
   //Sending request to the server
@@ -75,12 +75,12 @@ const SignupForm=() => {
 
 
       if ( res.data.status==="success" ) {
-        setCookie( "jwt", res.data.token )
+        Cookies.set( 'jwt', res.data.token );
         navigate( "/" );
       }
 
 
-      console.log( cookies );
+
     }
     catch ( err ) {
       console.log( err );
