@@ -9,14 +9,18 @@ import AppState from './context/appState/AppState';
 import ProtectedRoute from './components/ProtectedRoute';
 import Sidenavbar from './components/Sidenavbar';
 import Installments from './components/Installments'
-import Flexes from './components/Flexes'
-import ComplaintForm from './components/ComplaintForm'
-import Approvalrequests from './components/Approvalrequests'
-import { Digitalpages } from './components/DigitalPages'
+import Feedback from './components/Feedback'
+import Notification from './components/Notification'
+// import Flexes from './components/Flexes'
+// import ComplaintForm from './components/ComplaintForm'
+// import Approvalrequests from './components/Approvalrequests'
+// import { Digitalpages } from './components/DigitalPages'
 import {
   Routes,
   Route,
 } from "react-router-dom";
+import Profile from './components/Profile';
+import Plot from './components/Plot';
 
 
 
@@ -38,12 +42,16 @@ function App() {
               }
             />
             <Route exact path="dashboard" element={<Sidenavbar />}>
-              <Route exact path="" element={<Installments />} />
+              <Route exact path="" element={<Profile />} />
+              <Route exact path="profile" element={<Profile />} />
+              {/* <Route exact path="complaints" element={<ComplaintForm />} /> */}
+              <Route exact path="plot" element={<Plot />} />
               <Route exact path="installments" element={<Installments />} />
-              <Route exact path="complaints" element={<ComplaintForm />} />
-              <Route exact path="flexes" element={<Flexes />} />
-              <Route exact path="digitalpages" element={<Digitalpages />} />
-              <Route exact path="approvalrequests" element={<Approvalrequests />} />
+              <Route exact path="notification" element={<Notification />} />
+              <Route exact path="feedback" element={<Feedback />} />
+              {/* <Route exact path="flexes" element={<Flexes />} /> */}
+              {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
+              {/* <Route exact path="approvalrequests" element={<Approvalrequests />} /> */}
             </Route>
           </Routes>
 

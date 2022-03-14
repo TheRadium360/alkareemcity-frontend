@@ -8,7 +8,6 @@ import UsersContext from '../context/users/UsersContext';
 export default function Sidenavbar() {
     const location = useLocation();
   const { user }=useContext( UsersContext )
-  console.log( user );
   return (
    
   <>
@@ -18,21 +17,32 @@ export default function Sidenavbar() {
             <a href="#" className="img_img logo  rounded-circle mb-5" />
 
             <ul className="list-unstyled components mb-5">
-        <li className={`${location.pathname.endsWith("installments") || location.pathname.endsWith('/') || location.pathname.endsWith('d') ? "active": ''}`}>
+        <li className={`${location.pathname.endsWith("profile") || location.pathname.endsWith('/') || location.pathname.endsWith('d') ? "active": ''}`}>
+          <Link to='/dashboard/profile'>Profile</Link>
+        </li> 
+         <li className={`${location.pathname.endsWith("plot")  ? "active": ''}`}>
+          <Link to='/dashboard/plot'>My plot</Link>
+        </li>
+        <li className={`${location.pathname.endsWith("installments")  ? "active": ''}`}>
           <Link to='/dashboard/installments'>Installments</Link>
         </li>
-        <li className={`${location.pathname.endsWith("flexes")? "active": ''}`}>
+        <li className={`${location.pathname.endsWith("notificaton")  ? "active": ''}`}>
+          <Link to='/dashboard/notification'>Notifications</Link>
+        </li> <li className={`${location.pathname.endsWith("feedback")  ? "active": ''}`}>
+          <Link to='/dashboard/feedback'>Feedback</Link>
+        </li>
+        {/* <li className={`${location.pathname.endsWith("flexes")? "active": ''}`}>
           <Link to="/dashboard/flexes">Flexes</Link>
         </li>
         <li className={`${location.pathname.endsWith("digitalpages")? "active": ''}`}>
           <Link to="/dashboard/digitalpages">Digital Pages</Link>
-        </li>
-        <li className={`${location.pathname.endsWith("complaints")? "active": ''}`}>
+        </li> */}
+        {/* <li className={`${location.pathname.endsWith("complaints")? "active": ''}`}>
           <Link to='/dashboard/complaints'>Complaints</Link>
-        </li>
-        <li className={`${location.pathname.endsWith("approvalrequests")? "active": ''}`}>
+        </li> */}
+        {/* <li className={`${location.pathname.endsWith("approvalrequests")? "active": ''}`}>
           <Link to="approvalrequests">Approval Requests</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   </nav>
