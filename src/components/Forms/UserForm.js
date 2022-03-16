@@ -48,7 +48,7 @@ const UserForm=( props ) => {
 
     try {
       const res=await Api.post( endPoint,
-        data,
+        d,
         {
           withCredentials: true,
         }
