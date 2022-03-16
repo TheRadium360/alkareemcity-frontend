@@ -3,7 +3,7 @@ import UsersContext from './UsersContext';
 // import { useCookies } from 'react-cookie';
 import jwtDecode from 'jwt-decode';
 import Api from '../../Api';
-import Cookies from 'js-cookie';
+import Cook from 'js-cookie';
 
 
 const UserState=( props ) => {
@@ -23,6 +23,7 @@ const UserState=( props ) => {
     setUser( res.data.data );
     return res.data.data;
   }
+  const Cookies=Cook.withAttributes( { path: '/', sameSite: 'Strict', secure: true } )
 
 
   return (

@@ -1,5 +1,5 @@
 import './css/index.css'
-import React from 'react';
+import React, { useContext } from 'react';
 import SignupForm from './components/SignupForm';
 import Navbar from './components/Navbar';
 import SignInForm from './components/SignInForm';
@@ -11,20 +11,27 @@ import Sidenavbar from './components/Sidenavbar';
 import Installments from './components/Installments'
 import Feedback from './components/Feedback'
 import Notification from './components/Notification'
+import CreateUser from './components/CreateUser';
+import Alert from './components/Alert';
+
+
 // import Flexes from './components/Flexes'
 // import ComplaintForm from './components/ComplaintForm'
 // import Approvalrequests from './components/Approvalrequests'
 // import { Digitalpages } from './components/DigitalPages'
+
 import {
   Routes,
   Route,
 } from "react-router-dom";
 import Profile from './components/Profile';
 import Plot from './components/Plot';
+import AppContext from './context/appState/AppContext';
 
 
 
 function App() {
+
   return (
     <>
       <UserState>
@@ -49,6 +56,8 @@ function App() {
               <Route exact path="installments" element={<Installments />} />
               <Route exact path="notification" element={<Notification />} />
               <Route exact path="feedback" element={<Feedback />} />
+              <Route exact path="createnewuser" element={<CreateUser />} />
+
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
               {/* <Route exact path="approvalrequests" element={<Approvalrequests />} /> */}
@@ -56,6 +65,8 @@ function App() {
           </Routes>
 
 
+
+          <Alert />
         </AppState>
 
         {/* <Navbar /> */}

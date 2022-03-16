@@ -1,9 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AppContext from './AppContext';
 
 
 
 const AppState=( props ) => {
+
+
+  const [ alert, setAlert ]=useState( null );
+
+  const showAlert=( msg, type ) => {
+
+    setAlert( {
+      msg,
+      type
+    } )
+    setTimeout( () => setAlert( null ), 3000 )
+
+  }
 
   const onChangeGeneric=( stateVar, stateModifier ) => {
 
@@ -15,9 +28,11 @@ const AppState=( props ) => {
     )
 
   }
+
+
   return (
 
-    <AppContext.Provider value={{ onChangeGeneric }}>
+    <AppContext.Provider value={{ onChangeGeneric, showAlert, alert, setAlert }}>
       {props.children}
     </AppContext.Provider>
 

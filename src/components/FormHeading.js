@@ -8,7 +8,11 @@ export const FormHeading = (props) => {
    <h1 className="formHeading">
   {props.value}
   </h1>
-  </div>
+      </div>
+
+      {props.subHeading? <p className='text-center sub_head'>{props.subHeading}</p>
+        :''} 
+
   </>
   );
 }

@@ -18,6 +18,7 @@ const emailReg=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[
 
 
 const SignupForm=() => {
+
   const fnameRef=useRef();
 
   const [ fname, setFname ]=useState( "" );
