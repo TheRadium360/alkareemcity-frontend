@@ -34,6 +34,8 @@ export default function Sidenavbar() {
               </li>
               <li className={`${location.pathname.endsWith( "createnewuser" )? "active":''}`}>
                 <Link to='/dashboard/createnewuser'>Create User</Link>
+              </li>  <li className={`${location.pathname.endsWith( "users" )? "active":''}`}>
+                <Link to='/dashboard/users'>Users</Link>
               </li>
 
 
