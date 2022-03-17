@@ -8,7 +8,7 @@
   color: black; 
   padding-bottom: .3rem;
   border-bottom: 2px solid #bd960a;
- text-align: center;
+
  letter-spacing: 1px;
  font-size: 2.5rem;
 
@@ -16,4 +16,6 @@
 .sub_head {
   font-size: 14px;
   margin-top: -28px;
+  margin-left: 0;
+  margin-bottom: 0;
 }

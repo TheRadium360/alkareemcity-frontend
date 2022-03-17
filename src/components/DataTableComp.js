@@ -52,7 +52,7 @@ this.$el.DataTable({
         500,
         800000,
         650000,
-        `<button class='btn-primary px-5 ms-3'>Pay</button>`,
+        `<button class='btn-primary px-2 ms-3'>Pay</button>`,
   ],
      [
         1,

@@ -39,7 +39,7 @@ const PlotForm=( props ) => {
   return (
     <div>
 
-      <div className='my-5'>
+      <div className='mb-2'>
         <FormHeading value="Plot Details" subHeading="Select the plot catgeory and then fill out the information" />
       </div>
 
@@ -49,36 +49,36 @@ const PlotForm=( props ) => {
           <div className="row">
 
 
-            <div className="col-12 mt-3 text-center">
-              <FormDropdown name='plotType' width='40%' backgroundColor='#bd960a' color='white' list={[ 'Commercial', 'Residential' ]} onChange={onChange} formVal={formVal} setFormVal={setFormVal} formRef={formRef} defaultValue={values.plotType} />
+            <div className="col-12 text-center">
+              <FormDropdown name='plotType' width='60%' backgroundColor='#bd960a' color='white' list={[ 'Commercial', 'Residential' ]} onChange={onChange} formVal={formVal} setFormVal={setFormVal} formRef={formRef} defaultValue={values.plotType} />
             </div>
 
 
-            <div className="col-6 mt-3 text-end">
-              <FormDropdown name='block' width='30%' backgroundColor='#bd960a' color='white' list={values.category==='commercial'? commercialBlocks:residentialBlocks} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.block} />
+            <div className="col-6 mt-2 text-end">
+              <FormDropdown name='block' width='60%' backgroundColor='#bd960a' color='white' list={values.category==='commercial'? commercialBlocks:residentialBlocks} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.block} />
             </div>
 
-            <div className="col-6 mt-3 ">
-              <FormDropdown name='plotArea' width='30%' backgroundColor='#bd960a' color='white' list={values.category==='commercial'? commercialPlotArea:residentialPlotArea} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.plotArea} />
+            <div className="col-6  mt-2">
+              <FormDropdown name='plotArea' width='60%' backgroundColor='#bd960a' color='white' list={values.category==='commercial'? commercialPlotArea:residentialPlotArea} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.plotArea} />
             </div>
 
             <div className="col-6 text-end mt-3">
-              <Input placeholder="Enter plot no" width="30%" label='l' name="plotNo" type="number" onChange={onChange} margin="" defaultValue={values.plotNo} labelVal="Plot No" />
+              <Input placeholder="Enter plot no" width="60%" label='l' name="plotNo" type="number" onChange={onChange} margin="" defaultValue={values.plotNo} labelVal="Plot No" />
             </div>
 
 
             <div className="col-6  mt-3">
-              <Input placeholder="Enter plotPrice" width="30%" label='r' name="plotPrice" type="number" onChange={onChange} margin="" defaultValue={values.plotPrice} labelVal="Plot Price" />
+              <Input placeholder="Enter plotPrice" width="60%" label='r' name="plotPrice" type="number" onChange={onChange} margin="" defaultValue={values.plotPrice} labelVal="Plot Price" />
             </div>
 
 
 
-            <div className="col-6 text-end mt-3">
-              <Input placeholder="Enter plot latitude" width="30%" label='l' name="lat" type="number" onChange={onChange} defaultValue={values.lat} labelVal="Latitude(Cordinates)" />
+            <div className="col-6 text-end ">
+              <Input placeholder="Enter plot latitude" width="60%" label='l' name="lat" type="number" onChange={onChange} defaultValue={values.lat} labelVal="Latitude(Cordinates)" />
             </div>
 
-            <div className="col-6  mt-3">
-              <Input placeholder="Enter plot longitude" width="30%" label='r' name="lng" type="number" onChange={onChange} defaultValue={values.lng} labelVal="Longitude(Cordinates)" />
+            <div className="col-6  ">
+              <Input placeholder="Enter plot longitude" width="60%" label='r' name="lng" type="number" onChange={onChange} defaultValue={values.lng} labelVal="Longitude(Cordinates)" />
             </div>
 
 
@@ -88,7 +88,7 @@ const PlotForm=( props ) => {
             {/* <button className="btn form_btn me-4 mx-2" onClick={moveToNext} >Next</button> */}
             {/* </div> */}
 
-            <div className='text-center mt-5 container'>
+            <div className='text-center mt-2 container'>
 
 
               <div className="col-12 text-center">
