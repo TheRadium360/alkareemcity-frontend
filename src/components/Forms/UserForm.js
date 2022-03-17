@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import InputMask from 'react-input-mask';
 import Input from '../Input';
 import { FormHeading } from '../FormHeading';
@@ -10,7 +10,7 @@ import UsersContext from '../../context/users/UsersContext';
 
 const UserForm=( props ) => {
   const endPoint='users/';
-  const { onChange, values, nextStep }=props;
+  const { onChange, values, nextStep, userFormStatus, setUserFormStatus, formVal, setFormVal }=props;
 
   const { showAlert, setAlert }=useContext( AppContext );
   const { Cookies }=useContext( UsersContext );
@@ -18,56 +18,56 @@ const UserForm=( props ) => {
 
   const moveToNext=( e ) => {
     e.preventDefault();
-    showAlert( "User has been created", "danger" );
-
     nextStep();
-
-
 
   }
 
+
+
+  //?  Form Submission
   const handleUserFormSubmit=async ( e ) => {
     e.preventDefault();
-    const d={
+
+    const cookie=Cookies.get( 'jwt' );
+    const data={
       firstName: values.firstName,
       lastName: values.lastName,
       email: values.email,
       password: values.password,
       CNIC: values.CNIC,
       passwordConfirm: values.passwordConfirm
-    }
-
-    const cookie=Cookies.get( 'jwt' );
-    console.log( cookie )
-
-    const data=JSON.stringify( d );
-
-
-    console.log( data )
-
+    };
 
     try {
-      const res=await Api.post( endPoint,
-        d,
-        {
-          withCredentials: true,
-        }
+      let res;
+      if ( !formVal.userId ) {
+        res=await Api.post( endPoint,
+          data,
+          {
+            // withCredentials: true,
+            headers: { Authorization: `Bearer ${cookie}` }
+          }
+        )
 
-      )
+      } else {
 
-      // const res=await Api.get( '/users', { withCredentials: true } )
-      // const res=await axios( "http://127.0.0.1:3001/api/v1/users", {
-      //   method: "post",
-      //   data: data,
-      //   withCredentials: true,
-
-      // } )
+        res=await Api.patch( `users/${formVal.userId}`,
+          data,
+          {
+            // withCredentials: true,
+            headers: { Authorization: `Bearer ${cookie}` }
+          }
+        )
+      }
 
       console.log( res );
-      console.log( res.data );
+      console.log( res.data.status );
       if ( res.data.status==="success" ) {
-        // Cookies.set( 'jwt', res.data.token );
-        // navigate( "/" );
+
+        showAlert( `User has been ${formVal.userId? 'updated':'created'} successfully!`, "success" );
+        setUserFormStatus( res.data.status );
+        setFormVal( { ...formVal, userId: res.data.data.id } )
+
       }
 
 
@@ -75,6 +75,7 @@ const UserForm=( props ) => {
     }
     catch ( err ) {
       console.log( err );
+      showAlert( "Something went wrong! Please try again later", "danger" );
     }
   }
 
@@ -126,12 +127,12 @@ const UserForm=( props ) => {
               {/* <button className="btn form_btn me-4" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm} onClick={moveToNext}>Next</button> */}
 
               <div className="col-12 text-center">
-                <button type='submit' className="btn form_btn" >Submit</button>
+                <button type='submit' className="btn form_btn" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm} >{formVal.userId? 'Update':'Submit'}</button>
               </div>
 
 
               <div className="col-12 text-end mb-3">
-                <button className="btn form_next_btn " onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button>
+                <button className="btn form_next_btn " disabled={userFormStatus==='fail'? true:false} onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button>
 
               </div>
 

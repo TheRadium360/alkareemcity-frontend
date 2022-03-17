@@ -26,13 +26,13 @@ const PlotForm=( props ) => {
   const commercialPlotArea=[ '2 Marla', '4 Marla', '5 Marla' ];
   const commercialBlocks=[ 'Broad Way Block', 'High Way Block', 'Park Square Block', 'Omer Block' ];
 
-  const cat=values.category;
+  // const cat=values.category;
   useEffect( () => {
 
-    setFormVal( { ...formVal, block: '', area: '', plotNo: '', plotPrice: '', lat: '', lng: '' } )
+    setFormVal( { ...formVal, block: '', plotArea: '', plotNo: '', plotPrice: '', lat: '', lng: '' } )
     // formRef.current.reset();
 
-  }, [ values.category ] )
+  }, [ values.plotType ] )
 
 
 
@@ -49,9 +49,8 @@ const PlotForm=( props ) => {
           <div className="row">
 
 
-
             <div className="col-12 mt-3 text-center">
-              <FormDropdown name='category' width='40%' backgroundColor='#bd960a' color='white' list={[ 'commercial', 'residential' ]} onChange={onChange} formVal={formVal} setFormVal={setFormVal} formRef={formRef} defaultValue={values.category} />
+              <FormDropdown name='plotType' width='40%' backgroundColor='#bd960a' color='white' list={[ 'Commercial', 'Residential' ]} onChange={onChange} formVal={formVal} setFormVal={setFormVal} formRef={formRef} defaultValue={values.plotType} />
             </div>
 
 
@@ -60,7 +59,7 @@ const PlotForm=( props ) => {
             </div>
 
             <div className="col-6 mt-3 ">
-              <FormDropdown name='area' width='30%' backgroundColor='#bd960a' color='white' list={values.category==='commercial'? commercialPlotArea:residentialPlotArea} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.area} />
+              <FormDropdown name='plotArea' width='30%' backgroundColor='#bd960a' color='white' list={values.category==='commercial'? commercialPlotArea:residentialPlotArea} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.plotArea} />
             </div>
 
             <div className="col-6 text-end mt-3">

@@ -41,7 +41,7 @@ const InstallmentForm=( props ) => {
 
 
 
-            <div className="col-6 mt-3 text-end">
+            <div className="col-6 mt-4 text-end">
               <FormDropdown name='plan' width='30%' backgroundColor='#bd960a' color='white' list={[ '3 Years', '4 Years', '5 Years' ]} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.plan} />
             </div>
 
@@ -70,11 +70,15 @@ const InstallmentForm=( props ) => {
             </div>
 
             <div className="col-6  mt-3 ">
-              <Input placeholder="Total Iinstallment" width="30%" name="totalInstallmentCount" label='r' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Total Installments" />
+              <Input placeholder="Total installment" width="30%" name="totalInstallmentCount" label='r' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Total Installments" />
             </div>
 
-            <div className="col-12 text-center  mt-3">
-              <Input placeholder="Total Iinstallment" width="30%" name="startDate" label='c' type="date" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Installment Start Date" />
+            <div className="col-6 text-end  mt-3">
+              <Input placeholder="Remaining installment amount" width="30%" name="remainAmount" label='l' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Remaining installment amount" />
+            </div>
+
+            <div className="col-6  mt-3">
+              <Input placeholder="Total installment" width="30%" name="startDate" label='r' type="date" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Installment Start Date" />
             </div>
 
 

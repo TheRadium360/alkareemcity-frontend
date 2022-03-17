@@ -22,7 +22,7 @@ const AppState=( props ) => {
 
     return (
       ( event ) => {
-        console.log( stateVar )
+        // console.log( stateVar )
         stateModifier( { ...stateVar, [ event.target.name ]: event.target.value } )
       }
     )

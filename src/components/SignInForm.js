@@ -24,7 +24,7 @@ const SignInForm=() => {
   const handleLogin=async ( e ) => {
     e.preventDefault();
     const res=await Api.post( endPoint, credentials );
-    // console.log( res.data );
+    console.log( res.data );
 
     if ( res.data.status==="success" ) {
 

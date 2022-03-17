@@ -23,7 +23,9 @@ const UserState=( props ) => {
     setUser( res.data.data );
     return res.data.data;
   }
-  const Cookies=Cook.withAttributes( { path: '/', sameSite: 'Strict', secure: true } )
+  const Cookies=Cook.withAttributes( {
+    path: '/', sameSite: 'Strict', secure: true
+  } )
 
 
   return (
