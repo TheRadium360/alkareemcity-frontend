@@ -31,15 +31,27 @@
     transition: all 0.3s;
     position: fixed;
     height: 100vh;
-    }
+    <<<<<<< HEAD
+}
 
-    #content {
-        margin-left: 22%;
-        width: 100%;
-    }
+#content {
+    margin-left: 22%;
+    width: 100%;
+}
 
-    .content_container {
-        margin-top: 4.5rem;
+.content_container {
+    margin-top: 4.5rem;
+    =======
+}
+
+#content {
+    margin-left: 22%;
+    width: 100%;
+}
+
+.content_container {
+    margin-top: 4.5rem;
+    >>>>>>>2963a3fbfd47abc299bce452474e0c8e9e4d4b32
 }
 
 #sidebar .logo {
