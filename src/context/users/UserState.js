@@ -17,15 +17,32 @@ const UserState=( props ) => {
   //    setUser(res.data.data);
   // }
 
+
+
+  const Cookies=Cook.withAttributes( {
+    path: '/', sameSite: 'Strict', secure: true
+  } )
+
+
+
   const retrieveUserInfo=async ( id ) => {
     const endPoint='users/'+id;
     const res=await Api.get( endPoint );
     setUser( res.data.data );
+
     return res.data.data;
   }
-  const Cookies=Cook.withAttributes( {
-    path: '/', sameSite: 'Strict', secure: true
-  } )
+
+
+  let userId;
+  useEffect( async () => {
+
+    if ( Cookies.get( 'jwt' ) ) {
+      userId=jwtDecode( Cookies.get( 'jwt' ) ).id;
+      await retrieveUserInfo( userId );
+    }
+
+  }, [] )
 
 
   return (

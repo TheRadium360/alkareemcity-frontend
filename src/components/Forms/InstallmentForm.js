@@ -30,8 +30,8 @@ const InstallmentForm=( props ) => {
   return (
     <div>
 
-      <div className='my-5'>
-        <FormHeading value="Installment Detail" />
+      <div className='mb-3'>
+        <FormHeading value="Installment Detail"  subHeading="Fill out all the installment details"/>
       </div>
 
       <form>
@@ -42,43 +42,43 @@ const InstallmentForm=( props ) => {
 
 
             <div className="col-6 mt-4 text-end">
-              <FormDropdown name='plan' width='30%' backgroundColor='#bd960a' color='white' list={[ '3 Years', '4 Years', '5 Years' ]} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.plan} />
+              <FormDropdown name='plan' width='60%' backgroundColor='#bd960a' color='white' list={[ '3 Years', '4 Years', '5 Years' ]} onChange={onChange} formVal={formVal} setFormVal={setFormVal} defaultValue={values.plan} />
             </div>
 
             <div className="col-6  mt-3 ">
-              <Input placeholder="Total amount" width="30%" name="totalAmount" label='r' type="number" onChange={onChange} defaultValue={values.totalAmount} labelVal="Total Installment Amount" />
+              <Input placeholder="Total amount" width="60%" name="totalAmount" label='r' type="number" onChange={onChange} defaultValue={values.totalAmount} labelVal="Total Installment Amount" />
             </div>
 
-            <div className="col-6  mt-3 text-end">
-              <Input placeholder="Possession amount" width="30%" name="possessionAmount" label='l' type="number" onChange={onChange} defaultValue={values.possessionAmount} labelVal="Possession rate" />
+            <div className="col-6  text-end">
+              <Input placeholder="Possession amount" width="60%" name="possessionAmount" label='l' type="number" onChange={onChange} defaultValue={values.possessionAmount} labelVal="Possession rate" />
             </div>
 
-            <div className="col-6  mt-3">
-              <Input placeholder="Installment per month" width="30%" name="installmentPerMonth" label='r' type="number" onChange={onChange} defaultValue={values.installmentPerMonth} labelVal="Per Month Installment" />
+            <div className="col-6  ">
+              <Input placeholder="Installment per month" width="60%" name="installmentPerMonth" label='r' type="number" onChange={onChange} defaultValue={values.installmentPerMonth} labelVal="Per Month Installment" />
             </div>
 
-            <div className="col-6  mt-3 text-end">
-              <Input placeholder="Ballot amount" width="30%" name="ballotAmount" label='l' type="number" onChange={onChange} defaultValue={values.ballotAmount} labelVal="Ballot Amount" />
+            <div className="col-6   text-end">
+              <Input placeholder="Ballot amount" width="60%" name="ballotAmount" label='l' type="number" onChange={onChange} defaultValue={values.ballotAmount} labelVal="Ballot Amount" />
             </div>
 
-            <div className="col-6  mt-3 ">
-              <Input placeholder="Booking amount" width="30%" name="bookingAmount" label='r' type="number" onChange={onChange} defaultValue={values.bookingAmount} labelVal="Booking Price" />
+            <div className="col-6   ">
+              <Input placeholder="Booking amount" width="60%" name="bookingAmount" label='r' type="number" onChange={onChange} defaultValue={values.bookingAmount} labelVal="Booking Price" />
             </div>
 
-            <div className="col-6  mt-3 text-end">
-              <Input placeholder="Half year payment" width="30%" name="halfYearPayment" label='l' type="number" onChange={onChange} defaultValue={values.halfYearPayment} labelVal="Half Year Payment" />
+            <div className="col-6   text-end">
+              <Input placeholder="Half year payment" width="60%" name="halfYearPayment" label='l' type="number" onChange={onChange} defaultValue={values.halfYearPayment} labelVal="Half Year Payment" />
             </div>
 
-            <div className="col-6  mt-3 ">
-              <Input placeholder="Total installment" width="30%" name="totalInstallmentCount" label='r' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Total Installments" />
+            <div className="col-6   ">
+              <Input placeholder="Total installment" width="60%" name="totalInstallmentCount" label='r' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Total Installments" />
             </div>
 
-            <div className="col-6 text-end  mt-3">
-              <Input placeholder="Remaining installment amount" width="30%" name="remainAmount" label='l' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Remaining installment amount" />
+            <div className="col-6 text-end  ">
+              <Input placeholder="Remaining installment amount" width="60%" name="remainAmount" label='l' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Remaining installment amount" />
             </div>
 
-            <div className="col-6  mt-3">
-              <Input placeholder="Total installment" width="30%" name="startDate" label='r' type="date" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Installment Start Date" />
+            <div className="col-6  ">
+              <Input placeholder="Total installment" width="60%" name="startDate" label='r' type="date" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Installment Start Date" />
             </div>
 
 

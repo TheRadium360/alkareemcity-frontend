@@ -13,6 +13,7 @@ import Feedback from './components/Feedback'
 import Notification from './components/Notification'
 import CreateUser from './components/CreateUser';
 import Alert from './components/Alert';
+import Users from './components/Users'
 
 
 // import Flexes from './components/Flexes'
@@ -26,11 +27,13 @@ import {
 } from "react-router-dom";
 import Profile from './components/Profile';
 import Plot from './components/Plot';
-import AppContext from './context/appState/AppContext';
 
 
 
 function App() {
+
+
+
 
   return (
     <>
@@ -57,6 +60,8 @@ function App() {
               <Route exact path="notification" element={<Notification />} />
               <Route exact path="feedback" element={<Feedback />} />
               <Route exact path="createnewuser" element={<CreateUser />} />
+              <Route exact path="users" element={<Users />} />
+
 
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}

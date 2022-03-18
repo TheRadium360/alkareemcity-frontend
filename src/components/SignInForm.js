@@ -19,24 +19,25 @@ const SignInForm=() => {
 
   const navigate=useNavigate();
 
-
+  let userId;
 
   const handleLogin=async ( e ) => {
     e.preventDefault();
     const res=await Api.post( endPoint, credentials );
     console.log( res.data );
+    console.log( res.data.data );
 
     if ( res.data.status==="success" ) {
 
       Cookies.set( 'jwt', res.data.token );
-      const userId=jwtDecode( res.data.token ).id;
-      const userData=await retrieveUserInfo( userId );
+      await retrieveUserInfo( res.data.data.user._id )
       navigate( '/dashboard' )
 
     }
 
 
   }
+
 
   const onChange=( e ) => {
     setCredentials( { ...credentials, [ e.target.name ]: e.target.value } )

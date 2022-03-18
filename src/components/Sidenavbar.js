@@ -34,6 +34,8 @@ export default function Sidenavbar() {
               </li>
               <li className={`${location.pathname.endsWith( "createnewuser" )? "active":''}`}>
                 <Link to='/dashboard/createnewuser'>Create User</Link>
+              </li>  <li className={`${location.pathname.endsWith( "users" )? "active":''}`}>
+                <Link to='/dashboard/users'>Users</Link>
               </li>
 
 
@@ -52,8 +54,10 @@ export default function Sidenavbar() {
             </ul>
           </div>
         </nav>
+
+
         <div id="content">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light dashboard_nav">
+          <nav className="navbar navbar-expand navbar-light bg-light dashboard_nav">
             <div className="container-fluid">
               <span className="text-black"> Al-Kareem-City</span>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -69,7 +73,7 @@ export default function Sidenavbar() {
               </div>
             </div>
           </nav>
-          <div>
+          <div className='content_container'>
             <Outlet />
           </div>
         </div>
