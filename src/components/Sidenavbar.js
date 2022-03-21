@@ -74,7 +74,7 @@ export default function Sidenavbar() {
             </div>
           </nav>
           <div className='content_container'>
-            <Outlet />
+           {user._id && <Outlet />}
           </div>
         </div>
       </div>
