@@ -1,0 +1,21 @@
+.installmentSubheading{
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+}
+
+.installmenSubheadingValue{
+  font-size: 1.2rem;
+  margin-left: .5rem;
+  font-weight: 400;
+}
+
+.installmentRow{
+  padding-left: 2rem;
+  margin-top: 4rem;
+}
+
+.installmentRight{
+  padding-right: 3rem;
+  text-align: right;
+}
