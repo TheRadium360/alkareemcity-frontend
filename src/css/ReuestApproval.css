@@ -1,0 +1,12 @@
+.image_preview {}
+
+.img_val {
+  width: 500px;
+  max-height: 500px !important;
+  object-fit: contain;
+}
+
+/* 
+.processing_bar {
+  display: none;
+} */

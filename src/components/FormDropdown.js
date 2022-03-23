@@ -20,8 +20,17 @@ export const FormDropdown = (props) => {
       props.setFormVal( obj );
 
     }
+
     if ( props.formRef ) {
+      // const pTy
+      // if ( props.setFormVal ) {
+
+      // props.setFormVal( { ...props.formVal,plotType:, block: '', plotArea: '', plotNo: '', plotPrice: '', lat: '', lng: '' } )
+
+      // }
+
       props.formRef.current.reset();
+
     }
 
   };

@@ -4,7 +4,7 @@ import UsersContext from "../context/users/UsersContext";
 import Cookies from 'js-cookie';
 
 const ProtectedRoute=( {
-  redirectPath='/signup',
+  redirectPath='/login',
   children,
 } ) => {
 

@@ -1,12 +1,18 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import Input from '../Input';
 import { FormHeading } from '../FormHeading';
 import { FormDropdown } from '../FormDropdown';
+import Api from '../../Api';
+import UsersContext from '../../context/users/UsersContext';
+import AppContext from '../../context/appState/AppContext';
 
 
 const PlotForm=( props ) => {
 
-  const { values, onChange, nextStep, previousStep, formVal, setFormVal }=props;
+  const { values, onChange, nextStep, previousStep, formVal, setFormVal, setPlotFormStatus, plotFormStatus }=props;
+
+  const { showAlert, setAlert }=useContext( AppContext );
+  const { Cookies }=useContext( UsersContext );
 
   const moveToNext=( e ) => {
     e.preventDefault();
@@ -16,6 +22,68 @@ const PlotForm=( props ) => {
   const moveToBack=( e ) => {
     e.preventDefault();
     previousStep();
+  }
+
+  const handlePlotFormSubmit=async ( e ) => {
+    e.preventDefault();
+
+
+    const cookie=Cookies.get( 'jwt' );
+
+    const data={
+      plotNo: values.plotNo,
+      plotType: values.plotType,
+      plotPrice: values.plotPrice,
+      block: values.block,
+      plotArea: values.plotArea,
+      lat: values.lat,
+      lng: values.lng,
+      user: formVal.userId
+    };
+
+
+    try {
+
+      let res;
+      if ( !formVal.plotId ) {
+        res=await Api.post( 'plots',
+          data,
+          {
+            // withCredentials: true,
+            headers: { Authorization: `Bearer ${cookie}` }
+          }
+        )
+
+      } else {
+
+        res=await Api.patch( `plots/${formVal.plotId}`,
+          data,
+          {
+            // withCredentials: true,
+            headers: { Authorization: `Bearer ${cookie}` }
+          }
+        )
+      }
+
+      console.log( res );
+      console.log( res.data.status );
+      if ( res.data.status==="success" ) {
+
+        showAlert( `Plot has been ${formVal.plotId? 'updated':'created'} for the user successfully!`, "success" );
+        setPlotFormStatus( res.data.status );
+        setFormVal( { ...formVal, plotId: res.data.data.id } )
+
+      }
+
+
+
+
+
+    } catch ( error ) {
+
+      console.log( error );
+      showAlert( "Something went wrong! Please try again later", "danger" );
+    }
   }
 
   const formRef=useRef( null )
@@ -29,7 +97,7 @@ const PlotForm=( props ) => {
   // const cat=values.category;
   useEffect( () => {
 
-    setFormVal( { ...formVal, block: '', plotArea: '', plotNo: '', plotPrice: '', lat: '', lng: '' } )
+    // setFormVal( { ...formVal, block: '', plotArea: '', plotNo: '', plotPrice: '', lat: '', lng: '' } )
     // formRef.current.reset();
 
   }, [ values.plotType ] )
@@ -43,7 +111,7 @@ const PlotForm=( props ) => {
         <FormHeading value="Plot Details" subHeading="Select the plot catgeory and then fill out the information" />
       </div>
 
-      <form ref={formRef}>
+      <form ref={formRef} onSubmit={handlePlotFormSubmit}>
 
         <div className="container" >
           <div className="row">
@@ -63,22 +131,22 @@ const PlotForm=( props ) => {
             </div>
 
             <div className="col-6 text-end mt-3">
-              <Input placeholder="Enter plot no" width="60%" label='l' name="plotNo" type="number" onChange={onChange} margin="" defaultValue={values.plotNo} labelVal="Plot No" />
+              <Input placeholder="Enter plot no" width="60%" label='l' name="plotNo" type="text" onChange={onChange} margin="" defaultValue={values.plotNo} labelVal="Plot No" />
             </div>
 
 
             <div className="col-6  mt-3">
-              <Input placeholder="Enter plotPrice" width="60%" label='r' name="plotPrice" type="number" onChange={onChange} margin="" defaultValue={values.plotPrice} labelVal="Plot Price" />
+              <Input placeholder="Enter plotPrice" width="60%" label='r' name="plotPrice" type="number" onChange={onChange} margin="" defaultValue={values.plotPrice} labelVal="Plot Price" step="any" />
             </div>
 
 
 
             <div className="col-6 text-end ">
-              <Input placeholder="Enter plot latitude" width="60%" label='l' name="lat" type="number" onChange={onChange} defaultValue={values.lat} labelVal="Latitude(Cordinates)" />
+              <Input placeholder="Enter plot latitude" width="60%" label='l' name="lat" type="number" onChange={onChange} defaultValue={values.lat} labelVal="Latitude(Cordinates)" step="any" />
             </div>
 
             <div className="col-6  ">
-              <Input placeholder="Enter plot longitude" width="60%" label='r' name="lng" type="number" onChange={onChange} defaultValue={values.lng} labelVal="Longitude(Cordinates)" />
+              <Input placeholder="Enter plot longitude" width="60%" label='r' name="lng" type="number" onChange={onChange} defaultValue={values.lng} labelVal="Longitude(Cordinates)" step="any" />
             </div>
 
 
@@ -89,17 +157,17 @@ const PlotForm=( props ) => {
             {/* </div> */}
 
             <div className='text-center mt-2 container'>
-
+              {console.log( !values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.area )}
 
               <div className="col-12 text-center">
                 <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-                <button type='submit' className="btn form_btn" >Submit</button>
+                <button type='submit' className="btn form_btn" disabled={!values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.plotArea}>{formVal.plotId? 'Update':'Submit'}</button>
               </div>
 
 
               <div className="col-12 text-end mb-3">
-                {/* <button className="btn form_btn me-4 mx-2" onClick={moveToNext} disabled={!values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.area}>Next</button> */}
-                <button className="btn form_next_btn " onClick={moveToNext}> next <span className='right_arrow'>&#8594;</span></button>
+                {/* <button className="btn form_btn me-4 mx-2" onClick={moveToNext} >Next</button> */}
+                <button className="btn form_next_btn " disabled={plotFormStatus==='fail'? true:false} onClick={moveToNext}> next <span className='right_arrow'>&#8594;</span></button>
 
               </div>
 

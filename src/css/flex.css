@@ -9,7 +9,7 @@
     border-radius: 30px;
     text-align: center;
     height: 50px;
-    width: 200px;
+    width: 300px;
     display: inline-block;
     transition: .2s;
     position: relative;
@@ -69,9 +69,10 @@
 
 .success_box {
     display: none;
-    right: 1.3rem;
+    right: 0rem;
     bottom: 0.8rem;
     position: relative;
+    font-size: 220px;
 }
 
 .success_box:before {

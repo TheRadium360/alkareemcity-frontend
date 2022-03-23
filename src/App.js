@@ -27,6 +27,7 @@ import {
 } from "react-router-dom";
 import Profile from './components/Profile';
 import Plot from './components/Plot';
+import RequestApproval from './components/RequestApproval';
 
 
 
@@ -46,7 +47,7 @@ function App() {
             <Route
               path="/"
               element={
-                <ProtectedRoute redirectPath="/signup" >
+                <ProtectedRoute redirectPath="/login" >
                   <Welcome />
                 </ProtectedRoute>
               }
@@ -67,6 +68,8 @@ function App() {
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
               {/* <Route exact path="approvalrequests" element={<Approvalrequests />} /> */}
             </Route>
+
+            <Route exact path="approval" element={<RequestApproval />} />
           </Routes>
 
 

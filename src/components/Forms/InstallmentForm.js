@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Input from '../Input';
 import { FormHeading } from '../FormHeading';
 import { FormDropdown } from '../FormDropdown';
+import Api from '../../Api';
+import UsersContext from '../../context/users/UsersContext';
+import AppContext from '../../context/appState/AppContext';
 
 
 const InstallmentForm=( props ) => {
-  const { values, onChange, nextStep, previousStep, formVal, setFormVal }=props;
+  const { values, onChange, nextStep, previousStep, formVal, setFormVal, installmentFormStatus, setInstallmentFormStatus }=props;
+
+
+  const { showAlert, setAlert }=useContext( AppContext );
+  const { Cookies }=useContext( UsersContext );
 
   // plan: '',
   //   totalAmount: '',
@@ -27,6 +34,78 @@ const InstallmentForm=( props ) => {
     previousStep();
   }
 
+
+  const handleInstallmentFormSubmit=async ( e ) => {
+    e.preventDefault();
+
+
+    const cookie=Cookies.get( 'jwt' );
+
+    const data={
+      plan: values.plan,
+      totalAmount: values.totalAmount,
+      remainingBalance: values.remainingBalance,
+      possesionAmount: values.possessionAmount,
+      planStartDate: values.planStartDate,
+      totalInstallmentCount: values.totalInstallmentCount,
+      installmentPerMonth: values.installmentPerMonth,
+      ballotAmount: formVal.ballotAmount,
+      bookingAmount: values.bookingAmount,
+      halfYearPayment: values.halfYearPayment,
+      plot: formVal.plotId,
+      user: formVal.userId
+
+    };
+
+
+    try {
+
+      let res;
+      if ( !formVal.installmentId ) {
+        res=await Api.post( 'installment',
+          data,
+          {
+            // withCredentials: true,
+            headers: { Authorization: `Bearer ${cookie}` }
+          }
+        )
+
+      } else {
+
+        res=await Api.patch( `installment/${formVal.installmentId}`,
+          data,
+          {
+            // withCredentials: true,
+            headers: { Authorization: `Bearer ${cookie}` }
+          }
+        )
+      }
+
+      console.log( res );
+      console.log( res.data.status );
+      if ( res.data.status==="success" ) {
+
+        showAlert( `Installment plan has been ${formVal.installmentId? 'updated':'created'} for the user successfully!`, "success" );
+        setInstallmentFormStatus( res.data.status );
+        setFormVal( { ...formVal, installmentId: res.data.data.id } )
+
+      }
+
+
+
+
+
+    } catch ( error ) {
+
+      console.log( error );
+      showAlert( "Something went wrong! Please try again later", "danger" );
+    }
+  }
+
+
+
+
+
   return (
     <div>
 
@@ -34,7 +113,7 @@ const InstallmentForm=( props ) => {
         <FormHeading value="Installment Detail"  subHeading="Fill out all the installment details"/>
       </div>
 
-      <form>
+      <form onSubmit={handleInstallmentFormSubmit}>
 
         <div className="container" >
           <div className="row">
@@ -74,11 +153,11 @@ const InstallmentForm=( props ) => {
             </div>
 
             <div className="col-6 text-end  ">
-              <Input placeholder="Remaining installment amount" width="60%" name="remainAmount" label='l' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Remaining installment amount" />
+              <Input placeholder="Remaining installment amount" width="60%" name="remainingBalance" label='l' type="number" onChange={onChange} defaultValue={values.remainingBalance} labelVal="Remaining installment amount" />
             </div>
 
             <div className="col-6  ">
-              <Input placeholder="Total installment" width="60%" name="startDate" label='r' type="date" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Installment Start Date" />
+              <Input placeholder="Select plan start date" width="60%" name="planStartDate" label='r' type="date" onChange={onChange} defaultValue={values.planStartDate} labelVal="Installment Start Date" />
             </div>
 
 
@@ -94,13 +173,13 @@ const InstallmentForm=( props ) => {
 
               <div className="col-12 text-center">
                 <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-                <button type='submit' className="btn form_btn" >Submit</button>
+                <button type='submit' className="btn form_btn" disabled={!values.plan||!values.totalAmount||!values.possessionAmount||!values.installmentPerMonth||!values.ballotAmount||!values.bookingAmount||!values.halfYearPayment||!values.totalInstallmentCount||!values.remainingBalance} >{formVal.installmentId? 'Update':'Submit'}</button>
               </div>
 
 
               <div className="col-12 text-end mb-3">
                 {/* <button className="btn form_btn me-4 mx-2" onClick={moveToNext} disabled={!values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.area}>Next</button> */}
-                <button className="btn form_next_btn " onClick={moveToNext}> next <span className='right_arrow'>&#8594;</span></button>
+                <button className="btn form_next_btn " disabled={installmentFormStatus==='fail'? true:false} onClick={moveToNext}> next <span className='right_arrow'>&#8594;</span></button>
 
               </div>
 

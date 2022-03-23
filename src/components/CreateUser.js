@@ -7,6 +7,8 @@ import InputMask from 'react-input-mask';
 import UserForm from './Forms/UserForm';
 import PlotForm from './Forms/PlotForm';
 import InstallmentForm from './Forms/InstallmentForm';
+import Success from './Forms/Success';
+import PrintComponent from './Forms/PrintComponent';
 
 const CreateUser=() => {
 
@@ -35,6 +37,7 @@ const CreateUser=() => {
     lng: '',
     plotArea: '',
     plotType: '',
+    plotId: '',
 
     plan: '',
     totalAmount: '',
@@ -43,7 +46,9 @@ const CreateUser=() => {
     ballotAmount: '',
     bookingAmount: '',
     halfYearPayment: '',
-    totalInstallmentCount: ''
+    totalInstallmentCount: '',
+    remainingBalance: '',
+    planStartDate: ''
 
 
   } )
@@ -52,6 +57,7 @@ const CreateUser=() => {
   const nextStep=() => {
 
     const { step }=formVal;
+    console.log( formVal )
     setFormVal( { ...formVal, step: step+1 } )
 
 
@@ -63,6 +69,8 @@ const CreateUser=() => {
 
     const { step }=formVal;
 
+    console.log( formVal )
+
     setFormVal( { ...formVal, step: step-1 } )
   }
 
@@ -73,17 +81,19 @@ const CreateUser=() => {
 
   //?  status to check if user has created successfully (success,fail)
   const [ userFormStatus, setUserFormStatus ]=useState( "fail" );
+  const [ plotFormStatus, setPlotFormStatus ]=useState( "fail" );
+  const [ installmentFormStatus, setInstallmentFormStatus ]=useState( "fail" );
 
 
   const { step }=formVal;
 
   const { firstName, lastName, email, CNIC, password, passwordConfirm }=formVal;
   const { plotNo, plotPrice, lat, lng, block, plotArea, plotType }=formVal;
-  const { plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, bookingAmount, halfYearPayment, totalInstallmentCount }=formVal;
+  const { plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, remainingBalance, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }=formVal;
 
   const values1={ firstName, lastName, email, CNIC, password, passwordConfirm }
   const values2={ plotNo, plotPrice, lat, lng, block, plotArea, plotType }
-  const values3={ plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, bookingAmount, halfYearPayment, totalInstallmentCount }
+  const values3={ plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, remainingBalance, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }
 
   switch ( step ) {
     case 1:
@@ -91,10 +101,12 @@ const CreateUser=() => {
         <UserForm onChange={onChange} values={values1} nextStep={nextStep} userFormStatus={userFormStatus} setUserFormStatus={setUserFormStatus} formVal={formVal} setFormVal={setFormVal} />
       )
     case 2:
-      return ( <PlotForm onChange={onChange} values={values2} nextStep={nextStep} previousStep={previousStep} setFormVal={setFormVal} formVal={formVal} /> )
+      return ( <PlotForm onChange={onChange} values={values2} nextStep={nextStep} plotFormStatus={plotFormStatus} setPlotFormStatus={setPlotFormStatus} previousStep={previousStep} setFormVal={setFormVal} formVal={formVal} /> )
     case 3:
-      return ( <InstallmentForm onChange={onChange} values={values3} nextStep={nextStep} previousStep={previousStep} setFormVal={setFormVal} formVal={formVal} /> );
-
+      return ( <InstallmentForm onChange={onChange} values={values3} nextStep={nextStep} installmentFormStatus={installmentFormStatus} setInstallmentFormStatus={setInstallmentFormStatus} previousStep={previousStep} setFormVal={setFormVal} formVal={formVal} /> );
+    case 4:
+      return ( <PrintComponent formVal={formVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
+    // return ( <Success formVal={formVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
 
   }
 

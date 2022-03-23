@@ -10,17 +10,11 @@ const UserState=( props ) => {
   
   const [ user, setUser ]=useState( {} );
 
-  // if ( Cookies.jwt ) {
-  //   const id=jwtDecode( Cookies.jwt ).id;
-  //    const endPoint='users/'+id;
-  //    const res= await Api.get(endPoint);
-  //    setUser(res.data.data);
-  // }
 
 
 
   const Cookies=Cook.withAttributes( {
-    path: '/', sameSite: 'Strict', secure: true
+    path: '/', sameSite: 'Strict', secure: true, expires: 30
   } )
 
 

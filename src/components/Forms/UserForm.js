@@ -58,8 +58,7 @@ const UserForm=( props ) => {
         )
       }
 
-      console.log( res );
-      console.log( res.data.status );
+      // console.log( res.data.status );
       if ( res.data.status==="success" ) {
 
         showAlert( `User has been ${formVal.userId? 'updated':'created'} successfully!`, "success" );
@@ -130,7 +129,7 @@ const UserForm=( props ) => {
 
               {/* disabled={userFormStatus==='fail'? true:false} */}
               <div className="col-12 text-end mb-3">
-                <button className="btn form_next_btn " onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button>
+                <button className="btn form_next_btn " disabled={userFormStatus==='fail'? true:false} onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button>
 
               </div>
 
