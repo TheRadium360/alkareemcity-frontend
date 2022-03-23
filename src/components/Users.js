@@ -9,6 +9,7 @@ import UsersContext from "../context/users/UsersContext";
 
 export default function Users() {
   const { user , Cookies } = useContext(UsersContext);
+  const { showAlert }=useContext( AppContext );
 
   const { onChangeGeneric } = useContext(AppContext);
   const [details, setDetails] = useState({});
@@ -40,13 +41,14 @@ export default function Users() {
     totalInstallmentCount: "",
   });
 
-  const cnicRef = useRef();
+  // const cnicRef = useRef();
 
 
 
   const getAllDetails = async () => {
     const res = await Api.get(`/users/${user.id}`);
     setDetails(res.data.data);
+    setFormVal(details)
   };
 
 
@@ -61,24 +63,44 @@ export default function Users() {
 
 
 
-  const handleUpdate = async (e) => {
+  const handleUserUpdate = async (e) => {
     e.preventDefault();
     const cookie = Cookies.get('jwt')
     const res = await Api.patch(`/users/${user.id}`, {
-      "firstName": "moon",
+      "firstName": formVal.firstName,
+      "lastName": formVal.lastName,
+      "CNIC": formVal.CNIC,
+      "email" : formVal.email,
+      "password": formVal.password,
+      "passwordConfirm": formVal.passwordConfirm
     },
     {
       headers: { Authorization: `Bearer ${cookie}` }
     });
-    setDetails(res.data.data)   
+    if(res.data.status === "success"){
+
+      setDetails(res.data.data)
+      setDisableInputs(true)
+      showAlert( `User has been update successfully!`, "success" );
+    }else{
+      showAlert( `User not updated! Something went wrong`, "danger" );
+
+    }
      
   };
+
+  const handleInstallmentUpdate =(e)=>{
+    e.preventDefault();
+
+  }
 
 
 
 
   useEffect(() => {
-    getAllDetails();
+     getAllDetails();
+    // details && setFormVal( { ...formVal, CNIC: details.CNIC } )
+    // console.log(details.CNIC)
   }, []);
 
 
@@ -88,15 +110,12 @@ export default function Users() {
   
 
 
-    // {
-    //   if (cnicRef.current) cnicRef.current.value = details && details.CNIC;
-    // }
-
-
-
-
-  return details && (
-    <>
+   
+    
+    
+    
+    return details && (
+      <>
       <div>
         <FormHeading value="User Details" />
         <div className="w-25 ms-auto">
@@ -105,11 +124,11 @@ export default function Users() {
           </button>
         </div>
       </div>
-      <form>
+      <form onSubmit={handleUserUpdate}>
         <div className="container">
           <div className="row">
             <div className="col-6 text-end">
-              <InputMask
+              {/* <InputMask
                 mask="99999-9999999-9"
                 maskChar={null}
                 type="text"
@@ -120,10 +139,20 @@ export default function Users() {
                 onChange={onChange}
                 name="CNIC"
                 style={{ width: "60%" }}
-                required
                 disabled={disableInputs}
+                // defaultValue= {details.CNIC}
                 ref={cnicRef}
-              />
+              /> */}
+               <Input
+                placeholder="Enter CNIC"
+                defaultValue={details.CNIC}
+                width="60%"
+                name="CNIC"
+                type="text"
+                onChange={onChange}
+                disabled={disableInputs}
+                />
+
               <p className="input_label_l" style={{ width: "60%" }}>
                 CNIC
               </p>
@@ -138,7 +167,7 @@ export default function Users() {
                 type="email"
                 onChange={onChange}
                 disabled={disableInputs}
-              />
+                />
               <p className="input_label_l">Email</p>
             </div>
 
@@ -156,7 +185,7 @@ export default function Users() {
                 First name
               </p>
             </div>
-
+              {console.log(details)}
             <div className="col-6">
               <Input
                 placeholder="Enter lastname"
@@ -178,6 +207,7 @@ export default function Users() {
                 type="password"
                 onChange={onChange}
                 disabled={disableInputs}
+                required={false}
               />
               <p className="input_label_l" style={{ width: "60%" }}>
                 Password
@@ -192,6 +222,7 @@ export default function Users() {
                 type="password"
                 onChange={onChange}
                 disabled={disableInputs}
+                required={false}
               />
               <p className="input_label_l">Confirm Password</p>
             </div>
@@ -200,9 +231,10 @@ export default function Users() {
               <div className="col-12 text-center">
                 <button
                   type="submit"
-                  disabled={disableInputs}
+                  
                   className="btn form_btn"
-                  onClick={handleUpdate}
+                  disabled={disableInputs}
+
                 >
                   Update
                 </button>
@@ -361,7 +393,7 @@ export default function Users() {
         </div>
       </div>
 
-      <form>
+      <form onSubmit={handleInstallmentUpdate}>
         <div className="container">
           <div className="row">
             <div className="col-6 mt-4 text-end">
@@ -540,7 +572,8 @@ export default function Users() {
                 <button
                   type="submit"
                   disabled={disableInputs}
-                  className="btn form_btn"
+                  className="btn form_btn"  
+                  
                 >
                   Update
                 </button>
