@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import { FormHeading } from "./FormHeading";
 import './../css/flex.css'
 import './../css/ReuestApproval.css';
@@ -6,9 +6,16 @@ import Input from './Input';
 import InputMask from 'react-input-mask';
 import $ from 'jquery';
 import { useEffect } from 'react';
+import Api from '../Api';
+import UsersContext from '../context/users/UsersContext';
+import AppContext from '../context/appState/AppContext';
 
 
-const Flexes=() => {
+const RequestApproval=( props ) => {
+
+
+
+  const { approvalRequestCreds, setApprovalRequestCreds }=props;
 
   const submitBtnRef=useRef( null )
   const formRef=useRef( null )
@@ -34,6 +41,50 @@ const Flexes=() => {
     console.log( submitBtnRef.current )
   }
 
+  const { Cookies }=useContext( UsersContext )
+  const { showAlert }=useContext( AppContext );
+
+
+
+  const cookie=Cookies.get( 'jwt' )
+
+  const handleSubmit=async ( e ) => {
+    e.preventDefault();
+
+
+    console.log( e.target.firstName.value, e.target.CNIC.value, approvalRequestCreds.CNIC );
+
+    console.log( String( approvalRequestCreds.CNIC )===String( e.target.CNIC.value ) )
+    console.log( approvalRequestCreds.firstName===e.target.CNIC.value.toLowerCase() )
+    if ( approvalRequestCreds.CNIC===e.target.CNIC.value&&approvalRequestCreds.firstName===e.target.CNIC.value.toLowerCase() ) {
+
+
+      let formData=new FormData();
+      formData.append( 'transactionImage', e.target.transactionImage.files[ 0 ] )
+      formData.append( 'user', approvalRequestCreds.user );
+      formData.append( 'plot', approvalRequestCreds.plot );
+      formData.append( 'installment', approvalRequestCreds.installment );
+
+
+      const res=await Api.post( 'requestapproval',
+        formData,
+        {
+          // withCredentials: true,
+          headers: { Authorization: `Bearer ${cookie}` }
+        }
+      )
+
+      console.log( res )
+
+    }
+
+    else {
+      showAlert( `CNIC or First name is incorrect!`, "danger" );
+
+    }
+
+
+  }
 
 
   const uploadFlex=() => {
@@ -80,80 +131,105 @@ const Flexes=() => {
     <>
 
       <div>
-        {/*Button trigger modal*/}
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Launch demo modal
-        </button>
-        {/*Modal */}
+
         <div className="modal fade " id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Send Approval Request</h5>
+                <h5 className="modal-title fw-bold" id="exampleModalLabel">Pay Installment</h5>
 
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose} />
               </div>
               <div className="modal-body">
 
-                <form ref={formRef}>
 
-                  <div className="container-fluid">
 
-                    <div className="row">
 
-                      <div className="col-6 text-end mt-3">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                      <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Pay Installment
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body text-center">
 
-                        <InputMask mask="99999-9999999-9" maskChar={null} type="text" id="inputCnic" placeholder='Enter CNIC' className='input' autoComplete="off" name="CNIC" style={{ width: "100%" }} required />
-                        <p className="input_label_l" style={{ width: "100%" }}>CNIC</p>
-
+                        <a href="https://www.facebook.com/" target={'_blank'} type="button" className='btn payment_btn' >Pay with HBL</a>
                       </div>
-
-
-
-                      <div className="col-6 inputBox mt-3">
-                        <Input placeholder="Enter email" width="100%" name="email" type="email" margin="" label='r' labelVal="Email Address" />
-
-                      </div>
-
-                      <div className="col-6 text-end inputBox mt-3">
-                        <Input placeholder="Enter firstname" width="100%" name="firstName" type="text" margin="" label='l' labelVal="First Name" />
-                      </div>
-
-                      <div className="col-6 mt-3">
-                        <Input placeholder="Enter lastname" width="100%" name="lastName" type="text" label='r' labelVal="Last Name" />
-                      </div>
-
-
-                      <div className="col-12">
-                        <div className="panel">
-                          <div className="button_outer">
-                            {/* <form> */}
-                            <div className="btn_upload">
-                              <input type="file" id="upload_file" name="" onChange={handleOnchange} />
-                              Upload Transaction Image
-                            </div>
-                            <div className="processing_bar"></div>
-
-                            <button className="success_box btn" ref={submitBtnRef}>Submit</button>
-                            {/* </form> */}
-                          </div>
-                        </div>
-                        <div className="error_msg"></div>
-                        <div className="uploaded_file_view" id="uploaded_view">
-                          <span className="file_remove">X</span>
-                        </div>
-                      </div>
-
                     </div>
                   </div>
-                </form>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        Upload Transaction image
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                      <div class="accordion-body">
+
+                        <form ref={formRef} onSubmit={handleSubmit}>
+
+                          <div className="container-fluid">
+
+                            <div className="row">
+
+                              <div className="col-6 text-end mt-3">
+
+                                <InputMask mask="99999-9999999-9" maskChar={null} type="text" id="inputCnic" placeholder='Enter CNIC' className='input' autoComplete="off" name="CNIC" style={{ width: "100%" }} required />
+                                <p className="input_label_l" style={{ width: "100%" }}>CNIC</p>
+
+                              </div>
+
+
+
+                              <div className="col-6 text-end inputBox mt-3">
+                                <Input placeholder="Enter firstname" width="100%" name="firstName" type="text" margin="" label='l' labelVal="First Name" />
+                              </div>
+
+
+
+
+                              <div className="col-12">
+                                <div className="panel">
+                                  <div className="button_outer">
+                                    {/* <form> */}
+                                    <div className="btn_upload">
+                                      <input type="file" id="upload_file" name="transactionImage" onChange={handleOnchange} />
+                                      Upload Transaction Image
+                                    </div>
+                                    <div className="processing_bar"></div>
+
+                                    <button className="success_box btn" ref={submitBtnRef}>Submit</button>
+                                    {/* </form> */}
+                                  </div>
+                                </div>
+                                <div className="error_msg"></div>
+                                <div className="uploaded_file_view" id="uploaded_view">
+                                  <span className="file_remove">X</span>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                          <div className='text-center'><button type="submit" className="btn btn-dark">Submit</button></div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
               </div>
 
-
+              {/*
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
                 <button type="button" className="btn btn-success">Submit</button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -164,6 +240,6 @@ const Flexes=() => {
   )
 }
 
-export default Flexes;
+export default RequestApproval;
 
 

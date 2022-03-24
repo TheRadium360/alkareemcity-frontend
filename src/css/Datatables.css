@@ -75,6 +75,13 @@ li.paginate_button.active a{
 
 .show_table_btn{
   margin-top: -0.5rem;
+  width: 120px;
+  font-size: 12px;
+  }
+
+  .show_table_btn2 {
+    margin-top: -0.5rem;
+    font-size: 12px;
 
 }
 

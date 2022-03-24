@@ -37,13 +37,13 @@ export class DataTableComp extends Component {
       // Ballot Amount
       // <button btn-primary > Add </button>
       if(!ballotPaid && index===installmentCount+1){
-       this.checkBallot ? installment.push(ballotAmount):installment.push(`<button type="button" class="btn btn-sm btn-primary show_table_btn">Add</button>`);
+        this.checkBallot? installment.push( ballotAmount ):installment.push( `<button type="button" class="btn btn-sm btn-primary show_table_btn2">Add</button>` );
       }else{
         installment.push('_')
       }
       //Possession Amount
       if(!possesion && index===installmentCount+1){
-        this.checkPosession ? installment.push(possesionAmount):installment.push(`<button type="button" class="btn btn-sm btn-primary show_table_btn">Add</button>`);
+        this.checkPosession? installment.push( possesionAmount ):installment.push( `<button type="button" class="btn btn-sm btn-primary show_table_btn2">Add</button>` );
        }else{
          installment.push('_')
        }
@@ -65,7 +65,7 @@ export class DataTableComp extends Component {
      
       //Status 
       if(index<installmentCount+1) installment.push(`<button type="button" class="btn btn-sm btn-secondary show_table_btn show_table_btn_paid" disabled='true'>Paid</button>`)
-      if(index===installmentCount+1) installment.push('<button type="button" class="btn btn-sm btn-success show_table_btn">Pay</button>')
+      if ( index===installmentCount+1 ) installment.push( `<button type="button" class="btn btn-sm btn-success show_table_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Pay & Approve</button>` )
       if(index>installmentCount+1) installment.push(`<button disabled='true' type="button" class="btn btn-sm btn-danger show_table_btn">Pay</button>`)
 
       this.installmentTableData.push(installment)
@@ -88,13 +88,13 @@ export class DataTableComp extends Component {
     "columnDefs": [
       { "orderable": false,"width": "5px", "targets": 0 },
       { "orderable": false,"width": "35px", "targets": 1 },
-      { "orderable": false,"width": "35px", "targets": 2 },
-      { "orderable": false,"width": "40px", "targets": 3 },
+      { "orderable": false, "width": "30px", "targets": 2 },
+      { "orderable": false, "width": "30px", "targets": 3 },
       { "orderable": false,"width": "42px", "targets": 4 },
-      { "orderable": false,"width": "35px", "targets": 5 },
+      { "orderable": false, "width": "30px", "targets": 5 },
       { "orderable": false,"width": "28px", "targets": 6 },
       { "orderable": false,"width": "35px", "targets": 7 },
-      { "orderable": false,"width": "30px", "targets": 8 }
+      { "orderable": false, "width": "60px", "targets": 8 }
     ],
     "buttons": [
       // 'copyHtml5',

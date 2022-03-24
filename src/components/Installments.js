@@ -1,14 +1,33 @@
-import React,{useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import UsersContext from '../context/users/UsersContext'; 
 import DataTableComp from './DataTableComp';
 import{ FormHeading} from './FormHeading'
 import '../css/installment.css';
-
+import RequestApproval from './RequestApproval';
+import AppContext from '../context/appState/AppContext';
 
 export default function Installments() {
 
-const {user}=useContext(UsersContext);
-// console.log(user.installmentPlan[0].remainingBalance);
+  const { user }=useContext( UsersContext );
+  const [ approvalRequestCreds, setApprovalRequestCreds ]=useState( {
+    installment: user.installmentPlan[ 0 ].id,
+    user: user.id,
+    plot: user.installmentPlan[ 0 ].plot,
+    CNIC: user.CNIC,
+    firstName: user.firstName.toLowerCase()
+
+  } )
+
+  const { onChangeGeneric }=useContext( AppContext );
+
+  const onChange=onChangeGeneric( approvalRequestCreds, setApprovalRequestCreds )
+
+  console.log( user );
+  console.log( "USER ID: ", user.id );
+  console.log( "Installment ID: ", user.installmentPlan[ 0 ].id );
+  console.log( "Plot ID: ", user.installmentPlan[ 0 ].plot );
+
+
   return (
     <>
      <FormHeading value="Installment"/>
@@ -21,7 +40,8 @@ const {user}=useContext(UsersContext);
       </div>
     </div>
 
-    {/* Installment */}
+      {/* Installment */}
+      <RequestApproval approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
     <DataTableComp {...user} />
     </>
     )

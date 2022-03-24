@@ -6,6 +6,16 @@
   object-fit: contain;
 }
 
+.payment_btn {
+  background-color: #bd960a;
+  color: white;
+}
+
+.payment_btn:hover {
+  background-color: #daad0c;
+  color: white;
+}
+
 /* 
 .processing_bar {
   display: none;
