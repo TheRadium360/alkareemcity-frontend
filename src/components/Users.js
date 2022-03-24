@@ -6,10 +6,16 @@ import InputMask from "react-input-mask";
 import { FormDropdown } from "./FormDropdown";
 import Api from "../Api";
 import UsersContext from "../context/users/UsersContext";
+import UserDataTable from './UsersDataTable'
+
+
+
+
 
 export default function Users() {
   const { user , Cookies } = useContext(UsersContext);
   const { showAlert }=useContext( AppContext );
+  const [users, setUsers] = useState([]);
 
   const { onChangeGeneric } = useContext(AppContext);
   const [details, setDetails] = useState({});
@@ -42,6 +48,22 @@ export default function Users() {
   });
 
   // const cnicRef = useRef();
+
+
+
+
+  const getUsers = async ()=>{
+
+    const cookie = Cookies.get('jwt')
+
+    const res= await Api.get("users",
+    {
+      headers: { Authorization: `Bearer ${cookie}` }
+    })
+    const users = res.data.data.data;
+    setUsers(users)
+
+  }
 
 
 
@@ -81,6 +103,7 @@ export default function Users() {
 
       setDetails(res.data.data)
       setDisableInputs(true)
+      console.log(res.data.status)
       showAlert( `User has been update successfully!`, "success" );
     }else{
       showAlert( `User not updated! Something went wrong`, "danger" );
@@ -98,9 +121,9 @@ export default function Users() {
 
 
   useEffect(() => {
+    getUsers()
      getAllDetails();
     // details && setFormVal( { ...formVal, CNIC: details.CNIC } )
-    // console.log(details.CNIC)
   }, []);
 
 
@@ -116,6 +139,11 @@ export default function Users() {
     
     return details && (
       <>
+              <FormHeading value="Users" />
+
+
+      {users.length!=0 &&<UserDataTable users={users}/>}
+      {/* {console.log(users)} */}
       <div>
         <FormHeading value="User Details" />
         <div className="w-25 ms-auto">
@@ -185,7 +213,6 @@ export default function Users() {
                 First name
               </p>
             </div>
-              {console.log(details)}
             <div className="col-6">
               <Input
                 placeholder="Enter lastname"

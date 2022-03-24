@@ -1,94 +1,106 @@
-.show_table{
-  margin-top: 1rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  margin-bottom: 5rem;
+.show_table {
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 5rem;
 }
 
-table{
-  margin: 0 auto;
-  width: 100%;
-  clear: both;
-  border-collapse: collapse;
-  table-layout: fixed; 
-  word-wrap:break-word; 
+table {
+    margin: 0 auto;
+    width: 100%;
+    clear: both;
+    border-collapse: collapse;
+    table-layout: fixed;
+    word-wrap: break-word;
 }
 
-.headings{
-  background-color: #bd960a!important;
-  color: #fff;
-  text-align: center;
+.headings {
+    background-color: #bd960a!important;
+    color: #fff;
+    text-align: center;
 }
 
-.show_table tr.even td{
-  --bs-table-accent-bg:white;
-  /* border-bottom: 1px solid black!important; */
-  color: black;
-  text-align: center;
-  padding-top: 1rem;
+.show_table tr.even td {
+    --bs-table-accent-bg: white;
+    /* border-bottom: 1px solid black!important; */
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
 }
 
-.show_table tbody tr.odd td{
-  --bs-table-accent-bg: rgba(255, 255, 255, 0.87);
-  /* border-bottom: 1px solid black; */
-  color: black;
-  text-align: center;
-  padding-top: 1rem;
+.show_table tbody tr.odd td {
+    --bs-table-accent-bg: rgba(255, 255, 255, 0.87);
+    /* border-bottom: 1px solid black; */
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
 }
 
 .page-item.active .page-link {
-  background-color: #bd960a;
-  outline: none;
-  border: none ;
-  box-shadow: none;
+    background-color: #bd960a;
+    outline: none;
+    border: none;
+    box-shadow: none;
 }
+
 .page-item .page-link {
-  color: #bd960a;
-  box-shadow: none;
-}
-.page-item{
-  margin-top: 1rem;
+    color: #bd960a;
+    box-shadow: none;
 }
 
-
-.buttons-collection,.buttons-copy,.buttons-csv,.buttons-print,.buttons-excel{
-  background-color: rgba(255, 255, 255, 0.87);
-  color: black;
-  border-color: #bd960a;
-  margin-bottom: 1rem;
+.page-item {
+    margin-top: 1rem;
 }
 
-tbody, td, tfoot, th, thead, tr{
-  border-style: none;
+.buttons-collection,
+.buttons-copy,
+.buttons-csv,
+.buttons-print,
+.buttons-excel {
+    background-color: rgba(255, 255, 255, 0.87);
+    color: black;
+    border-color: #bd960a;
+    margin-bottom: 1rem;
 }
 
-#binance_table_paginate{
-  margin-top: 1.5rem;
-  margin-right: .5rem;
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border-style: none;
 }
 
-li.paginate_button.active a{
-  background-color: #1e202d;
-  color: #fff;
+#binance_table_paginate {
+    margin-top: 1.5rem;
+    margin-right: .5rem;
 }
 
+li.paginate_button.active a {
+    background-color: #1e202d;
+    color: #fff;
+}
 
-.show_table_btn{
-  margin-top: -0.5rem;
-  width: 120px;
-  font-size: 12px;
-  }
+.show_table_btn {
+    margin-top: -0.5rem;
+    width: 120px;
+    font-size: 12px;
+}
 
-  .show_table_btn2 {
+.show_table_btn2 {
     margin-top: -0.5rem;
     font-size: 12px;
-
 }
 
+.show_table_btn_paid {
+    opacity: 100%!important;
+    background-color: #bd960a!important;
+    color: white!important;
+    border: none;
+}
 
-.show_table_btn_paid{
-  opacity: 100%!important;
-  background-color: #bd960a!important;
-color: white!important;
-border: none;
+.odd,
+.even {
+    font-size: 14px;
 }
