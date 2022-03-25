@@ -11,7 +11,7 @@ import UsersContext from '../context/users/UsersContext';
 import AppContext from '../context/appState/AppContext';
 
 
-const RequestApproval=( props ) => {
+const PayApprove=( props ) => {
 
 
 
@@ -54,9 +54,9 @@ const RequestApproval=( props ) => {
 
     console.log( e.target.firstName.value, e.target.CNIC.value, approvalRequestCreds.CNIC );
 
-    console.log( String( approvalRequestCreds.CNIC )===String( e.target.CNIC.value ) )
-    console.log( approvalRequestCreds.firstName===e.target.CNIC.value.toLowerCase() )
-    if ( approvalRequestCreds.CNIC===e.target.CNIC.value&&approvalRequestCreds.firstName===e.target.CNIC.value.toLowerCase() ) {
+    // console.log( String( approvalRequestCreds.CNIC )===String( e.target.CNIC.value ) )
+    // console.log( approvalRequestCreds.firstName===e.target.CNIC.value.toLowerCase() )
+    if ( approvalRequestCreds.CNIC===e.target.CNIC.value&&approvalRequestCreds.firstName===e.target.firstName.value.toLowerCase() ) {
 
 
       let formData=new FormData();
@@ -75,6 +75,15 @@ const RequestApproval=( props ) => {
       )
 
       console.log( res )
+      if ( res.data.status==='success' ) {
+        showAlert( `Approval request has been submited!`, "success" );
+
+      }
+      else {
+        showAlert( `Something went wrong, please try again later!`, "danger" );
+
+      }
+
 
     }
 
@@ -240,6 +249,6 @@ const RequestApproval=( props ) => {
   )
 }
 
-export default RequestApproval;
+export default PayApprove;
 
 

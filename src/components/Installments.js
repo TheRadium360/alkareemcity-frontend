@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import UsersContext from '../context/users/UsersContext'; 
+import UsersContext from '../context/users/UsersContext';
 import DataTableComp from './DataTableComp';
-import{ FormHeading} from './FormHeading'
+import { FormHeading } from './FormHeading'
 import '../css/installment.css';
-import RequestApproval from './RequestApproval';
+import PayApprove from './PayApprove';
 import AppContext from '../context/appState/AppContext';
 
 export default function Installments() {
@@ -41,7 +41,7 @@ export default function Installments() {
     </div>
 
       {/* Installment */}
-      <RequestApproval approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
+      <PayApprove approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
     <DataTableComp {...user} />
     </>
     )

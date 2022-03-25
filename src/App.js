@@ -14,7 +14,7 @@ import Notification from './components/Notification'
 import CreateUser from './components/CreateUser';
 import Alert from './components/Alert';
 import Users from './components/Users'
-
+import ApprovalRequest from './components/ApprovalRequest';
 
 // import Flexes from './components/Flexes'
 // import ComplaintForm from './components/ComplaintForm'
@@ -27,7 +27,8 @@ import {
 } from "react-router-dom";
 import Profile from './components/Profile';
 import Plot from './components/Plot';
-import RequestApproval from './components/RequestApproval';
+import PayApprove from './components/PayApprove';
+import ComplaintForm from './components/ComplaintForm';
 
 
 
@@ -59,9 +60,10 @@ function App() {
               <Route exact path="plot" element={<Plot />} />
               <Route exact path="installments" element={<Installments />} />
               <Route exact path="notification" element={<Notification />} />
-              <Route exact path="feedback" element={<Feedback />} />
+              <Route exact path="feedback" element={<ComplaintForm />} />
               <Route exact path="createnewuser" element={<CreateUser />} />
               <Route exact path="users" element={<Users />} />
+              <Route exact path="approvalrequest" element={<ApprovalRequest />} />
 
 
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
@@ -69,7 +71,7 @@ function App() {
               {/* <Route exact path="approvalrequests" element={<Approvalrequests />} /> */}
             </Route>
 
-            <Route exact path="approval" element={<RequestApproval />} />
+            {/* <Route exact path="approval" element={<PayApprove />} /> */}
           </Routes>
 
 
