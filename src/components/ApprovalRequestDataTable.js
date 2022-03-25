@@ -20,8 +20,8 @@ export class ApprovalRequestDataTable extends Component {
 
   constructor() {
     super();
-    this.requestTableData=[];
-
+    // this.requestTableData=[];
+    // this.state={ tableData: [] };
   }
 
   getAllRequests=async () => {
@@ -52,8 +52,9 @@ export class ApprovalRequestDataTable extends Component {
       req.push( element.installment.installmentCount+1 )
       req.push( `<button type="button" class="btn btn-sm btn-dark show_table_btn" data-bs-toggle="modal" data-bs-target="#approvalRequestModal" aid=${element.id} ${onclick=( e ) => handleClick( e )}>View</button>` )
 
-      this.requestTableData.push( req )
-
+      // this.requestTableData.push( req )
+      const updatedArray=this.props.tableData.push
+      this.setState( this.props.setTableData() )
 
     } );
   }

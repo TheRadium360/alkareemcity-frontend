@@ -11,6 +11,7 @@ const ApprovalRequest=() => {
 
   const [ requests, setRequests ]=useState( [] );
   const [ modalData, setModalData ]=useState( {} );
+  const [ tableData, setTableData ]=useState( [] );
   // const []
 
 
@@ -59,8 +60,8 @@ const ApprovalRequest=() => {
   return (
     // <div>ApprovalRequest</div>
     <>
-      {requests.length!==0&&<ApprovalRequestDataTable requests={requests} handleClick={handleClick} />}
-      <ApprovalRequestModal data={modalData} setModalData={setModalData} completeData={requests} setRequests={setRequests} />
+      {requests.length!==0&&<ApprovalRequestDataTable requests={requests} handleClick={handleClick} tableData={tableData} setTableData={setTableData} />}
+      <ApprovalRequestModal data={modalData} setModalData={setModalData} completeData={requests} setRequests={setRequests} tableData={tableData} setTableData={setTableData} />
 
 
 

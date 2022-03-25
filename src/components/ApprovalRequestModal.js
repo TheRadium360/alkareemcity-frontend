@@ -27,7 +27,7 @@ const ApprovalRequestModal=( props ) => {
   const { showAlert }=useContext( AppContext );
 
 
-  const { data, setModalData, completeData }=props;
+  const { data, setModalData, completeData, setRequests }=props;
 
   // REJECT APPROVAL REQUEST
   const handleRejectEvent=async ( e ) => {
@@ -41,7 +41,8 @@ const ApprovalRequestModal=( props ) => {
 
     // DELETING DATA FROM ARRAY
     const newData=completeData.filter( el => el.id!==id );
-    setModalData( newData );
+    console.log( newData )
+    setRequests( newData );
 
     // DELETING DATA FROM BACKEND
     // const res=await Api.delete( `requestapproval/${id}`,
