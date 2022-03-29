@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 const ProtectedRoute=( {
   redirectPath='/login',
-  children,
+  children
 } ) => {
 
   // Check user token here

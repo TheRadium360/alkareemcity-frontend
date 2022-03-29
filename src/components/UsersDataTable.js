@@ -28,7 +28,8 @@ export class DataTableComp extends Component {
   
   getAllUsers = async()=>{
    
-    const users= this.props.users
+    const users=this.props.users
+    console.log( users )
     for (let i = 0; i < users.length; i++) {
       let user=[];
         user.push(i)

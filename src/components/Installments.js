@@ -19,7 +19,6 @@ export default function Installments() {
   } )
 
   const { onChangeGeneric }=useContext( AppContext );
-
   const onChange=onChangeGeneric( approvalRequestCreds, setApprovalRequestCreds )
 
   console.log( user );

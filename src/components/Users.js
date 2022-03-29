@@ -72,60 +72,6 @@ export default function Users() {
     }
   };
 
-  const handleUserUpdate = async (e) => {
-    e.preventDefault();
-    const cookie = Cookies.get("jwt");
-    try {
-      const res = await Api.patch(
-        `/users/${details._id}`,
-        {
-          firstName: formVal.firstName,
-          lastName: formVal.lastName,
-          CNIC: formVal.CNIC,
-          email: formVal.email,
-          password: formVal.password,
-          passwordConfirm: formVal.passwordConfirm,
-        },
-        {
-          headers: { Authorization: `Bearer ${cookie}` },
-        }
-      );
-      if (res.data.status === "success") {
-        setDetails(res.data.data);
-        setDisableInputs(true);
-        showAlert(`User has been update successfully!`, "success");
-      }
-      
-    } catch (err) {      
-      showAlert(`User not updated! Something went wrong`, "danger");
-    }
-
-    const USERS = users;
-    
-    const u= USERS.map((el)=>{
-      if(el.id===details._id){
-       return {
-                ...formVal,
-                firstName: formVal.firstName,
-                lastName: formVal.lastName,
-                CNIC: formVal.CNIC,
-                email: formVal.email,
-                password: formVal.password,
-                passwordConfirm: formVal.passwordConfirm,
-
-              }
-      }
-      else{
-        return el;
-      }
-    })
-    setUsers(u)
-  
-  };
-
-  // const handleInstallmentUpdate = (e) => {
-  //   e.preventDefault();
-  // };
 
   useEffect(() => {
     getUsers();
@@ -137,7 +83,7 @@ export default function Users() {
   return (
       (
       <>
-      {details && <EditUsersModal details={details} handleEdit={handleEdit} disableInputs={disableInputs} handleUserUpdate={handleUserUpdate} setUsers={setUsers} users={users} onChange={onChange}/>}
+        {details&&<EditUsersModal details={details} setDetails={setDetails} formVal={formVal} setFormVal={setFormVal} handleEdit={handleEdit} disableInputs={disableInputs} setDisableInputs={setDisableInputs} setUsers={setUsers} users={users} onChange={onChange} />}
       
         <FormHeading value="Users" />
 

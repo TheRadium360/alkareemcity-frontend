@@ -1,9 +1,86 @@
-import React from 'react'
+import React, { useContext, useRef } from 'react'
 import Input from './Input'
 import { FormDropdown } from './FormDropdown'
 import { FormHeading } from './FormHeading'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import AppContext from '../context/appState/AppContext';
+import Api from '../Api';
+import UsersContext from '../context/users/UsersContext';
 
-export default function (props) {
+{/* <i class="fa-solid fa-pen-to-square"></i> */ }
+
+
+
+export default function ( props ) {
+
+  const { showAlert }=useContext( AppContext );
+  const { Cookies }=useContext( UsersContext );
+  const closeBtn=useRef( null )
+
+
+  const handleUserUpdate=async ( e ) => {
+    e.preventDefault();
+    // console.log( e.target )
+    const cookie=Cookies.get( "jwt" );
+    try {
+      const res=await Api.patch(
+        `/users/${props.details._id}`,
+        {
+          firstName: props.formVal.firstName,
+          lastName: props.formVal.lastName,
+          CNIC: props.formVal.CNIC,
+          email: props.formVal.email,
+          password: props.formVal.password,
+          passwordConfirm: props.formVal.passwordConfirm,
+        },
+        {
+          headers: { Authorization: `Bearer ${cookie}` },
+        }
+      );
+
+      console.log( res.data )
+      if ( res.data.status==="success" ) {
+        props.setDetails( res.data.data );
+        props.setDisableInputs( true );
+
+
+        // CHANGES IN FRONTEND
+        const USERS=props.users;
+
+        const u=USERS.map( ( el ) => {
+          if ( el.id===props.details._id ) {
+            return {
+              ...props.formVal,
+              firstName: props.formVal.firstName,
+              lastName: props.formVal.lastName,
+              CNIC: props.formVal.CNIC,
+              email: props.formVal.email,
+              password: props.formVal.password,
+              passwordConfirm: props.formVal.passwordConfirm,
+
+            }
+          }
+          else {
+            return el;
+          }
+        } )
+        props.setUsers( u )
+
+        closeBtn.current.click();
+
+        showAlert( `User has been update successfully!`, "success" );
+      }
+
+    } catch ( err ) {
+      showAlert( `User not updated! Something went wrong`, "danger" );
+    }
+
+  };
+
+
+
+
   return (
     <div>
         <div
@@ -24,7 +101,8 @@ export default function (props) {
                   type="button"
                   className="btn-close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
+                aria-label="Close"
+                ref={closeBtn}
                 />
               </div>
                { <div className="modal-body">
@@ -50,16 +128,16 @@ export default function (props) {
                       <div class="accordion-body text-center">
                         <FormHeading value="User Details" />
 
-                        <div className="w-25 ms-auto">
+                      <div className="w-25 ms-auto text-end">
                           <button
                             className=" btn btn-success"
                             onClick={props.handleEdit}
                           >
-                            edit
+                          <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </div>
 
-                        <form onSubmit={props.handleUserUpdate}>
+                      <form onSubmit={handleUserUpdate}>
                           <div className="container">
                             <div className="row">
                               <div className="col-6 text-end">
@@ -195,13 +273,13 @@ export default function (props) {
                     >
                       <div class="accordion-body">
                         <FormHeading value="Plot Details" />
-                        <div className="w-25 ms-auto">
+                      <div className="w-25 ms-auto text-end">
                           <button
                             className=" btn btn-success"
                             disabled={true}
                             onClick={props.handleEdit}
                           >
-                            edit
+                          <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </div>
 
@@ -363,12 +441,13 @@ export default function (props) {
                       <div className="accordion-body">
                         <div>
                           <FormHeading value="Installment Details" />
-                          <div className="w-25 ms-auto">
+                        <div className="w-25 ms-auto text-end">
                             <button
                               className=" btn btn-success"
                               onClick={props.handleEdit}
                             >
-                              edit
+                            <FontAwesomeIcon icon={faPenToSquare} />
+
                             </button>
                           </div>
                         </div>

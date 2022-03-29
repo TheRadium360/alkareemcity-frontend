@@ -18,6 +18,7 @@ const PayApprove=( props ) => {
   const { approvalRequestCreds, setApprovalRequestCreds }=props;
 
   const submitBtnRef=useRef( null )
+  const closeBtn=useRef( null )
   const formRef=useRef( null )
   const handleClose=() => {
     formRef.current.reset()
@@ -75,12 +76,12 @@ const PayApprove=( props ) => {
 
       console.log( res )
       if ( res.data.status==='success' ) {
+        closeBtn.current.click();
         showAlert( `Approval request has been submited!`, "success" );
 
       }
       else {
         showAlert( `Something went wrong, please try again later!`, "danger" );
-
       }
 
 
@@ -109,8 +110,8 @@ const PayApprove=( props ) => {
         btnOuter.addClass( "file_uploading" );
         setTimeout( function () {
           btnOuter.addClass( "file_uploaded" );
-          btnOuter.css( 'position', 'absolute' )
-          btnOuter.css( 'left', '-999999999rem' )
+          btnOuter.css( 'position', 'absolute' );
+          btnOuter.css( 'left', '-999999999rem' );
         }, 3000 );
         const uploadedFile=URL.createObjectURL( e.target.files[ 0 ] );
         setTimeout( function () {
@@ -146,7 +147,7 @@ const PayApprove=( props ) => {
               <div className="modal-header">
                 <h5 className="modal-title fw-bold" id="exampleModalLabel">Pay Installment</h5>
 
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose} />
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose} ref={closeBtn} />
               </div>
               <div className="modal-body">
 

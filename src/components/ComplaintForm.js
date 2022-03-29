@@ -38,7 +38,7 @@ const ComplaintForm=() => {
 
       <div style={{ margin: "2rem 10rem" }}>
         <div className='my-5'>
-          <FormHeading value="Complaint Form" />
+          <FormHeading value="Feedback" subHeading="Submit your feedback here" />
         </div>
 
 

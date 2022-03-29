@@ -6,12 +6,22 @@ import UsersContext from '../context/users/UsersContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-{/* <i class="fa-solid fa-right-from-bracket"></i> */ }
-
+import { useNavigate } from "react-router-dom"; 
 
 export default function Sidenavbar() {
   const location=useLocation();
-  const { user }=useContext( UsersContext )
+  const { user, Cookies, setUser }=useContext( UsersContext )
+  let navigate=useNavigate();
+
+  const handleLogout=( e ) => {
+    e.preventDefault();
+
+    Cookies.remove( 'jwt' );
+    setUser( {} )
+    navigate( '/login' );
+
+  }
+
   return (
 
     <>
@@ -56,9 +66,7 @@ export default function Sidenavbar() {
               {/* <li className={`${location.pathname.endsWith("complaints")? "active": ''}`}>
           <Link to='/dashboard/complaints'>Complaints</Link>
         </li> */}
-              {/* <li className={`${location.pathname.endsWith("approvalrequests")? "active": ''}`}>
-          <Link to="approvalrequests">Approval Requests</Link>
-        </li> */}
+
             </ul>
           </div>
         </nav>
@@ -71,10 +79,10 @@ export default function Sidenavbar() {
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="nav navbar-nav ms-auto">
                   <li className="nav-item">
-                    <a className="nav-link" href="#"><span className="me-2"><FontAwesomeIcon icon={faRightFromBracket} /></span>Logout</a>
+                    <Link className="nav-link" to="/login" onClick={handleLogout}><span className="me-2"><FontAwesomeIcon icon={faRightFromBracket} /></span>Logout</Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#"><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</a>
+                    <Link className="nav-link" to="/dasboard/profile"><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</Link>
                   </li>
 
                 </ul>
