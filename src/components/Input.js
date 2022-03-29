@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Input=( { type, name, placeholder, width, onChange, disabled=false, margin, defaultValue, label, labelVal, step, required=true } ) => {
+const Input=( { type, name, placeholder, width, onChange, disabled=false, margin, defaultValue, label, labelVal, step, required=true ,unit} ) => {
 
 
     return (

@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react';
-import UsersContext from '../context/users/UsersContext';
+import React, { useContext, useState,useEffect } from 'react';
+import UsersContext from '../context/users/UsersContext'; 
 import DataTableComp from './DataTableComp';
-import { FormHeading } from './FormHeading'
+import{ FormHeading} from './FormHeading'
 import '../css/installment.css';
-import PayApprove from './PayApprove';
+import RequestApproval from './RequestApproval';
 import AppContext from '../context/appState/AppContext';
+import jwtDecode from 'jwt-decode';
 
 export default function Installments() {
 
-  const { user }=useContext( UsersContext );
+  const { user,retrieveUserInfo ,Cookies}=useContext( UsersContext );
   const [ approvalRequestCreds, setApprovalRequestCreds ]=useState( {
     installment: user.installmentPlan[ 0 ].id,
     user: user.id,
@@ -27,6 +28,18 @@ export default function Installments() {
   console.log( "Installment ID: ", user.installmentPlan[ 0 ].id );
   console.log( "Plot ID: ", user.installmentPlan[ 0 ].plot );
 
+  
+  useEffect(async ()=>{
+    
+    if ( Cookies.get( 'jwt' ) ) {
+     const userId=jwtDecode( Cookies.get( 'jwt' ) ).id;
+      await retrieveUserInfo( userId );
+    }
+
+
+  },[])
+  
+
 
   return (
     <>
@@ -41,7 +54,7 @@ export default function Installments() {
     </div>
 
       {/* Installment */}
-      <PayApprove approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
+      <RequestApproval approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
     <DataTableComp {...user} />
     </>
     )

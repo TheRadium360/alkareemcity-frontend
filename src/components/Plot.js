@@ -1,14 +1,32 @@
-import React from 'react'
+import React,{useContext,useState} from 'react';
+import Api from './../Api';
+import { useEffect } from 'react';
 import{ FormHeading} from './FormHeading'
 import { FormDropdown } from './FormDropdown';
 import Input from './Input';
+import PlotMap from './PlotMap';
+import UsersContext from '../context/users/UsersContext';
+// import PlotLeaftet from './PlotLeaftet';
+// import GoogleMapComponent from './GoogleMapComponent';
 
 export default function Plot() {
  
+
+  const {user}=useContext(UsersContext);
+  const [plotInfo,setPlotInfo]=useState(user.plotInformation[0]);
+  console.log(plotInfo);
+
   return (
-    <>
+    <div className='plotDiv'>
+      {/* Plot Map*/}
+      
+      <FormHeading value="Plot Location" marginTop='2rem'/>
+      <PlotMap />
+     {/* <PlotLeaftet/> */}
+
+      {/* Plot Details*/}
       <FormHeading value="Plot Details" />
-      <form>
+      <form className='mb-5'>
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
@@ -17,12 +35,10 @@ export default function Plot() {
                 width="60%"
                 backgroundColor="#bd960a"
                 color="white"
-                // onChange={onChange}
                 list={["Commercial", "Residential"]}
                 disabled={true}
-                // defaultValue={
-                //   details.plotInformation && details.plotInformation[0].plotType
-                // }
+                defaultValue={plotInfo.plotType}
+                noDropdown='true'
               />
             </div>
 
@@ -35,9 +51,8 @@ export default function Plot() {
                 list={["Commercial", "Residential"]}
                 // onChange={onChange}
                 disabled={true}
-                // defaultValue={
-                //   details.plotInformation && details.plotInformation[0].block
-                // }
+                defaultValue={plotInfo.block}
+                noDropdown='true'
               />
             </div>
 
@@ -50,9 +65,8 @@ export default function Plot() {
                 list={["Commercial", "Residential"]}
                 // onChange={onChange}
                 disabled={true}
-                // defaultValue={
-                //   details.plotInformation && details.plotInformation[0].plotArea
-                // }
+                defaultValue={plotInfo.plotArea}
+                noDropdown='true'
               />
             </div>
 
@@ -64,11 +78,10 @@ export default function Plot() {
                 type="text"
                 // onChange={onChange}
                 disabled={true}
-                // defaultValue={
-                //   details.plotInformation && details.plotInformation[0].plotNo
-                // }
+                defaultValue={plotInfo.plotNo}
                 label="l"
                 labelVal="Plot Number"
+                noDropdown='true'
               />
             </div>
 
@@ -80,10 +93,7 @@ export default function Plot() {
                 type="number"
                 // onChange={onChange}
                 disabled={true}
-                // defaultValue={
-                //   details.plotInformation &&
-                //   details.plotInformation[0].plotPrice
-                // }
+                defaultValue={plotInfo.plotPrice}
                 label="r"
                 labelVal="Plot Price"
               />
@@ -94,12 +104,10 @@ export default function Plot() {
                 placeholder="Enter plot latitude"
                 width="60%"
                 name="lat"
-                type="number"
+                type="text"
                 // onChange={onChange}
                 disabled={true}
-                // defaultValue={
-                //   details.plotInformation && details.plotInformation[0].lat
-                // }
+                defaultValue={plotInfo.cords[0].lat+"°"}
                 label="l"
                 labelVal="Latitude(Cordinates)"
               />
@@ -110,14 +118,13 @@ export default function Plot() {
                 placeholder="Enter plot longitude"
                 width="60%"
                 name="lng"
-                type="number"
+                type="text"
                 // onChange={onChange}
                 disabled={true}
-                // defaultValue={
-                //   details.plotInformation && details.plotInformation[0].lng
-                // }
+                defaultValue={plotInfo.cords[0].lng+"°"}
                 label="r"
                 labelVal="Longitude(Cordinates)"
+                
               />
             </div>
 
@@ -125,6 +132,6 @@ export default function Plot() {
         </div>
       </form>
 
-    </>
+    </div>
   )
 }

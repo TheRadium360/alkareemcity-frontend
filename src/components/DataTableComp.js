@@ -25,8 +25,6 @@ export class DataTableComp extends Component {
     checkPosession:false,
   }
 
-
-
   componentDidMount(){
     const {totalAmount,remainingBalance,installmentPerMonth,possesionAmount,installmentCount,ballotPaid,possesion,halfYearPayment,totalInstallmentCount,bookingAmount,ballotAmount,fine}=this.props.installmentPlan[0];
     let installment;

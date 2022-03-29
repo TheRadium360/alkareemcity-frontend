@@ -1,139 +1,54 @@
-// import React, { Component } from 'react';
-// import './App.css';
-// import {AsyncTypeahead} from 'react-bootstrap-typeahead';
-// import _ from 'lodash';
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
 
-// let map;
-// let bounds = new window.google.maps.LatLngBounds();
-// let sub_area;
-// let coordinates=[];
-// let color = ['#FF0000', '#4286f4','#ffff00','#ff00b2','#bb00ff','#00ffff','#26ff00','#00ff87'];
+export default function PlotMap(props) {
 
-// class PlotMap extends Component {
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+
+ let defaultProps = {
+  zoom: 20,
+  center: {
+    lat:  31.515894, lng: 74.340111
+  },
+  mapTypeId: "terrain"
+};
+
+  const handleApiLoaded = (map, maps) => {
+    const triangleCoords = [
+      { lat:  31.515894, lng: 74.340111 },
+      { lat:  31.515936, lng: 74.340052},
+      { lat:31.515994, lng: 74.340131 },
+      { lat:  31.515945, lng:  74.340183}
+    ];
   
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       options: [],
-//       selectedOptions: []
-//     }
-//     this._handleSearch = this._handleSearch.bind(this);
-//     this.renderCoordinate = this.renderCoordinate.bind(this);
+     var bermudaTriangle = new maps.Polygon({
+      paths: triangleCoords,
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35
+    });
+    bermudaTriangle.setMap(map);
+  };
 
-//   }
 
-//   componentDidMount(){
-//     this._initMap()
-//   }
-
-//   _initMap () {
-//     map = new window.google.maps.Map(document.getElementById('map'),{
-//       center: {lat: -6.226996, lng: 106.819894},
-//       zoom: 10,
-//       zoomControl: true,
-//       zoomControlOptions: {
-//         position: window.google.maps.ControlPosition.RIGHT_CENTER
-//       },
-//       scrollwheel: false,
-//       streetViewControl: false,
-//       mapTypeControl: false,
-//       mapTypeId: 'roadmap',
-//     });
-//   }
-
-//   _handleSearch(query) {
-//     if (!query) {
-//       return;
-//     }
-//     if (this.timeout) clearTimeout(this.timeout)
-//     this.timeout = setTimeout(() => {
-//       fetch(`https://nominatim.openstreetmap.org/search.php?q=${query}&polygon_geojson=1&format=json`)
-//       .then(resp => resp.json())
-//       .then(data => {
-//         let filterGeoJsonType = data.filter(function(data){
-//           return data.geojson.type === "MultiPolygon" || data.geojson.type === "Polygon"
-//         });
-//         this.setState({options: filterGeoJsonType});
-//       });
-//     }, 1000)
-//   }
-
-//   renderCoordinate(paths){
-//     coordinates = [];
-//     let position = 0;
-//     paths.map((location) =>{
-//         if(position %10 === 0){
-//           coordinates.push({"lat": location[1], "lng": location[0]});
-//           bounds.extend({"lat": location[1], "lng": location[0]});
-//         }
-//         position++
-//         return true;
-//     });
-//   }
-
-//   renderToMaps (selectedOptions) {
-//     selectedOptions.forEach((option) => {
-      
-//       if(option.geojson.type === "MultiPolygon"){
-//         this.renderCoordinate(option.geojson.coordinates[0][0]);
-//       }else if(option.geojson.type === "Polygon"){
-//         this.renderCoordinate(option.geojson.coordinates[0]);
-//       }else{
-//         alert('option.geojson.type: MultiPolygon & Polygon');
-//       }
-      
-//       if(coordinates.length > 1){
-//         sub_area = new window.google.maps.Polygon({
-//           paths: coordinates,
-//           strokeColor: color[1],
-//           strokeOpacity: 0.8,
-//           strokeWeight: 2,
-//           fillColor: color[1],
-//           fillOpacity: 0.35,
-//           editable: true
-//         });
-        
-//         sub_area.setMap(map);
-//         map.setOptions({ maxZoom: 15 });
-//         map.fitBounds(bounds);
-//         // map.zoom(200)
-  
-//         coordinates = [];
-//       }
-//     })
-//   }
-
-//   _handleChange (option) {
-//     this._initMap()
-//     this.renderToMaps(option)
-//   }
-
-//   render() {
-//     return (
-//       <div className="container" style={{height: `100%`}}>
-      
-         
-         
-//            <AsyncTypeahead
-//                 align="justify"
-//                 multiple
-//                 labelKey="display_name"
-//                 onSearch={this._handleSearch.bind(this)}
-//                 onChange={this._handleChange.bind(this)}
-//                 options={this.state.options}
-//                 placeholder="Search city, ex: tomang or jakarta selatan..."
-//                 renderMenuItemChildren={(option, props, index) => (
-//                   <div>
-//                     <span>{option.display_name}</span>
-//                   </div>
-//                 )}/>
-              
-//               <div className="maps" id="map"></div>
-
-             
-//       </div>
-//     );
-//   }
-// }
-
-// export default PlotMap;
+  return (
+    <div className='mapBox'>
+    <GoogleMapReact
+      // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+      defaultCenter={defaultProps.center}
+      defaultZoom={defaultProps.zoom}
+      yesIWantToUseGoogleMapApiInternals
+      onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+    >
+      {/* <AnyReactComponent
+        lat={59.955413}
+        lng={30.337844}
+        text="My Marker"
+      /> */}
+    </GoogleMapReact>
+  </div>
+  )
+}

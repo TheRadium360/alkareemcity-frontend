@@ -37,13 +37,13 @@ export const FormDropdown = (props) => {
   
   return(
     <div className="btn-group " style={{width:props.width}}>
-      <button value={props.name} className="btn btn_name dropdown-toggle" disabled={props.disabled} type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: props.backgroundColor, color: props.color }} >
+      <button value={props.name} className={'btn btn_name '+ (props.noDropdown ? `` : 'dropdown-toggle')} disabled={props.disabled} type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: props.backgroundColor, color: props.color }} >
         {props.defaultValue? props.defaultValue:"Select "+props.name}
   </button>
   <ul className="dropdown-menu list"  style={{width:'100%'}} onClick={handleSelection}>
 
   {
-          props.list.map( ( e ) => <li className='list_item' name={props.name} value={e}>{e}</li> )
+          props.list.map( ( e,i ) => <li key={i} className='list_item' name={props.name} value={e}>{e}</li> )
   }
     
   </ul>

@@ -4,7 +4,7 @@ import React from 'react';
 export const FormHeading = (props) => {
   return(
     <>
-   <div className="headingBox">
+   <div className="headingBox" style={{marginTop:props.marginTop}}>
    <h1 className="formHeading">
   {props.value}
   </h1>

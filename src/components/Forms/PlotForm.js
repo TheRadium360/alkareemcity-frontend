@@ -36,9 +36,26 @@ const PlotForm=( props ) => {
       plotPrice: values.plotPrice,
       block: values.block,
       plotArea: values.plotArea,
-      lat: values.lat,
-      lng: values.lng,
-      user: formVal.userId
+      cords:[
+        {
+        lat:formVal.lat1,
+        lng:formVal.lng1,
+        },
+        {
+        lat:formVal.lat2,
+        lng:formVal.lng2,
+        },
+        {
+        lat:formVal.lat3,
+        lng:formVal.lng3,
+        },
+        {
+        lat:formVal.lat4,
+        lng:formVal.lng4,
+        },
+      ],
+      user: formVal.userId='623b0db70693e52860bda1d1'
+      // user: '623b0db70693e52860bda1d1'
     };
 
 
@@ -70,8 +87,43 @@ const PlotForm=( props ) => {
       if ( res.data.status==="success" ) {
 
         showAlert( `Plot has been ${formVal.plotId? 'updated':'created'} for the user successfully!`, "success" );
+        console.log({ ...formVal, plotId: res.data.data.id ,cords:[
+          {
+          lat:formVal.lat1,
+          lng:formVal.lng1,
+          },
+          {
+          lat:formVal.lat2,
+          lng:formVal.lng2,
+          },
+          {
+          lat:formVal.lat3,
+          lng:formVal.lng3,
+          },
+          {
+          lat:formVal.lat4,
+          lng:formVal.lng4,
+          },
+        ]});
         setPlotFormStatus( res.data.status );
-        setFormVal( { ...formVal, plotId: res.data.data.id } )
+        setFormVal( { ...formVal, plotId: res.data.data.id ,cords:[
+        {
+        lat:formVal.lat1,
+        lng:formVal.lng1,
+        },
+        {
+        lat:formVal.lat2,
+        lng:formVal.lng2,
+        },
+        {
+        lat:formVal.lat3,
+        lng:formVal.lng3,
+        },
+        {
+        lat:formVal.lat4,
+        lng:formVal.lng4,
+        },
+      ]} )
 
       }
 
@@ -142,11 +194,35 @@ const PlotForm=( props ) => {
 
 
             <div className="col-6 text-end ">
-              <Input placeholder="Enter plot latitude" width="60%" label='l' name="lat" type="number" onChange={onChange} defaultValue={values.lat} labelVal="Latitude(Cordinates)" step="any" />
+              <Input placeholder="Enter latitude of 1st corner" width="60%" label='l' name="lat1" type="number" onChange={onChange} defaultValue={values.lat1} labelVal="Latitude(Cordinates)" step="any" />
             </div>
 
             <div className="col-6  ">
-              <Input placeholder="Enter plot longitude" width="60%" label='r' name="lng" type="number" onChange={onChange} defaultValue={values.lng} labelVal="Longitude(Cordinates)" step="any" />
+              <Input placeholder="Enter longitude of 1st corner" width="60%" label='r' name="lng1" type="number" onChange={onChange} defaultValue={values.lng1} labelVal="Longitude(Cordinates)" step="any" />
+            </div>
+
+            <div className="col-6 text-end ">
+              <Input placeholder="Enter latitude of 2nd corner" width="60%" label='l' name="lat2" type="number" onChange={onChange} defaultValue={values.lat2} labelVal="Latitude(Cordinates)" step="any" />
+            </div>
+
+            <div className="col-6  ">
+              <Input placeholder="Enter longitude of 2nd corner" width="60%" label='r' name="lng2" type="number" onChange={onChange} defaultValue={values.lng2} labelVal="Longitude(Cordinates)" step="any" />
+            </div>
+
+            <div className="col-6 text-end ">
+              <Input placeholder="Enter latitude of 3rd corner" width="60%" label='l' name="lat3" type="number" onChange={onChange} defaultValue={values.lat3} labelVal="Latitude(Cordinates)" step="any" />
+            </div>
+
+            <div className="col-6">
+              <Input placeholder="Enter longitude of 3rd corner" width="60%" label='r' name="lng3" type="number" onChange={onChange} defaultValue={values.lng3} labelVal="Longitude(Cordinates)" step="any" />
+            </div>
+
+            <div className="col-6 text-end ">
+              <Input placeholder="Enter latitude of 4th corner" width="60%" label='l' name="lat4" type="number" onChange={onChange} defaultValue={values.lat4} labelVal="Latitude(Cordinates)" step="any" />
+            </div>
+
+            <div className="col-6">
+              <Input placeholder="Enter longitude  of 4th corner" width="60%" label='r' name="lng4" type="number" onChange={onChange} defaultValue={values.lng4} labelVal="Longitude(Cordinates)" step="any" />
             </div>
 
 
@@ -161,7 +237,8 @@ const PlotForm=( props ) => {
 
               <div className="col-12 text-center">
                 <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-                <button type='submit' className="btn form_btn" disabled={!values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.plotArea}>{formVal.plotId? 'Update':'Submit'}</button>
+                {/* <button type='submit' className="btn form_btn" disabled={!values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.plotArea}>{formVal.plotId? 'Update':'Submit'}</button> */}
+                <button type='submit' className="btn form_btn" >{formVal.plotId? 'Update':'Submit'}</button>
               </div>
 
 
