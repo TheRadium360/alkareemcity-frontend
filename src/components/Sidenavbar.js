@@ -3,6 +3,10 @@ import { Link, Outlet } from 'react-router-dom'
 import './../css/sideNavbar.css'
 import { useLocation } from 'react-router-dom'
 import UsersContext from '../context/users/UsersContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+{/* <i class="fa-solid fa-right-from-bracket"></i> */ }
 
 
 export default function Sidenavbar() {
@@ -67,10 +71,10 @@ export default function Sidenavbar() {
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="nav navbar-nav ms-auto">
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Logout</a>
+                    <a className="nav-link" href="#"><span className="me-2"><FontAwesomeIcon icon={faRightFromBracket} /></span>Logout</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">{user.firstName}</a>
+                    <a className="nav-link" href="#"><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</a>
                   </li>
 
                 </ul>

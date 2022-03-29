@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
 import './../css/ApprovalRequestModal.css'
 import BoxInput from './BoxInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,40 +17,53 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import Api from '../Api';
 import UsersContext from '../context/users/UsersContext';
 import AppContext from '../context/appState/AppContext';
+import Confirmation from './Welcome/Confirmation';
 
 
 
 const ApprovalRequestModal=( props ) => {
 
+  const closeBtn=useRef( null )
 
   const { user, Cookies }=useContext( UsersContext );
   const { showAlert }=useContext( AppContext );
 
-
-  const { data, setModalData, completeData, setRequests }=props;
+  const { data, setModalData, completeData, setRequests, setTableData, tableData }=props;
 
   // REJECT APPROVAL REQUEST
   const handleRejectEvent=async ( e ) => {
     e.preventDefault();
     const cookie=Cookies.get( 'jwt' )
-
     const id=data.id;
 
-    console.log( "deleting ", id )
-    console.log( data )
-
     // DELETING DATA FROM ARRAY
-    const newData=completeData.filter( el => el.id!==id );
-    console.log( newData )
+    const arr=tableData;
+    console.log( tableData )
+    const newData=arr.filter( el => {
+      return el.id!==id;
+    } );
+
+
+    // console.log( newData );
+
     setRequests( newData );
+    closeBtn.current.click()
 
     // DELETING DATA FROM BACKEND
-    // const res=await Api.delete( `requestapproval/${id}`,
-    //   {
-    //     headers: { Authorization: `Bearer ${cookie}` }
-    //   } )
+    // const cookie=Cookies.get( 'jwt' );
+    try {
+      const res=await Api.delete( `requestapproval/${id}`,
+        {
+          headers: { Authorization: `Bearer ${cookie}` }
+        } )
 
-    // console.log( res );
+      showAlert( "Request has been rejected", 'success' );
+
+
+    } catch ( error ) {
+      showAlert( 'Something went wrong!', 'danger' )
+    }
+
 
 
 
@@ -61,7 +74,45 @@ const ApprovalRequestModal=( props ) => {
   const handleAcceptEvent=async ( e ) => {
     e.preventDefault();
 
-    console.log( "accepting ", data.id );
+
+    const cookie=Cookies.get( 'jwt' )
+    console.log( cookie )
+    const id=data.id;
+
+
+
+    console.log( "accepting ", data );
+    // DELETING DATA FROM BACKEND
+    // const cookie=Cookies.get( 'jwt' );
+    try {
+      // const res=await Api.patch( `requestapproval/${data.id}`, {
+      const res=await Api.patch( `requestapproval/${data.installment.id}`, {
+
+      },
+        {
+          headers: { Authorization: `Bearer ${cookie}` }
+        } )
+
+      if ( res.data.status==='success' ) {
+        // DELETING DATA FROM ARRAY
+        const arr=tableData;
+        console.log( tableData )
+        const newData=arr.filter( el => {
+          return el.id!==id;
+        } );
+        setRequests( newData );
+        closeBtn.current.click();
+        showAlert( "Request has been approved", 'success' );
+
+      }
+
+
+
+    } catch ( error ) {
+      showAlert( error.response.data.message, 'danger' )
+      console.log( error.response.data.message )
+    }
+
 
 
 
@@ -80,7 +131,7 @@ const ApprovalRequestModal=( props ) => {
               <div className="modal-header">
                 <h5 className="modal-title fw-bold" id="exampleModalLabel">Request Approval Reciept</h5>
 
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                <button type="button" className="btn-close" ref={closeBtn} data-bs-dismiss="modal" aria-label="Close" />
               </div>
               <div className="modal-body">
 
@@ -150,7 +201,7 @@ const ApprovalRequestModal=( props ) => {
 
               <div className="modal-footer">
 
-                <button type="button" className="btn btn-danger" onClick={handleRejectEvent} ><FontAwesomeIcon icon={faTrashCan} /> <span className='ms-2'>Reject</span> </button>
+                <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmation"  ><FontAwesomeIcon icon={faTrashCan} /> <span className='ms-2'>Reject</span> </button>
 
 
                 <button type="button" className="btn btn-success" onClick={handleAcceptEvent}><FontAwesomeIcon icon={faCircleCheck} /> <span className='ms-2'>Accept</span></button>
@@ -160,7 +211,12 @@ const ApprovalRequestModal=( props ) => {
 
             </div>
           </div>
-        </div>}
+        </div>
+
+
+
+      }
+      <Confirmation handleClick={handleRejectEvent} />
     </>
 
   )

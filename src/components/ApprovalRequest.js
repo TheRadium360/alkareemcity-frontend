@@ -11,7 +11,7 @@ const ApprovalRequest=() => {
 
   const [ requests, setRequests ]=useState( [] );
   const [ modalData, setModalData ]=useState( {} );
-  const [ tableData, setTableData ]=useState( [] );
+
   // const []
 
 
@@ -35,14 +35,14 @@ const ApprovalRequest=() => {
   }
 
 
+
+
   useEffect( () => {
     getRequests();
   }, [] )
 
   const handleClick=( e ) => {
-    // function handleClick=( id, e ) => {
 
-    // console.log( e.target )
     if ( e.target.classList.contains( 'show_table_btn' ) ) {
 
 
@@ -57,11 +57,13 @@ const ApprovalRequest=() => {
 
   }
 
+
   return (
-    // <div>ApprovalRequest</div>
     <>
-      {requests.length!==0&&<ApprovalRequestDataTable requests={requests} handleClick={handleClick} tableData={tableData} setTableData={setTableData} />}
-      <ApprovalRequestModal data={modalData} setModalData={setModalData} completeData={requests} setRequests={setRequests} tableData={tableData} setTableData={setTableData} />
+      {<ApprovalRequestDataTable requests={requests} handleClick={handleClick} key={requests} />}
+
+
+      <ApprovalRequestModal data={modalData} setModalData={setModalData} completeData={requests} tableData={requests} setRequests={setRequests} />
 
 
 

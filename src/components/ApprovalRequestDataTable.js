@@ -18,31 +18,23 @@ export class ApprovalRequestDataTable extends Component {
   static contextType=UsersContext;
 
 
-  constructor() {
-    super();
-    // this.requestTableData=[];
-    // this.state={ tableData: [] };
+  constructor( props ) {
+    super( props );
+
   }
 
-  getAllRequests=async () => {
-    // const cookie = this.context.Cookies.get('jwt')
 
-    //   const res= await Api.get("users",
-    //   {
-    //     headers: { Authorization: `Bearer ${cookie}` }
-    //   })
-    //   const users = res.data.data.data;
+  getAllRequests=() => {
+
     const requests=this.props.requests;
-    // console.log(users)
 
+
+    const updatedArray=[];
 
     requests.forEach( ( element, i ) => {
 
       const handleClick=this.props.handleClick;
       let req=[];
-      // const approvalId={
-      //   id: requests[ i ].id,
-      // };
 
       req.push( i+1 )
       req.push( element.user.CNIC )
@@ -52,20 +44,23 @@ export class ApprovalRequestDataTable extends Component {
       req.push( element.installment.installmentCount+1 )
       req.push( `<button type="button" class="btn btn-sm btn-dark show_table_btn" data-bs-toggle="modal" data-bs-target="#approvalRequestModal" aid=${element.id} ${onclick=( e ) => handleClick( e )}>View</button>` )
 
-      // this.requestTableData.push( req )
-      const updatedArray=this.props.tableData.push
-      this.setState( this.props.setTableData() )
+      updatedArray.push( req );
+
 
     } );
+
+    return updatedArray;
   }
 
 
   componentDidMount() {
 
-    // console.log( this.props.users )
-    this.getAllRequests();
+
+    const d=this.getAllRequests();
     this.$el=$( this.el );
-    this.$el.DataTable( {
+
+
+    this.DT=this.$el.DataTable( {
       "dom": '<"dt-buttons"Bf><"clear">lirtp',
       "paging": true,
 
@@ -85,15 +80,16 @@ export class ApprovalRequestDataTable extends Component {
         'print'
       ]
       ,
-      "data": this.requestTableData
-      ,
+      "data": d,
+
 
 
     } )
 
+
+
+
   }
-
-
 
   render() {
     return (
