@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Api from '../Api'
 import AppContext from '../context/appState/AppContext'
-import UsersContext from '../context/users/UsersContext'
 import Input from './Input'
 import TextArea from './TextArea'
 import { FormHeading } from './FormHeading'

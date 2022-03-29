@@ -7,6 +7,7 @@ import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-buttons/js/buttons.flash';
 import 'datatables.net-buttons/js/buttons.print';
 import UsersContext from '../context/users/UsersContext';
+import Api from '../Api';
 
 
 const $=require('jquery');
@@ -22,36 +23,27 @@ export class DataTableComp extends Component {
     super();
     this.userTableData=[];
 
+    
   }
-
+  
   getAllUsers = async()=>{
-    // const cookie = this.context.Cookies.get('jwt')
-
-    //   const res= await Api.get("users",
-    //   {
-    //     headers: { Authorization: `Bearer ${cookie}` }
-    //   })
-    //   const users = res.data.data.data;
+   
     const users= this.props.users
-    // console.log(users)
     for (let i = 0; i < users.length; i++) {
-        let user=[];
+      let user=[];
         user.push(i)
         user.push(users[i].CNIC)
         user.push(`${users[i].firstName} ${users[i].lastName}`)
         user.push(users[i].email)
         user.push(users[i].plotInformation[0].plotNo)
-        user.push(`<button type="button" class="btn btn-sm btn-dark show_table_btn">Update</button>`)
-
+        user.push(`<button type="button" class="btn btn-sm btn-dark show_table_btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${users[i].id} ${onclick=(e)=>{this.props.getAllDetails(e, e.target.getAttribute("uid"))
+      }}>Update</button>`)
+        
         this.userTableData.push(user)  
-        // console.log(this.userTableData)
-    }
+    } 
   }
-  
 
   componentDidMount(){
-
-    console.log(this.props.users)
     this.getAllUsers();
     this.$el=$(this.el);
     this.$el.DataTable({
@@ -67,7 +59,6 @@ export class DataTableComp extends Component {
       { "orderable": false,"width": "30px", "targets": 5 },
     ],
     "buttons": [
-      // 'copyHtml5',
       'csvHtml5',
       'excelHtml5',
       'print'
@@ -78,8 +69,9 @@ export class DataTableComp extends Component {
   
   
 })
+}
+ 
 
-  }
 
   
 

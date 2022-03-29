@@ -1,7 +1,4 @@
 import React from 'react'
-import { useState } from 'react';
-import Api from './../Api'
-import { useEffect } from 'react';
 import{ FormHeading} from './FormHeading'
 import { FormDropdown } from './FormDropdown';
 import Input from './Input';
@@ -10,7 +7,6 @@ export default function Plot() {
  
   return (
     <>
-      {/* Plot */}
       <FormHeading value="Plot Details" />
       <form>
         <div className="container">

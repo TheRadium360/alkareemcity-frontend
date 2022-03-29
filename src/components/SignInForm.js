@@ -2,11 +2,9 @@ import '../css/App.css';
 import '../css/index.css'
 import { FaEye } from "react-icons/fa";
 import Api from '../Api';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import UsersContext from '../context/users/UsersContext';
 import { useNavigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode'
-// import Cookies from 'js-cookie';
 
 const endPoint='users/login';
 
@@ -19,7 +17,6 @@ const SignInForm=() => {
 
   const navigate=useNavigate();
 
-  let userId;
 
   const handleLogin=async ( e ) => {
     e.preventDefault();
