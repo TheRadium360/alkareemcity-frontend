@@ -39,6 +39,7 @@ export class ApprovalRequestDataTable extends Component {
       req.push( i+1 )
       req.push( element.user.CNIC )
       req.push( `${element.user.firstName} ${element.user.lastName}` )
+      console.log(element.plot);
       req.push( element.plot.plotNo )
       req.push( element.plot.block )
       req.push( element.installment.installmentCount+1 )

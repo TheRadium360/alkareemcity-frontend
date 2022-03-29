@@ -3,7 +3,7 @@ import UsersContext from '../context/users/UsersContext';
 import DataTableComp from './DataTableComp';
 import{ FormHeading} from './FormHeading'
 import '../css/installment.css';
-import RequestApproval from './RequestApproval';
+import PayApprove from './PayApprove';
 import AppContext from '../context/appState/AppContext';
 import jwtDecode from 'jwt-decode';
 
@@ -16,7 +16,6 @@ export default function Installments() {
     plot: user.installmentPlan[ 0 ].plot,
     CNIC: user.CNIC,
     firstName: user.firstName.toLowerCase()
-
   } )
 
   const { onChangeGeneric }=useContext( AppContext );
@@ -54,7 +53,7 @@ export default function Installments() {
     </div>
 
       {/* Installment */}
-      <RequestApproval approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
+      <PayApprove approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
     <DataTableComp {...user} />
     </>
     )

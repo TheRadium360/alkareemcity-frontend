@@ -39,6 +39,7 @@ const ApprovalRequest=() => {
 
   useEffect( () => {
     getRequests();
+    console.log(requests);
   }, [] )
 
   const handleClick=( e ) => {

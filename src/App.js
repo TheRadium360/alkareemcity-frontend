@@ -13,7 +13,9 @@ import Feedback from './components/Feedback'
 import Notification from './components/Notification'
 import CreateUser from './components/CreateUser';
 import Alert from './components/Alert';
-import Users from './components/Users'
+import Users from './components/Users';
+import ApprovalRequest from './components/ApprovalRequest'; 
+
 
 
 // import Flexes from './components/Flexes'
@@ -27,8 +29,7 @@ import {
 } from "react-router-dom";
 import Profile from './components/Profile';
 import Plot from './components/Plot';
-import RequestApproval from './components/RequestApproval';
-
+import PayApprove from './components/PayApprove';
 
 
 function App() {
@@ -66,10 +67,10 @@ function App() {
 
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
-              {/* <Route exact path="approvalrequests" element={<Approvalrequests />} /> */}
+              <Route exact path="approvalrequests" element={<ApprovalRequest />} />
             </Route>
 
-            <Route exact path="approval" element={<RequestApproval />} />
+            <Route exact path="approval" element={<PayApprove />} />
           </Routes>
 
 

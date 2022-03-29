@@ -36,14 +36,15 @@ const PayApprove=( props ) => {
     // console.log( btnRef.current.classList )
     // console.log( btnRef.current.classList.contains( 'file_uploading' ) )
     // if ( btnRef.current.classList.contains( 'file_uploading' ) ) {
-    //   btnRef.current.style.display='none';
-    // }
+      //   btnRef.current.style.display='none';
+      // }
     console.log( submitBtnRef.current )
   }
 
   const { Cookies }=useContext( UsersContext )
   const { showAlert }=useContext( AppContext );
-
+  
+  console.log('approvalRequestCreds',approvalRequestCreds);
 
 
   const cookie=Cookies.get( 'jwt' )
@@ -51,13 +52,11 @@ const PayApprove=( props ) => {
   const handleSubmit=async ( e ) => {
     e.preventDefault();
 
-
-    console.log( e.target.firstName.value, e.target.CNIC.value, approvalRequestCreds.CNIC );
-
     // console.log( String( approvalRequestCreds.CNIC )===String( e.target.CNIC.value ) )
-    // console.log( approvalRequestCreds.firstName===e.target.CNIC.value.toLowerCase() )
+    // console.log('hi',approvalRequestCreds.CNIC,e.target.CNIC.value,approvalRequestCreds.firstName,e.target.firstName.value.toLowerCase() );
     if ( approvalRequestCreds.CNIC===e.target.CNIC.value&&approvalRequestCreds.firstName===e.target.firstName.value.toLowerCase() ) {
 
+      console.log(approvalRequestCreds);
 
       let formData=new FormData();
       formData.append( 'transactionImage', e.target.transactionImage.files[ 0 ] )
