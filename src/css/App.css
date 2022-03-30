@@ -765,6 +765,7 @@ a:hover {
     position: fixed;
     bottom: 10px;
     right: 10px;
+    z-index: 100000000;
 }
 
 .form_next_btn {

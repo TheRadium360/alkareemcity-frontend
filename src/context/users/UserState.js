@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import UsersContext from './UsersContext';
-// import { useCookies } from 'react-cookie';
 import jwtDecode from 'jwt-decode';
 import Api from '../../Api';
 import Cook from 'js-cookie';
+let CryptoJS=require( "crypto-js" );
 
 
 const UserState=( props ) => {
@@ -27,13 +27,24 @@ const UserState=( props ) => {
     return res.data.data;
   }
 
+  const encryptData=( data ) => {
+    // Encrypt
+    let ciphertext=CryptoJS.AES.encrypt( JSON.stringify( data ), 'my-secret-key@123' ).toString();
+    return ciphertext;
+
+  }
 
   let userId;
   useEffect( async () => {
 
     if ( Cookies.get( 'jwt' ) ) {
       userId=jwtDecode( Cookies.get( 'jwt' ) ).id;
-      await retrieveUserInfo( userId );
+      const data=await retrieveUserInfo( userId );
+
+      // PERSISTING USER STATE(OPTIONAL)
+      window.localStorage.removeItem( 'UR' )
+      window.localStorage.setItem( 'UR', encryptData( data ) )
+
     }
 
   }, [] )

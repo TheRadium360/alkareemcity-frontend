@@ -1,6 +1,10 @@
-.logo {
+.admin_logo {
     background-image: url(./../admin.png)
 }
+.user_logo {
+    background-image: url(./../male.png)
+}
+
 
 .img_img {
     background-size: cover;

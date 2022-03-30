@@ -5,11 +5,13 @@ import Api from '../Api';
 import React, { useContext, useState } from 'react';
 import UsersContext from '../context/users/UsersContext';
 import { useNavigate } from 'react-router-dom';
+import AppContext from '../context/appState/AppContext';
 
 const endPoint='users/login';
 
 const SignInForm=() => {
   const { retrieveUserInfo, user, Cookies }=useContext( UsersContext );
+  const { encryptData }=useContext( AppContext );
   const [ credentials, setCredentials ]=useState( {
     email: "",
     password: ""
@@ -24,10 +26,19 @@ const SignInForm=() => {
     console.log( res.data );
     console.log( res.data.data );
 
+
+
+
     if ( res.data.status==="success" ) {
 
       Cookies.set( 'jwt', res.data.token );
-      await retrieveUserInfo( res.data.data.user._id )
+      const data=await retrieveUserInfo( res.data.data.user._id )
+
+      const encData=encryptData( data );
+      window.localStorage.setItem( 'UR', encData )
+      // Cookies.set( 'UR', encData )
+
+
       navigate( '/dashboard' )
 
     }

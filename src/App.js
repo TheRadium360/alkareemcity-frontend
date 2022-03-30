@@ -30,6 +30,7 @@ import {
 import Profile from './components/Profile';
 import Plot from './components/Plot';
 import PayApprove from './components/PayApprove';
+import Error from './components/Error';
 
 
 function App() {
@@ -45,37 +46,75 @@ function App() {
 
             <Route exact path="login" element={<SignInForm />} />
             <Route exact path="signup" element={<SignupForm />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute redirectPath="/login" >
-                  <Welcome />
-                </ProtectedRoute>
-              }
-            />
-            <Route exact path="dashboard" element={<Sidenavbar />}>
-              <Route exact path="" element={<Profile />} />
-              <Route exact path="profile" element={<Profile />} />
-              {/* <Route exact path="complaints" element={<ComplaintForm />} /> */}
-              <Route exact path="plot" element={<Plot />} />
-              <Route exact path="installments" element={<Installments />} />
-              <Route exact path="notification" element={<Notification />} />
-              <Route exact path="feedback" element={<Feedback />} />
-              <Route exact path="createnewuser" element={<CreateUser />} />
-              <Route exact path="users" element={<Users />} />
+            <Route exact path='error' element={<Error />} />
+
+            <Route path="/" element={<Welcome />} />
+
+
+            {/**********  PARENT DASHBOARD ROUTE ********/}
+            <Route exact path="dashboard" element={
+              <ProtectedRoute role={[ 'admin', 'user' ]} redirectPath='/login'>
+                <Sidenavbar />
+              </ProtectedRoute>
+            }
+            >
+
+
+              {/****************** ADMIN,USERS ROUTES  *****************/}
+              <Route exact path="profile" element={
+                <ProtectedRoute role={[ 'admin', 'user' ]}> <Profile /></ProtectedRoute>
+              } />
+              <Route exact path="" element={
+                <ProtectedRoute role={[ 'admin', 'user' ]}> <Profile /></ProtectedRoute>
+              } />
+
+
+
+
+              {/****************** USER ROUTES  *****************/}
+              <Route exact path="plot" element={
+                <ProtectedRoute role={[ 'user' ]}> <Plot /> </ProtectedRoute>
+              } />
+
+              <Route exact path="installments" role={[ 'user' ]} element={
+                <ProtectedRoute role={[ 'user' ]}> <Installments /></ProtectedRoute>
+              } />
+
+              <Route exact path="feedback" element={
+                <ProtectedRoute role={[ 'user' ]}>  <Feedback /> </ProtectedRoute>
+              } />
+
+              <Route exact path="approval" element={
+                <ProtectedRoute role={[ 'user' ]}> <PayApprove /></ProtectedRoute>
+              } />
+
+              {/****************** ADMIN ROUTES  *****************/}
+              <Route exact path="notification" element={
+                <ProtectedRoute role={[ 'admin' ]}><Notification /></ProtectedRoute>
+              } />
+
+              <Route exact path="createnewuser" element={
+                <ProtectedRoute role={[ 'admin' ]}>  <CreateUser /></ProtectedRoute>
+              } />
+
+              <Route exact path="users" element={
+                <ProtectedRoute role={[ 'admin' ]}>  <Users /> </ProtectedRoute>
+              } />
+
+              <Route exact path="approvalrequests" element={
+                <ProtectedRoute role={[ 'admin' ]}> <ApprovalRequest /></ProtectedRoute>
+              } />
+
 
 
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
-              <Route exact path="approvalrequests" element={<ApprovalRequest />} />
             </Route>
-
-            <Route exact path="approval" element={<PayApprove />} />
           </Routes>
 
 
-
           <Alert />
+
         </AppState>
 
         {/* <Navbar /> */}

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import AppContext from './AppContext';
+let CryptoJS=require( "crypto-js" );
+
+
 
 
 
@@ -7,6 +10,24 @@ const AppState=( props ) => {
 
 
   const [ alert, setAlert ]=useState( null );
+
+  const encryptData=( data ) => {
+    // Encrypt
+    let ciphertext=CryptoJS.AES.encrypt( JSON.stringify( data ), 'my-secret-key@123' ).toString();
+    console.log( ciphertext, "DATA HAS BEEN ENCRYPTED" )
+    return ciphertext;
+
+  }
+
+  const decryptData=( encryptedData ) => {
+    // Decrypt
+    let bytes=CryptoJS.AES.decrypt( encryptedData, 'my-secret-key@123' );
+    let decryptedData=JSON.parse( bytes.toString( CryptoJS.enc.Utf8 ) );
+
+    return decryptedData;
+
+  }
+
 
   const showAlert=( msg, type ) => {
 
@@ -32,7 +53,7 @@ const AppState=( props ) => {
 
   return (
 
-    <AppContext.Provider value={{ onChangeGeneric, showAlert, alert, setAlert }}>
+    <AppContext.Provider value={{ onChangeGeneric, showAlert, alert, setAlert, encryptData, decryptData }}>
       {props.children}
     </AppContext.Provider>
 

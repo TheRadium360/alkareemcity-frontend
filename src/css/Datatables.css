@@ -18,6 +18,7 @@ table {
     background-color: #bd960a!important;
     color: #fff;
     text-align: center;
+    font-size: 13px;
 }
 
 .show_table tr.even td {

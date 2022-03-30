@@ -67,12 +67,12 @@ export class ApprovalRequestDataTable extends Component {
 
       "columnDefs": [
         { "orderable": false, "width": "10px", "targets": 0 },
-        { "orderable": false, "width": "40px", "targets": 1 },
+        { "orderable": false, "width": "30px", "targets": 1 },
         { "orderable": true, "width": "40px", "targets": 2 },
-        { "orderable": false, "width": "60px", "targets": 3 },
-        { "orderable": false, "width": "15px", "targets": 4 },
-        { "orderable": false, "width": "30px", "targets": 5 },
-        { "orderable": false, "width": "20px", "targets": 6 },
+        { "orderable": false, "width": "20px", "targets": 3 },
+        { "orderable": false, "width": "25px", "targets": 4 },
+        { "orderable": false, "width": "25px", "targets": 5 },
+        { "orderable": false, "width": "30px", "targets": 6 },
       ],
       "buttons": [
         // 'copyHtml5',

@@ -1,12 +1,25 @@
 import React, { useContext } from "react";
 import { Link, Outlet } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import './../css/sideNavbar.css'
 import { useLocation } from 'react-router-dom'
 import UsersContext from '../context/users/UsersContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from "react-router-dom"; 
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faMountain } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyBillTransfer } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
+
+
+
+
+
 
 export default function Sidenavbar() {
   const location=useLocation();
@@ -17,10 +30,12 @@ export default function Sidenavbar() {
     e.preventDefault();
 
     Cookies.remove( 'jwt' );
+    window.localStorage.removeItem( 'UR' );
     setUser( {} )
     navigate( '/login' );
 
   }
+
 
   return (
 
@@ -28,33 +43,49 @@ export default function Sidenavbar() {
       <div className="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
           <div className="p-3">
-            <a href="#" className="img_img logo  rounded-circle mb-5" />
+            <Link to='/dashboard/profile' className={`img_img logo ${user.role}_logo  rounded-circle mb-5`} />
 
             <ul className="list-unstyled components mb-5">
-              <li className={`${location.pathname.endsWith( "profile" )||location.pathname.endsWith( '/' )||location.pathname.endsWith( 'd' )? "active":''}`}>
-                <Link to='/dashboard/profile'>Profile</Link>
+
+              {( user.role==='admin'||user.role==='user' )
+                &&
+                <li className={`${location.pathname.endsWith( "profile" )||location.pathname.endsWith( '/' )||location.pathname.endsWith( 'd' )? "active":''}`}>
+                  <Link to='/dashboard/profile'><span className="me-3"><FontAwesomeIcon icon={faAddressCard} /></span>Profile</Link>
+                </li>}
+
+
+              {user.role==='user'&&<li className={`${location.pathname.endsWith( "plot" )? "active":''}`}>
+                <Link to='/dashboard/plot'><span className="me-3"><FontAwesomeIcon icon={faMountain} /></span>My plot</Link>
+              </li>}
+
+              {user.role==='user'&&<li className={`${location.pathname.endsWith( "installments" )? "active":''}`}>
+                <Link to='/dashboard/installments'><span className="me-3"><FontAwesomeIcon icon={faMoneyBillTransfer} /></span>Installments</Link>
               </li>
-              <li className={`${location.pathname.endsWith( "plot" )? "active":''}`}>
-                <Link to='/dashboard/plot'>My plot</Link>
+              }
+
+              {user.role==='user'&&<li className={`${location.pathname.endsWith( "feedback" )? "active":''}`}>
+                <Link to='/dashboard/feedback'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span>Feedback</Link>
+              </li>}
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "notification" )? "active":''}`}>
+                <Link to='/dashboard/notification'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span>Notifications</Link>
+              </li>}
+
+
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "createnewuser" )? "active":''}`}>
+                <Link to='/dashboard/createnewuser'><span className="me-3"><FontAwesomeIcon icon={faUserPlus} /></span>Create New User</Link>
+              </li>}
+
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "users" )? "active":''}`}>
+                <Link to='/dashboard/users'><span className="me-3"><FontAwesomeIcon icon={faUsers} /></span>Users</Link>
               </li>
-              <li className={`${location.pathname.endsWith( "installments" )? "active":''}`}>
-                <Link to='/dashboard/installments'>Installments</Link>
-              </li>
-              <li className={`${location.pathname.endsWith( "notificaton" )? "active":''}`}>
-                <Link to='/dashboard/notification'>Notifications</Link>
-              </li>
-              <li className={`${location.pathname.endsWith( "feedback" )? "active":''}`}>
-                <Link to='/dashboard/feedback'>Feedback</Link>
-              </li>
-              <li className={`${location.pathname.endsWith( "createnewuser" )? "active":''}`}>
-                <Link to='/dashboard/createnewuser'>Create User</Link>
-              </li>  
-              <li className={`${location.pathname.endsWith( "users" )? "active":''}`}>
-                <Link to='/dashboard/users'>Users</Link>
-              </li>
-              <li className={`${location.pathname.endsWith( "approvalrequests" )? "active":''}`}>
-                <Link to='/dashboard/approvalrequests'>Approval Request</Link>
-              </li>
+              }
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "approvalrequests" )? "active":''}`}>
+                <Link to='/dashboard/approvalrequests'><span className="me-3"><FontAwesomeIcon icon={faFileCircleCheck} /></span>Approval Requests</Link>
+              </li>}
 
 
               {/* <li className={`${location.pathname.endsWith("flexes")? "active": ''}`}>
@@ -75,14 +106,17 @@ export default function Sidenavbar() {
         <div id="content">
           <nav className="navbar navbar-expand navbar-light bg-light dashboard_nav">
             <div className="container-fluid">
-              <span className="text-black"> Al-Kareem-City</span>
+              <Link to='/'><span className="text-black"> Al-Kareem-City</span></Link>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="nav navbar-nav ms-auto">
+
                   <li className="nav-item">
                     <Link className="nav-link" to="/login" onClick={handleLogout}><span className="me-2"><FontAwesomeIcon icon={faRightFromBracket} /></span>Logout</Link>
                   </li>
+
+
                   <li className="nav-item">
-                    <Link className="nav-link" to="/dasboard/profile"><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</Link>
+                    <Link className="nav-link" to="/dashboard/profile"><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</Link>
                   </li>
 
                 </ul>
