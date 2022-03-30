@@ -27,9 +27,7 @@ export class DataTableComp extends Component {
       feedback.push(feedbacks[i].email);
       feedback.push(feedbacks[i].subject);
       feedback.push(feedbacks[i].description);
-      feedback.push(`<h6><span class="badge bg-danger" fid=${feedbacks[i].id}  style=cursor:pointer;>
-      Remove
-    </span></h6>`)
+  
       this.feedbackTableData.push(feedback);
     }
   };
@@ -40,34 +38,47 @@ export class DataTableComp extends Component {
     this.$el.DataTable({
       dom: '<"dt-buttons"Bf><"clear">lirtp',
       paging: true,
-
+      // "bPaginate": false,
+      // "bLengthChange": false,
+      // "bFilter": true,
+      // "bInfo": false,
+      // "bAutoWidth": false ,
+      "aaSorting": []
+,
       columnDefs: [
         { orderable: false, width: "1px", targets: 0 },
         { orderable: false, width: "10px", targets: 1 },
-        { orderable: false, width: "7px", targets: 2 },
+        { orderable: false, width: "20px", targets: 2 },
         { orderable: false, width: "30px", targets: 3 },
-        { orderable: false, width: "35px", targets: 4 },
-        { orderable: false, width: "10px", targets: 5 },
+        { orderable: false, width: "30px", targets: 4 },
       ],
       buttons: [],
       data: this.feedbackTableData,
     });
   }
 
+  fetchAndRelaodData=()=>{
+  this.props.getFeedbacks();
+  };
+
+
   render() {
     return (
       <div className="show_table">
         <div
           style={{
-            position: "absolute",
-            left: "80rem",
-            top: "10rem",
+            position: "relative",
+             textAlign:'right',
+            // float: "right",
+            top: "7rem",
             cursor: "pointer",
           }}
         >
-          {console.log(this.props.feedbacks)}
-          <span class="badge bg-danger" onClick={()=>this.props.deleteAllFeedbacks()}>
-            Delete all <FontAwesomeIcon icon={faTrashCan} color="white" />
+           <button className='badge bg-primary p-2 mx-1 text-white btn-reload btn_reload_feedback' onClick={this.fetchAndRelaodData}>
+     <i class="fa-solid fa-rotate"></i>
+     </button>
+          <span class="badge bg-danger p-2" onClick={()=>this.props.deleteAllFeedbacks()}>
+          <FontAwesomeIcon icon={faTrashCan} color="white" />
           </span>
         </div>
 
@@ -84,7 +95,6 @@ export class DataTableComp extends Component {
               <th className="headings px-2">Email</th>
               <th className="headings px-2">Subject</th>
               <th className="headings px-2 ">Description</th>
-              <th className="headings px-2 ">Action</th>
             </tr>
           </thead>
         </table>

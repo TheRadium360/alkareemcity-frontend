@@ -51,7 +51,7 @@ export default function Feedbacks() {
   //   {console.log(feedbacks)}
   return (
     <div>
-     {<FeedbacksDataTable deleteAllFeedbacks={deleteAllFeedbacks} key={feedbacks} feedbacks={feedbacks} getAllFeedbackDetails={getAllFeedbackDetails} />}
+     {<FeedbacksDataTable deleteAllFeedbacks={deleteAllFeedbacks} key={feedbacks} feedbacks={feedbacks} getAllFeedbackDetails={getAllFeedbackDetails} getFeedbacks={getFeedbacks}/>}
     </div>
   );
 }
