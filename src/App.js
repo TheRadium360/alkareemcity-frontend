@@ -9,12 +9,13 @@ import AppState from './context/appState/AppState';
 import ProtectedRoute from './components/ProtectedRoute';
 import Sidenavbar from './components/Sidenavbar';
 import Installments from './components/Installments'
-import Feedback from './components/Feedback'
 import Notification from './components/Notification'
 import CreateUser from './components/CreateUser';
 import Alert from './components/Alert';
 import Users from './components/Users';
 import ApprovalRequest from './components/ApprovalRequest'; 
+import FeedbackForm from './components/FeedbackForm'
+import Feedbacks from './components/Feedbacks'
 
 
 
@@ -80,13 +81,19 @@ function App() {
                 <ProtectedRoute role={[ 'user' ]}> <Installments /></ProtectedRoute>
               } />
 
-              <Route exact path="feedback" element={
-                <ProtectedRoute role={[ 'user' ]}>  <Feedback /> </ProtectedRoute>
-              } />
-
               <Route exact path="approval" element={
                 <ProtectedRoute role={[ 'user' ]}> <PayApprove /></ProtectedRoute>
               } />
+
+
+              <Route exact path="feedbackform" element={
+                <ProtectedRoute role={[ 'user' ]}> <FeedbackForm /></ProtectedRoute>
+              } />
+
+
+
+
+
 
               {/****************** ADMIN ROUTES  *****************/}
               <Route exact path="notification" element={
@@ -103,7 +110,16 @@ function App() {
 
               <Route exact path="approvalrequests" element={
                 <ProtectedRoute role={[ 'admin' ]}> <ApprovalRequest /></ProtectedRoute>
+              } /> 
+              
+              
+              <Route exact path="feedbacks" element={
+                <ProtectedRoute role={[ 'admin' ]}> <Feedbacks /></ProtectedRoute>
               } />
+              
+              
+
+              
 
 
 

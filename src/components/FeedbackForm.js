@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useRef } from 'react'
 import Api from '../Api'
 import AppContext from '../context/appState/AppContext'
 import Input from './Input'
 import TextArea from './TextArea'
 import { FormHeading } from './FormHeading'
+import UsersContext from '../context/users/UsersContext'
 
 
 
@@ -12,24 +13,42 @@ import { FormHeading } from './FormHeading'
 
 
 
-const Feedback=() => {
+const FeedbackForm=() => {
+
+
 
   const [ complaintFormCred, setComplaintFormCred ]=useState( { name: "", email: "", subject: "", description: "" } )
-  const { onChangeGeneric }=useContext( AppContext );
-  // const { user }=useContext( UsersContext );
+  const { onChangeGeneric,showAlert }=useContext( AppContext );
+  const {Cookies}= useContext(UsersContext)
+  const formRef= useRef(null)
 
   const onChange=onChangeGeneric( complaintFormCred, setComplaintFormCred );
+  
 
-  const handleSubmit=async ( e ) => {
+
+
+
+
+
+
+
+  const createFeedback=async ( e ) => {
     e.preventDefault();
-    const res=await Api.post( '/complaints', complaintFormCred )
-    console.log( res );
+    const cookie=Cookies.get( 'jwt' );
+
+    const res=await Api.post( '/complaints', complaintFormCred,{
+      headers: { Authorization: `Bearer ${cookie}` }
+    } )
+    if ( res.data.status==="success" ) {
+      formRef.current.reset()
+      showAlert( `Feedback sent successfully!`, "success" );
+    }
+    else{
+      showAlert( `Something went wrong!`, "danger" );
+
+    }
 
   }
-
-  // console.log( user );
-
-
 
   return (
     <>
@@ -43,17 +62,17 @@ const Feedback=() => {
 
 
 
-        <form onSubmit={handleSubmit}>
+        <form ref={formRef} onSubmit={createFeedback}>
 
           <div className="container" >
             <div className="row">
 
               <div className="col-6">
-                <Input placeholder="Name" width="100%" name="name" type="text" onChange={onChange} margin="ml-2" />
+                <Input placeholder="Name"  width="100%" name="name" type="text" onChange={onChange} margin="ml-2" />
               </div>
 
               <div className="col-6">
-                <Input placeholder="Email" width="100%" name="email" type="email" onChange={onChange} />
+                <Input placeholder="Email" width="100%" name="email" type="email" onChange={onChange}  />
               </div>
 
               <div className="col-12">
@@ -64,7 +83,7 @@ const Feedback=() => {
                 <TextArea placeholder="Description" width="100%" name="description" rows={12} onChange={onChange} />
               </div>
 
-              <div>
+              <div className='text-center'>
                 <button type="submit" className="btn form_btn me-4">Submit</button>
                 <button type="reset" className="btn reset_btn">Reset</button>
               </div>
@@ -86,4 +105,4 @@ const Feedback=() => {
   )
 }
 
-export default Feedback
+export default FeedbackForm

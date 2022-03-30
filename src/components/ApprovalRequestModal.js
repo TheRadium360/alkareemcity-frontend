@@ -187,7 +187,7 @@ const ApprovalRequestModal=( props ) => {
 
                   <div className="col-12 text-center">
 
-                    <img src={require( `./../../../alkareemcity/img/transactions/${data.transactionImage}` )} alt="transaction img" className='img-fluid' />
+                    {/* <img src={require( `./../../../alkareemcity/img/transactions/${data.transactionImage}` )} alt="transaction img" className='img-fluid' /> */}
                   </div>
 
 

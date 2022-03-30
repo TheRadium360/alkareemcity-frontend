@@ -63,12 +63,16 @@ export default function Sidenavbar() {
               </li>
               }
 
-              {user.role==='user'&&<li className={`${location.pathname.endsWith( "feedback" )? "active":''}`}>
-                <Link to='/dashboard/feedback'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span>Feedback</Link>
+              {user.role==='user'&&<li className={`${location.pathname.endsWith( "feedbackform" )? "active":''}`}>
+                <Link to='/dashboard/feedbackform'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span>Feedback Form</Link>
               </li>}
 
               {user.role==='admin'&&<li className={`${location.pathname.endsWith( "notification" )? "active":''}`}>
                 <Link to='/dashboard/notification'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span>Notifications</Link>
+              </li>} 
+              
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "feedbacks" )? "active":''}`}>
+                <Link to='/dashboard/feedbacks'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span>Feedbacks</Link>
               </li>}
 
 
