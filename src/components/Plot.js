@@ -21,7 +21,7 @@ export default function Plot() {
       {/* Plot Map*/}
       
       <FormHeading value="Plot Location" marginTop='2rem'/>
-      <PlotMap />
+      <PlotMap {...(user.plotInformation[0])}/>
      {/* <PlotLeaftet/> */}
 
       {/* Plot Details*/}

@@ -1,8 +1,8 @@
-.admin_logo {
-    background-image: url(./../admin.png)
+.logo {
+    background-image: url(./../male.png)
 }
 .user_logo {
-    background-image: url(./../male.png)
+    background-image: url(./../user.jpg)
 }
 
 

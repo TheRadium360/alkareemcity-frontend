@@ -60,7 +60,7 @@ const ApprovalRequest=() => {
 
   return (
     <>
-      {<ApprovalRequestDataTable requests={requests} handleClick={handleClick} key={requests} />}
+      {<ApprovalRequestDataTable requests={requests} handleClick={handleClick} key={requests} getRequests={getRequests} setRequests={setRequests}/>}
 
 
       <ApprovalRequestModal data={modalData} setModalData={setModalData} completeData={requests} tableData={requests} setRequests={setRequests} />

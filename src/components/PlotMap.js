@@ -6,24 +6,29 @@ export default function PlotMap(props) {
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 
+  const {cords}=props;
+  const centerPoint=cords[0];
+
+
  let defaultProps = {
   zoom: 20,
-  center: {
-    lat:  31.515894, lng: 74.340111
-  },
+  // center: {
+  //   lat:  31.515894, lng: 74.340111
+  // },
+  center: centerPoint,
   mapTypeId: "terrain"
 };
 
   const handleApiLoaded = (map, maps) => {
-    const triangleCoords = [
-      { lat:  31.515894, lng: 74.340111 },
-      { lat:  31.515936, lng: 74.340052},
-      { lat:31.515994, lng: 74.340131 },
-      { lat:  31.515945, lng:  74.340183}
-    ];
+    // const radiumCoords = [
+    //   { lat:  31.515894, lng: 74.340111 },
+    //   { lat:  31.515936, lng: 74.340052},
+    //   { lat:31.515994, lng: 74.340131 },
+    //   { lat:  31.515945, lng:  74.340183}
+    // ];
   
      var bermudaTriangle = new maps.Polygon({
-      paths: triangleCoords,
+      paths: cords,
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
       strokeWeight: 2,

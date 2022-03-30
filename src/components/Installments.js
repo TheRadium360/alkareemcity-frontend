@@ -21,10 +21,6 @@ export default function Installments() {
   const { onChangeGeneric }=useContext( AppContext );
   const onChange=onChangeGeneric( approvalRequestCreds, setApprovalRequestCreds )
 
-  console.log( user );
-  console.log( "USER ID: ", user.id );
-  console.log( "Installment ID: ", user.installmentPlan[ 0 ].id );
-  console.log( "Plot ID: ", user.installmentPlan[ 0 ].plot );
 
   
   useEffect(async ()=>{
@@ -53,7 +49,8 @@ export default function Installments() {
 
       {/* Installment */}
       <PayApprove approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} />
-    <DataTableComp {...user} />
+     
+    <DataTableComp {...user}  key={user.requestApprovalInformation}/>
     </>
     )
 }

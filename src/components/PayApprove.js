@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import Api from '../Api';
 import UsersContext from '../context/users/UsersContext';
 import AppContext from '../context/appState/AppContext';
+import jwtDecode from 'jwt-decode';
 
 
 const PayApprove=( props ) => {
@@ -42,7 +43,7 @@ const PayApprove=( props ) => {
     console.log( submitBtnRef.current )
   }
 
-  const { Cookies }=useContext( UsersContext )
+  const { Cookies,retrieveUserInfo }=useContext( UsersContext )
   const { showAlert }=useContext( AppContext );
   
   console.log('approvalRequestCreds',approvalRequestCreds);
@@ -77,6 +78,12 @@ const PayApprove=( props ) => {
       console.log( res )
       if ( res.data.status==='success' ) {
         closeBtn.current.click();
+        let userId;
+        if ( Cookies.get( 'jwt' ) ) {
+          userId=jwtDecode( Cookies.get( 'jwt' ) ).id;
+          await retrieveUserInfo( userId );
+        }
+    
         showAlert( `Approval request has been submited!`, "success" );
 
       }

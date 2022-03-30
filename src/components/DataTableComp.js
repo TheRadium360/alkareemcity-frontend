@@ -23,10 +23,16 @@ export class DataTableComp extends Component {
   state={
     checkBallot:false,
     checkPosession:false,
+    pending:false,
   }
 
   componentDidMount(){
     const {totalAmount,remainingBalance,installmentPerMonth,possesionAmount,installmentCount,ballotPaid,possesion,halfYearPayment,totalInstallmentCount,bookingAmount,ballotAmount,fine}=this.props.installmentPlan[0];
+    
+    const {requestApprovalInformation}=this.props; 
+
+    this.state.pending=requestApprovalInformation.length+2>installmentCount?true:false;
+
     let installment;
     for (let index = 1; index <= totalInstallmentCount; index++) {
       installment=[];
@@ -65,7 +71,13 @@ export class DataTableComp extends Component {
      
       //Status 
       if(index<installmentCount+1) installment.push(`<button type="button" class="btn btn-sm btn-secondary show_table_btn show_table_btn_paid" disabled='true'>Paid</button>`)
-      if ( index===installmentCount+1 ) installment.push( `<button type="button" class="btn btn-sm btn-success show_table_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Pay & Approve</button>` )
+      if ( index===installmentCount+1 ){
+        if(!this.state.pending) 
+        installment.push( `<button type="button" class="btn btn-sm btn-success show_table_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Pay & Approve</button>` )
+        else
+        installment.push(`<button disabled='true' type="button" class="btn btn-sm btn-secondary show_table_btn">Pending</button>`)
+
+      }
       if(index>installmentCount+1) installment.push(`<button disabled='true' type="button" class="btn btn-sm btn-danger show_table_btn">Pay</button>`)
 
       this.installmentTableData.push(installment)
