@@ -43,13 +43,18 @@ function App() {
     <>
       <UserState>
         <AppState>
+
+
+
+
+
           <Routes>
+            <Route exact path='/' element={<Welcome />} />
 
             <Route exact path="login" element={<SignInForm />} />
             <Route exact path="signup" element={<SignupForm />} />
             <Route exact path='error' element={<Error />} />
-
-            <Route path="/" element={<Welcome />} />
+            {/* <Navbar /> */}
 
 
             {/**********  PARENT DASHBOARD ROUTE ********/}
@@ -63,10 +68,13 @@ function App() {
 
               {/****************** ADMIN,USERS ROUTES  *****************/}
               <Route exact path="profile" element={
-                <ProtectedRoute role={[ 'admin', 'user' ]}> <Profile /></ProtectedRoute>
+                <ProtectedRoute role={[ 'user' ]}> <Profile /></ProtectedRoute>
               } />
+              {/* <Route exact path="" element={
+                <ProtectedRoute role={['user' ]}> <Profile /></ProtectedRoute>
+              } /> */}
               <Route exact path="" element={
-                <ProtectedRoute role={[ 'admin', 'user' ]}> <Profile /></ProtectedRoute>
+                <ProtectedRoute role={[ 'admin' ]}> <Users /></ProtectedRoute>
               } />
 
 
@@ -126,6 +134,9 @@ function App() {
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
             </Route>
+
+
+
           </Routes>
 
 
@@ -133,7 +144,6 @@ function App() {
 
         </AppState>
 
-        {/* <Navbar /> */}
 
 
       </UserState>

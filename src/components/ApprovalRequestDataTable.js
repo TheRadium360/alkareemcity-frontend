@@ -101,7 +101,7 @@ export class ApprovalRequestDataTable extends Component {
   render() {
     return (
       <div className="show_table">
-     <button className='btn btn-reload' onClick={this.fetchAndRelaodData}>
+        <button className='btn-reload badge bg-primary p-2 mx-1 text-white' onClick={this.fetchAndRelaodData}>
      <i class="fa-solid fa-rotate"></i>
      </button>
         <table className="table table-striped table-bordered display  table-dark inner_table" cellSpacing="0" width="100%" ref={el => this.el=el}>

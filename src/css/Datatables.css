@@ -136,3 +136,6 @@ li.paginate_button.active a {
 .btn_reload_feedback{
     top:0;
 }
+.btn_disable {
+    opacity: 0.6;
+}

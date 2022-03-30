@@ -52,8 +52,8 @@ const SignInForm=() => {
   }
   return (
 
-    <div className='background' >
-      <div className="clipPath"  >
+    <div className='background' style={{ marginTop: "0px" }}>
+      <div className="clipPath" style={{ paddingTop: "100px" }}>
 
 
         <div className='container SignInForm' >

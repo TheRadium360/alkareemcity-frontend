@@ -77,9 +77,9 @@ export class DataTableComp extends Component {
            <button className='badge bg-primary p-2 mx-1 text-white btn-reload btn_reload_feedback' onClick={this.fetchAndRelaodData}>
      <i class="fa-solid fa-rotate"></i>
      </button>
-          <span class="badge bg-danger p-2" onClick={()=>this.props.deleteAllFeedbacks()}>
+          <button class={`badge bg-danger ${this.props.feedbacks.length===0? 'btn_disable':''}`} style={{ padding: "5.5px", fontSize: '14px' }} disabled={this.props.feedbacks.length===0} onClick={() => this.props.deleteAllFeedbacks()}>
           <FontAwesomeIcon icon={faTrashCan} color="white" />
-          </span>
+          </button>
         </div>
 
         <table

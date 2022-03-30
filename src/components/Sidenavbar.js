@@ -47,7 +47,34 @@ export default function Sidenavbar() {
 
             <ul className="list-unstyled components mb-5">
 
-              {( user.role==='admin'||user.role==='user' )
+
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "users" )||location.pathname.endsWith( '/' )||location.pathname.endsWith( 'd' )? "active":''}`}>
+                <Link to='/dashboard/users'><span className="me-3"><FontAwesomeIcon icon={faUsers} /></span>Users</Link>
+              </li>
+              }
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "createnewuser" )? "active":''}`}>
+                <Link to='/dashboard/createnewuser'><span className="me-3"><FontAwesomeIcon icon={faUserPlus} /></span>Create New User</Link>
+              </li>}
+
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "approvalrequests" )? "active":''}`}>
+                <Link to='/dashboard/approvalrequests'><span className="me-3"><FontAwesomeIcon icon={faFileCircleCheck} /></span>Approval Requests</Link>
+              </li>}
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "notification" )? "active":''}`}>
+                <Link to='/dashboard/notification'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span>Notifications</Link>
+              </li>}
+
+              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "feedbacks" )? "active":''}`}>
+                <Link to='/dashboard/feedbacks'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span>Feedbacks</Link>
+              </li>}
+
+
+
+
+              {( user.role==='user' )
                 &&
                 <li className={`${location.pathname.endsWith( "profile" )||location.pathname.endsWith( '/' )||location.pathname.endsWith( 'd' )? "active":''}`}>
                   <Link to='/dashboard/profile'><span className="me-3"><FontAwesomeIcon icon={faAddressCard} /></span>Profile</Link>
@@ -67,29 +94,15 @@ export default function Sidenavbar() {
                 <Link to='/dashboard/feedbackform'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span>Feedback Form</Link>
               </li>}
 
-              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "notification" )? "active":''}`}>
-                <Link to='/dashboard/notification'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span>Notifications</Link>
-              </li>} 
-              
-              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "feedbacks" )? "active":''}`}>
-                <Link to='/dashboard/feedbacks'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span>Feedbacks</Link>
-              </li>}
 
 
 
-              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "createnewuser" )? "active":''}`}>
-                <Link to='/dashboard/createnewuser'><span className="me-3"><FontAwesomeIcon icon={faUserPlus} /></span>Create New User</Link>
-              </li>}
 
 
-              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "users" )? "active":''}`}>
-                <Link to='/dashboard/users'><span className="me-3"><FontAwesomeIcon icon={faUsers} /></span>Users</Link>
-              </li>
-              }
 
-              {user.role==='admin'&&<li className={`${location.pathname.endsWith( "approvalrequests" )? "active":''}`}>
-                <Link to='/dashboard/approvalrequests'><span className="me-3"><FontAwesomeIcon icon={faFileCircleCheck} /></span>Approval Requests</Link>
-              </li>}
+
+
+
 
 
               {/* <li className={`${location.pathname.endsWith("flexes")? "active": ''}`}>

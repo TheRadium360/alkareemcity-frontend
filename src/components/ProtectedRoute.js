@@ -33,8 +33,7 @@ const ProtectedRoute=( {
   if ( !jwt||!user ) {
     return <Navigate to={redirectPath} replace />;
   }
-  // console.log( user&&role&&!role.includes( user.role ) )
-  // console.log( user, role, role.includes( user.role ) )
+  
   if ( role && !role.includes( user.role ) ) {
     return <Navigate to={'/error'} replace />;
   }

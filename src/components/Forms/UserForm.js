@@ -129,8 +129,8 @@ const UserForm=( props ) => {
 
               {/* disabled={userFormStatus==='fail'? true:false} */}
               <div className="col-12 text-end mb-3">
-                <button className="btn form_next_btn "  onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button>
-                {/* <button className="btn form_next_btn " disabled={userFormStatus==='fail'? true:false} onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button> */}
+                {/* <button className="btn form_next_btn "  onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button> */}
+                <button className="btn form_next_btn " disabled={userFormStatus==='fail'? true:false} onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button>
 
               </div>
 

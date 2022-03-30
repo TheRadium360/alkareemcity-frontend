@@ -237,8 +237,8 @@ const PlotForm=( props ) => {
 
               <div className="col-12 text-center">
                 <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-                {/* <button type='submit' className="btn form_btn" disabled={!values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.plotArea}>{formVal.plotId? 'Update':'Submit'}</button> */}
-                <button type='submit' className="btn form_btn" >{formVal.plotId? 'Update':'Submit'}</button>
+                <button type='submit' className="btn form_btn" disabled={!values.plotNo||!values.plotPrice||!values.lat1||!values.lng1||!values.lat2||!values.lng2||!values.lat3||!values.lng3||!values.lat4||!values.lng4||!values.block||!values.plotArea}>{formVal.plotId? 'Update':'Submit'}</button>
+                {/* <button type='submit' className="btn form_btn" >{formVal.plotId? 'Update':'Submit'}</button> */}
               </div>
 
 
