@@ -5,7 +5,7 @@ import Success from "./Success";
 
 export default function PrintComponent( props ) {
   let componentRef=useRef();
-  const { formVal: values, userFormStatus: user, plotFormStatus: plot, installmentFormStatus: installment, previousStep }=props;
+  const { formVal: values, userFormStatus: user, plotFormStatus: plot, installmentFormStatus: installment, previousStep, setFormVal }=props;
 
   return (
     <>
@@ -18,7 +18,7 @@ export default function PrintComponent( props ) {
         />
 
         {/* component to be printed */}
-        <Success ref={( el ) => ( componentRef=el )} values={values} user={user} plot={plot} installment={installment} previousStep={previousStep} />
+        <Success ref={( el ) => ( componentRef=el )} values={values} setFormVal={setFormVal} user={user} plot={plot} installment={installment} previousStep={previousStep} />
       </div>
     </>
   );

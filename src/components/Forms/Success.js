@@ -12,6 +12,49 @@ class Success extends React.Component {
       this.props.previousStep();
     }
 
+    const finishIt=() => {
+      this.props.setFormVal( {
+        step: 1,
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        CNIC: '',
+        userId: '',
+
+        plotNo: '',
+        plotPrice: '',
+        block: '',
+        lat1: '',
+        lng1: '',
+        lat2: '',
+        lng2: '',
+        lat3: '',
+        lng3: '',
+        lat4: '',
+        lng4: '',
+        plotArea: '',
+        plotType: '',
+        plotId: '',
+
+        plan: '',
+        totalAmount: '',
+        possessionAmount: '',
+        installmentPerMonth: '',
+        ballotAmount: '',
+        bookingAmount: '',
+        halfYearPayment: '',
+        totalInstallmentCount: '',
+        remainingBalance: '',
+        planStartDate: ''
+
+
+      } )
+
+    }
+
+
     return (
       <>
 
@@ -172,6 +215,7 @@ class Success extends React.Component {
         <div className='text-center my-4 container'>
 
           <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
+          <button className="btn form_btn mx-2" onClick={finishIt}>Finish</button>
 
 
         </div>
