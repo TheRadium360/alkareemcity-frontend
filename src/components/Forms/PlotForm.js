@@ -54,7 +54,7 @@ const PlotForm=( props ) => {
         lng:formVal.lng4,
         },
       ],
-      user: formVal.userId='623b0db70693e52860bda1d1'
+      user: formVal.userId
       // user: '623b0db70693e52860bda1d1'
     };
 

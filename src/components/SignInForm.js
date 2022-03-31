@@ -38,8 +38,13 @@ const SignInForm=() => {
       window.localStorage.setItem( 'UR', encData )
       // Cookies.set( 'UR', encData )
 
+      if(res.data.data.user.role==='user'){
 
-      navigate( '/dashboard' )
+        navigate( '/dashboard/profile' )
+      }else{
+        navigate( '/dashboard' )
+
+      }
 
     }
 

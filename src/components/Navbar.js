@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/App.css';
+import UsersContext from '../context/users/UsersContext';
+import { useContext } from 'react';
 
 const Navbar = () => {
+  const {user}=useContext(UsersContext)
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light NAVBAR  ">
       <div className="container-fluid">
@@ -17,7 +21,8 @@ const Navbar = () => {
             </li>
 
             <li className="d-flex nav-item">
-              <Link to='/dashboard' className='btn btn-secondary'>DASHBOARD</Link>
+
+              <Link to={`${user.role==='user'? '/dashboard/profile':'/dashboard'}`} className='btn btn-secondary'>DASHBOARD</Link>
             </li>
 
 
