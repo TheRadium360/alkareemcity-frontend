@@ -111,7 +111,7 @@ const CreateUser=() => {
     case 3:
       return ( <InstallmentForm onChange={onChange} values={values3} nextStep={nextStep} installmentFormStatus={installmentFormStatus} setInstallmentFormStatus={setInstallmentFormStatus} previousStep={previousStep} setFormVal={setFormVal} formVal={formVal} /> );
     case 4:
-      return ( <PrintComponent formVal={formVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
+      return ( <PrintComponent formVal={formVal} setFormVal={setFormVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
     // return ( <Success formVal={formVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
 
   }
