@@ -44,7 +44,6 @@ const InstallmentForm=( props ) => {
     const data={
       plan: values.plan,
       totalAmount: values.totalAmount,
-      remainingBalance: values.remainingBalance,
       possesionAmount: values.possessionAmount,
       planStartDate: values.planStartDate,
       totalInstallmentCount: values.totalInstallmentCount,
@@ -62,6 +61,7 @@ const InstallmentForm=( props ) => {
 
       let res;
       if ( !formVal.installmentId ) {
+        console.log(data);
         res=await Api.post( 'installment',
           data,
           {
@@ -152,12 +152,12 @@ const InstallmentForm=( props ) => {
               <Input placeholder="Total installment" width="60%" name="totalInstallmentCount" label='r' type="number" onChange={onChange} defaultValue={values.totalInstallmentCount} labelVal="Total Installments" />
             </div>
 
-            <div className="col-6 text-end  ">
+            {/* <div className="col-6 text-end  ">
               <Input placeholder="Remaining installment amount" width="60%" name="remainingBalance" label='l' type="number" onChange={onChange} defaultValue={values.remainingBalance} labelVal="Remaining installment amount" />
-            </div>
+            </div> */}
 
-            <div className="col-6  ">
-              <Input placeholder="Select plan start date" width="60%" name="planStartDate" label='r' type="date" onChange={onChange} defaultValue={values.planStartDate} labelVal="Installment Start Date" />
+            <div className="col-12 text-center ">
+              <Input placeholder="Select plan start date" width="60%" name="planStartDate" label='c' type="date" onChange={onChange} defaultValue={values.planStartDate} labelVal="Installment Start Date" />
             </div>
 
 
@@ -173,7 +173,7 @@ const InstallmentForm=( props ) => {
 
               <div className="col-12 text-center">
                 <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-                <button type='submit' className="btn form_btn" disabled={!values.plan||!values.totalAmount||!values.possessionAmount||!values.installmentPerMonth||!values.ballotAmount||!values.bookingAmount||!values.halfYearPayment||!values.totalInstallmentCount||!values.remainingBalance} >{formVal.installmentId? 'Update':'Submit'}</button>
+                <button type='submit' className="btn form_btn" disabled={!values.plan||!values.totalAmount||!values.possessionAmount||!values.installmentPerMonth||!values.ballotAmount||!values.bookingAmount||!values.halfYearPayment||!values.totalInstallmentCount} >{formVal.installmentId? 'Update':'Submit'}</button>
               </div>
 
 
