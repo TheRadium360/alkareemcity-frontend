@@ -31,7 +31,7 @@ export class DataTableComp extends Component {
     
     const {requestApprovalInformation}=this.props; 
 
-    this.state.pending=requestApprovalInformation.length+2>installmentCount?true:false;
+    this.state.pending=requestApprovalInformation.length+1>installmentCount? true:false;
 
     let installment;
     for (let index = 1; index <= totalInstallmentCount; index++) {
@@ -74,8 +74,10 @@ export class DataTableComp extends Component {
       if ( index===installmentCount+1 ){
         if(!this.state.pending) 
         installment.push( `<button type="button" class="btn btn-sm btn-success show_table_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Pay & Approve</button>` )
-        else
-        installment.push(`<button disabled='true' type="button" class="btn btn-sm btn-secondary show_table_btn">Pending</button>`)
+        else {
+
+          installment.push( `<button disabled='true' type="button" class="btn btn-sm btn-secondary show_table_btn">Pending</button>` )
+        }
 
       }
       if(index>installmentCount+1) installment.push(`<button disabled='true' type="button" class="btn btn-sm btn-danger show_table_btn">Pay</button>`)
