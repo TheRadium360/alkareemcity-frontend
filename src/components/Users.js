@@ -14,7 +14,7 @@ import EditUsersModal from "./EditUsersModal";
 
 export default function Users() {
   const {  Cookies } = useContext(UsersContext);
-  const [users, setUsers] = useState([]);
+  const [ users, setUsers ]=useState( [] );
   const {showAlert} = useContext(AppContext)
 
 

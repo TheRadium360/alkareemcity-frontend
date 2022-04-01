@@ -78,25 +78,42 @@ export class DataTableComp extends Component {
 
   render() {
     return (
-<div className="show_table">  
-  <table  className="table table-striped table-bordered display  table-dark inner_table"  cellSpacing="0" width="100%" ref={el=> this.el=el}>
-  
-  <thead>
-      <tr>
-        <th className="headings px-3">No.</th>
-        <th className="headings px-3">CNIC</th>
-        <th className="headings px-3">Name</th>
-        <th className="headings px-3">Email</th>
-        <th className="headings px-3">Plot#</th>
-        <th className="headings px-3 ">Update</th>
-      </tr> 
+      <>
 
-      
-    </thead>
- 
-  </table>
+        {!this.props.users? <div className='text-center'> <div className="spinner-grow" style={{ width: "4rem", height: '4rem', marginTop: "10rem" }} role="status">
 
-</div>
+        </div><div className="" style={{ fontSize: "12px" }}>Loading...</div></div>:
+
+
+
+
+          <div className="show_table">
+            <table className="table table-striped table-bordered display  table-dark inner_table" cellSpacing="0" width="100%" ref={el => this.el=el}>
+
+              <thead>
+                <tr>
+                  <th className="headings px-3">No.</th>
+                  <th className="headings px-3">CNIC</th>
+                  <th className="headings px-3">Name</th>
+                  <th className="headings px-3">Email</th>
+                  <th className="headings px-3">Plot#</th>
+                  <th className="headings px-3 ">Update</th>
+                </tr>
+
+
+              </thead>
+
+            </table>
+
+          </div>
+
+        }
+
+
+
+
+
+      </>
 
     
     )
