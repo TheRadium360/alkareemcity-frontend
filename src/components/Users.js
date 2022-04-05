@@ -59,13 +59,39 @@ export default function Users() {
 
 
   const getAllDetails =  (e,id) => {
-    if(e.target.classList.contains("show_table_btn")){
-      const data= users.filter(el=>el.id===id)
-      setDetails(data[0])
-      setFormVal(data[0]);
-    }
+      if(e.target.classList.contains('btn_id')){
+        const data= users.filter(el=>el.id===id)
+        setDetails(data[0])
+        setFormVal(data[0]);
+      }
     
   };
+
+
+  
+  const deleteUser =async(e)=>{
+    const cookie = Cookies.get("jwt");
+
+    try {
+      
+      const res =await Api.delete(`users/${details.id}`,
+      {headers: { Authorization: `Bearer ${cookie}` }}
+      );
+      const data = users.filter(el=> el.id!==details.id)
+      setUsers(data)
+        showAlert('User deleted!', 'success')
+    } catch (err) {
+      showAlert("Something went wrong!" , 'danger')
+      
+    }
+    
+
+      
+      
+      
+
+
+  }
 
   const handleEdit = () => {
     if (disableInputs === true) {
@@ -90,7 +116,7 @@ export default function Users() {
       
         <FormHeading value="Users" />
 
-        <UserDataTable users={users} key={JSON.stringify(users)} getAllDetails={getAllDetails} />
+        <UserDataTable  users={users} deleteUser={deleteUser} key={JSON.stringify(users)} getAllDetails={getAllDetails} />
       </>
     )
   );

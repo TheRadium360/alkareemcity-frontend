@@ -7,7 +7,7 @@ import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-buttons/js/buttons.flash';
 import 'datatables.net-buttons/js/buttons.print';
 import UsersContext from '../context/users/UsersContext';
-import Api from '../Api';
+import Confirmation from './Welcome/Confirmation';
 
 
 const $=require('jquery');
@@ -29,7 +29,6 @@ export class DataTableComp extends Component {
   getAllUsers = async()=>{
    
     const users=this.props.users
-    console.log( users )
     for (let i = 0; i < users.length; i++) {
       let user=[];
         user.push(i)
@@ -37,8 +36,21 @@ export class DataTableComp extends Component {
         user.push(`${users[i].firstName} ${users[i].lastName}`)
         user.push(users[i].email)
         user.push(users[i].plotInformation[0].plotNo)
-        user.push(`<button type="button" class="btn btn-sm btn-dark show_table_btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${users[i].id} ${onclick=(e)=>{this.props.getAllDetails(e, e.target.getAttribute("uid"))
-      }}>Update</button>`)
+    
+
+      user.push(`<button type="button" class="btn btn-sm btn-success  btn_id" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${
+        users[i].id
+      } ${(onclick = (e) => {
+        this.props.getAllDetails(e , e.target.getAttribute('uid'));
+      })}>Edit</button>    
+
+
+
+
+
+
+      <button type="button" class="btn btn-sm btn-danger btn_id" data-bs-toggle="modal" data-bs-target="#confirmation"  uid=${users[i].id}>Delete</button>
+      `);
         
         this.userTableData.push(user)  
     } 
@@ -79,6 +91,7 @@ export class DataTableComp extends Component {
   render() {
     return (
       <>
+      <Confirmation handleClick={this.props.deleteUser} />
 
         {!this.props.users? <div className='text-center'> <div className="spinner-grow" style={{ width: "4rem", height: '4rem', marginTop: "10rem" }} role="status">
 

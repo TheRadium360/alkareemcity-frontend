@@ -275,7 +275,7 @@ export default function ( props ) {
                         <FormHeading value="Plot Details" />
                       <div className="w-25 ms-auto text-end">
                           <button
-                            className=" btn btn-success"
+                            className=" btn btn-success mb-4"
                             disabled={true}
                             onClick={props.handleEdit}
                           >
