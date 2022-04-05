@@ -77,6 +77,12 @@ export default function Users() {
       const res=await Api.delete( `users/${details.id}`,
         { headers: { Authorization: `Bearer ${cookie}` } }
       );
+      await Api.delete( `plots/${details.plotInformation[0].id}`,
+      { headers: { Authorization: `Bearer ${cookie}` } }
+    );
+    await Api.delete( `installments/${details.installmentPlan[0].id}`,
+      { headers: { Authorization: `Bearer ${cookie}` } }
+    );
       const data=users.filter( el => el.id!==details.id )
       setUsers( data )
       showAlert( 'User deleted!', 'success' )
