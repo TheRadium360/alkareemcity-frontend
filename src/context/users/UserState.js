@@ -14,7 +14,7 @@ const UserState=( props ) => {
 
 
   const Cookies=Cook.withAttributes( {
-    path: '/', sameSite: 'Strict', secure: true, expires: 30
+    path: '/', sameSite: 'Strict', secure: true
   } )
 
 
