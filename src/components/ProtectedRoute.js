@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from 'react-router-dom';
 import UsersContext from "../context/users/UsersContext";
-import Cookies from 'js-cookie';
+import Api from './../Api'
 import jwtDecode from "jwt-decode";
 import AppContext from "../context/appState/AppContext";
 

@@ -30,6 +30,7 @@ export class ApprovalRequestDataTable extends Component {
 
 
     const updatedArray=[];
+    console.log(requests)
 
     requests.forEach( ( element, i ) => {
 
