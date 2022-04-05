@@ -13,7 +13,7 @@ const ProtectedRoute=( {
 
   // Check user token here
 
-  const { Cookies }=useContext( UsersContext )
+  const { Cookies, retrieveUserInfo }=useContext( UsersContext )
   const { decryptData }=useContext( AppContext )
 
 
@@ -27,10 +27,15 @@ const ProtectedRoute=( {
 
   if ( UR ) {
     user=decryptData( UR )
+
   }
+  useEffect( () => {
+    retrieveUserInfo( user.id );
+  }, [] )
 
 
-  if ( !jwt||!user ) {
+
+  if ( !jwt||!user||( jwtDecode( Cookies.get( 'jwt' ) ).id!==user.id ) ) {
     return <Navigate to={redirectPath} replace />;
   }
   
