@@ -378,7 +378,7 @@ export default function ( props ) {
                                   disabled={true}
                                   defaultValue={
                                     props.details.plotInformation &&
-                                    props.details.plotInformation[0].lat
+                                    props.details.plotInformation[0].cords[0].lat
                                   }
                                   label="l"
                                   labelVal="Latitude(Cordinates)"
@@ -395,7 +395,7 @@ export default function ( props ) {
                                   disabled={true}
                                   defaultValue={
                                     props.details.plotInformation &&
-                                    props.details.plotInformation[0].lng
+                                    props.details.plotInformation[0].cords[0].lng
                                   }
                                   label="r"
                                   labelVal="Longitude(Cordinates)"
