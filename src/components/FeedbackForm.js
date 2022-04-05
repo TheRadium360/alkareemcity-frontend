@@ -19,7 +19,7 @@ const FeedbackForm=() => {
 
   const [ complaintFormCred, setComplaintFormCred ]=useState( { name: "", email: "", subject: "", description: "" } )
   const { onChangeGeneric,showAlert }=useContext( AppContext );
-  const {Cookies}= useContext(UsersContext)
+  const { Cookies, user }=useContext( UsersContext )
   const formRef= useRef(null)
 
   const onChange=onChangeGeneric( complaintFormCred, setComplaintFormCred );
@@ -68,11 +68,11 @@ const FeedbackForm=() => {
             <div className="row">
 
               <div className="col-6">
-                <Input placeholder="Name"  width="100%" name="name" type="text" onChange={onChange} margin="ml-2" />
+                <Input placeholder="Name" width="100%" name="name" type="text" onChange={onChange} margin="ml-2" defaultValue={user.firstName+" "+user.lastName} disabled={true} />
               </div>
 
               <div className="col-6">
-                <Input placeholder="Email" width="100%" name="email" type="email" onChange={onChange}  />
+                <Input placeholder="Email" width="100%" name="email" type="email" onChange={onChange} defaultValue={user.email} disabled={true} />
               </div>
 
               <div className="col-12">

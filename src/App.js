@@ -70,9 +70,11 @@ function App() {
               <Route exact path="profile" element={
                 <ProtectedRoute role={[ 'user' ]}> <Profile /></ProtectedRoute>
               } />
+
               {/* <Route exact path="" element={
                 <ProtectedRoute role={['user' ]}> <Profile /></ProtectedRoute>
               } /> */}
+
               <Route exact path="" element={
                 <ProtectedRoute role={[ 'admin' ]}> <Users /></ProtectedRoute>
               } />

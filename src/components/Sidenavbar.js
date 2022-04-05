@@ -40,6 +40,8 @@ export default function Sidenavbar() {
   return (
 
     <>
+
+
       <div className="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
           <div className="p-3">
@@ -140,8 +142,24 @@ export default function Sidenavbar() {
               </div>
             </div>
           </nav>
-          <div className='content_container'>
-           {user._id && <Outlet />}
+          <div className={`content_container  ${!user.id? 'text-center':''}`}>
+            {/* <div className={`content_container  text-center`}> */}
+
+
+
+
+
+
+
+
+
+            {!user._id? <div> <div className="spinner-grow" style={{ width: "5rem", height: '5rem', marginTop: "11rem" }} role="status">
+
+            </div><div className="" style={{ fontSize: "12px" }}>Loading...</div></div>:<Outlet />}
+
+
+
+
           </div>
         </div>
       </div>

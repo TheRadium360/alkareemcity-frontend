@@ -11,7 +11,7 @@ const endPoint='users/login';
 
 const SignInForm=() => {
   const { retrieveUserInfo, user, Cookies }=useContext( UsersContext );
-  const { encryptData }=useContext( AppContext );
+  const { encryptData, showAlert }=useContext( AppContext );
   const [ credentials, setCredentials ]=useState( {
     email: "",
     password: ""
@@ -38,11 +38,18 @@ const SignInForm=() => {
       window.localStorage.setItem( 'UR', encData )
       // Cookies.set( 'UR', encData )
 
-      if(res.data.data.user.role==='user'){
+      if ( res.data.data.user.role==='user' ) {
+        showAlert( 'Logged in successfully', 'success' )
+        setTimeout( () => {
+          navigate( '/dashboard/profile' )
+        }, 4000 )
+      } else {
 
-        navigate( '/dashboard/profile' )
-      }else{
-        navigate( '/dashboard' )
+        showAlert( 'Logged in successfully', 'success' )
+        setTimeout( () => {
+          navigate( '/dashboard' )
+        }, 4000 )
+
 
       }
 
@@ -57,13 +64,16 @@ const SignInForm=() => {
   }
   return (
 
-    <div className='background' style={{ marginTop: "0px" }}>
-      <div className="clipPath" style={{ paddingTop: "100px" }}>
+    <div className='background' style={{ marginTop: "0px", height: "100vh" }}>
+      <div className="clipPath" style={{ paddingTop: "100px", height: '100vh' }}>
 
 
         <div className='container SignInForm' >
-          <div className='formHeading'><h1 >Welcome</h1>
+          {/* <div className='formHeading'><h1 >Welcome</h1>
             <p>Sign in to continue</p>
+          </div> */}
+          <div className='col-3'>
+            <h1 className='text-center text-white mb-5'>Login</h1>
           </div>
           <form onSubmit={handleLogin}>
             <div className="mb-3" >

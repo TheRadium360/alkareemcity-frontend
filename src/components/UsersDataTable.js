@@ -7,7 +7,7 @@ import 'datatables.net-buttons/js/buttons.html5';
 import 'datatables.net-buttons/js/buttons.flash';
 import 'datatables.net-buttons/js/buttons.print';
 import UsersContext from '../context/users/UsersContext';
-import Api from '../Api';
+import Confirmation from './Welcome/Confirmation';
 
 
 const $=require('jquery');
@@ -29,7 +29,6 @@ export class DataTableComp extends Component {
   getAllUsers = async()=>{
    
     const users=this.props.users
-    console.log( users )
     for (let i = 0; i < users.length; i++) {
       let user=[];
         user.push(i)
@@ -37,8 +36,21 @@ export class DataTableComp extends Component {
         user.push(`${users[i].firstName} ${users[i].lastName}`)
         user.push(users[i].email)
         user.push(users[i].plotInformation[0].plotNo)
-        user.push(`<button type="button" class="btn btn-sm btn-dark show_table_btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${users[i].id} ${onclick=(e)=>{this.props.getAllDetails(e, e.target.getAttribute("uid"))
-      }}>Update</button>`)
+    
+
+      user.push(`<button type="button" class="btn btn-sm btn-success  btn_id" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${
+        users[i].id
+      } ${(onclick = (e) => {
+        this.props.getAllDetails(e , e.target.getAttribute('uid'));
+      })}>Edit</button>    
+
+
+
+
+
+
+      <button type="button" class="btn btn-sm btn-danger btn_id" data-bs-toggle="modal" data-bs-target="#confirmation"  uid=${users[i].id}>Delete</button>
+      `);
         
         this.userTableData.push(user)  
     } 
@@ -78,25 +90,43 @@ export class DataTableComp extends Component {
 
   render() {
     return (
-<div className="show_table">  
-  <table  className="table table-striped table-bordered display  table-dark inner_table"  cellSpacing="0" width="100%" ref={el=> this.el=el}>
-  
-  <thead>
-      <tr>
-        <th className="headings px-3">No.</th>
-        <th className="headings px-3">CNIC</th>
-        <th className="headings px-3">Name</th>
-        <th className="headings px-3">Email</th>
-        <th className="headings px-3">Plot#</th>
-        <th className="headings px-3 ">Update</th>
-      </tr> 
+      <>
+      <Confirmation handleClick={this.props.deleteUser} />
 
-      
-    </thead>
- 
-  </table>
+        {!this.props.users? <div className='text-center'> <div className="spinner-grow" style={{ width: "4rem", height: '4rem', marginTop: "10rem" }} role="status">
 
-</div>
+        </div><div className="" style={{ fontSize: "12px" }}>Loading...</div></div>:
+
+
+
+
+          <div className="show_table">
+            <table className="table table-striped table-bordered display  table-dark inner_table" cellSpacing="0" width="100%" ref={el => this.el=el}>
+
+              <thead>
+                <tr>
+                  <th className="headings px-3">No.</th>
+                  <th className="headings px-3">CNIC</th>
+                  <th className="headings px-3">Name</th>
+                  <th className="headings px-3">Email</th>
+                  <th className="headings px-3">Plot#</th>
+                  <th className="headings px-3 ">Update</th>
+                </tr>
+
+
+              </thead>
+
+            </table>
+
+          </div>
+
+        }
+
+
+
+
+
+      </>
 
     
     )

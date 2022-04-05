@@ -40,10 +40,10 @@ export default function Installments() {
      <FormHeading value="Installment"/>
     <div className="row installmentRow">
       <div className="col-6 installmentLeft">
-      <span className='installmentSubheading'>Total: </span> <span className='installmenSubheadingValue'>{user.installmentPlan[0].totalAmount}</span>
+          <span className='installmentSubheading'>Total: </span> <span className='installmenSubheadingValue'>{user.installmentPlan[ 0 ].totalAmount} <small className="fw-bold"> PKR</small> </span>
       </div>
       <div className="col-6 installmentRight">
-        <span className='installmentSubheading'>Remaining: </span> <span className='installmenSubheadingValue'>{user.installmentPlan[0].remainingBalance}</span>
+          <span className='installmentSubheading'>Remaining: </span> <span className='installmenSubheadingValue'>{user.installmentPlan[ 0 ].remainingBalance}<small className="fw-bold"> PKR</small></span>
       </div>
     </div>
 

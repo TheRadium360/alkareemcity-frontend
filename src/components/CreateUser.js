@@ -53,7 +53,6 @@ const CreateUser=() => {
     bookingAmount: '',
     halfYearPayment: '',
     totalInstallmentCount: '',
-    remainingBalance: '',
     planStartDate: ''
 
 
@@ -95,11 +94,11 @@ const CreateUser=() => {
 
   const { firstName, lastName, email, CNIC, password, passwordConfirm }=formVal;
   const { plotNo, plotPrice, lat1, lng1, lat2, lng2, lat3, lng3, lat4, lng4, block, plotArea, plotType }=formVal;
-  const { plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, remainingBalance, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }=formVal;
+  const { plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }=formVal;
 
   const values1={ firstName, lastName, email, CNIC, password, passwordConfirm }
   const values2={ plotNo, plotPrice, lat1, lng1, lat2, lng2, lat3, lng3, lat4, lng4, block, plotArea, plotType }
-  const values3={ plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, remainingBalance, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }
+  const values3={ plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }
 
   switch ( step ) {
     case 1:
@@ -111,7 +110,7 @@ const CreateUser=() => {
     case 3:
       return ( <InstallmentForm onChange={onChange} values={values3} nextStep={nextStep} installmentFormStatus={installmentFormStatus} setInstallmentFormStatus={setInstallmentFormStatus} previousStep={previousStep} setFormVal={setFormVal} formVal={formVal} /> );
     case 4:
-      return ( <PrintComponent formVal={formVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
+      return ( <PrintComponent formVal={formVal} setFormVal={setFormVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
     // return ( <Success formVal={formVal} userFormStatus={userFormStatus} plotFormStatus={plotFormStatus} installmentFormStatus={installmentFormStatus} nextStep={nextStep} previousStep={previousStep} /> )
 
   }

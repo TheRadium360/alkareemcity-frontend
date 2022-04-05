@@ -20,7 +20,7 @@ const Confirmation=( props ) => {
 
             <div className="modal-footer">
               <button type="button" className="btn btn-danger" data-bs-dismiss="modal">No</button>
-              <button type="button" className="btn btn-success" onClick={props.handleClick}>Yes</button>
+              <button type="button" className="btn btn-success"  data-bs-dismiss="modal" onClick={props.handleClick}>Yes</button>
             </div>
           </div>
         </div>
