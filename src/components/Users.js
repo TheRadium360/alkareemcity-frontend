@@ -74,9 +74,24 @@ export default function Users() {
 
     try {
 
-      const res=await Api.delete( `users/${details.id}`,
+    await  Promise.all([
+        Api.delete( `users/${details.id}`,
         { headers: { Authorization: `Bearer ${cookie}` } }
-      );
+      ),
+      Api.delete( `plots/${details.plotInformation[0].id}`,
+      { headers: { Authorization: `Bearer ${cookie}` } }
+    ),
+    Api.delete( `installments/${details.installmentPlan[0].id}`,
+      { headers: { Authorization: `Bearer ${cookie}` } }
+    ),
+    Api.delete( `requestapproval/${details.id}`,
+      { headers: { Authorization: `Bearer ${cookie}` } }
+    )
+        
+      ])
+
+     
+  
       const data=users.filter( el => el.id!==details.id )
       setUsers( data )
       showAlert( 'User deleted!', 'success' )

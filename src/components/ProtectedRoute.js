@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import { Navigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Navigate, useNavigate } from 'react-router-dom';
+
 import UsersContext from "../context/users/UsersContext";
-import Cookies from 'js-cookie';
+import Api from './../Api'
 import jwtDecode from "jwt-decode";
 import AppContext from "../context/appState/AppContext";
 
@@ -12,11 +13,9 @@ const ProtectedRoute=( {
 } ) => {
 
   // Check user token here
-
-  const { Cookies, retrieveUserInfo }=useContext( UsersContext )
+  const navigate = useNavigate();
+  const { Cookies }=useContext( UsersContext )
   const { decryptData }=useContext( AppContext )
-
-
   const jwt=Cookies.get( 'jwt' );
 
   let user;
@@ -29,10 +28,26 @@ const ProtectedRoute=( {
     user=decryptData( UR )
 
   }
-  useEffect( () => {
-    retrieveUserInfo( user.id );
-  }, [] )
 
+
+  
+  (async () => {
+    try {
+      const res= await Api.get(`/users/${user.id}`)
+      if(res.data.status !== 'success'){
+        
+        Cookies.remove('jwt');
+        window.localStorage.removeItem( 'UR' )
+        navigate('/login')
+      }
+      
+     } catch (err) {
+       console.log(err)
+     }
+  
+
+  })();
+  
 
 
   if ( !jwt||!user||( jwtDecode( Cookies.get( 'jwt' ) ).id!==user.id ) ) {

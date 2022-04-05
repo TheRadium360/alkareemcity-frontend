@@ -3,15 +3,32 @@ import GoogleMapReact from 'google-map-react';
 
 export default function PlotMap(props) {
 
+// Calculating center point of four coordinates
+const calcCenterTriangle=(arr)=>{
+const tr1=(arr[0]+arr[1]+arr[2])/3;
+const tr2=(arr[1]+arr[2]+arr[3])/3;
+return (tr1+tr2)/2
+}
+
+const calcCenter=(cords)=>{
+    const lats= cords.map((el)=> el.lat);
+    const lngs= cords.map((el)=> el.lng);
+    const lat=calcCenterTriangle(lats);
+    const lng=calcCenterTriangle(lngs);
+   return {lat,lng}
+}
+
+
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-
   const {cords}=props;
-  const centerPoint=cords[0];
+  // const centerPoint=cords[0];
+  const centerPoint=calcCenter(cords);
+  console.log(centerPoint);
 
 
  let defaultProps = {
-  zoom: 18,
+   zoom: 18,
   // center: {
   //   lat:  31.515894, lng: 74.340111
   // },
