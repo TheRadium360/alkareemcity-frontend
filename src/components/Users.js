@@ -84,7 +84,7 @@ export default function Users() {
     Api.delete( `installment/${details.installmentPlan[0].id}`,
       { headers: { Authorization: `Bearer ${cookie}` } }
     ),
-    Api.delete( `requestapproval/${details.id}`,
+    Api.delete( `requestapproval/user/${details.id}`,
       { headers: { Authorization: `Bearer ${cookie}` } }
     )
         
