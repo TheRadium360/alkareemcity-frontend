@@ -29,27 +29,31 @@ export class DataTableComp extends Component {
   getAllUsers = async()=>{
    
     const users=this.props.users
+
+    console.log(users)
     for (let i = 0; i < users.length; i++) {
       let user=[];
+
         user.push(i)
         user.push(users[i].CNIC)
         user.push(`${users[i].firstName} ${users[i].lastName}`)
         user.push(users[i].email)
         user.push(users[i].plotInformation[0].plotNo)
+        user.push(users[i].active===true?'Active':'Blocked');
     
 
-      user.push(`<button type="button" class="btn btn-sm btn-success  btn_id" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${
+      user.push(`<button type="button" class="btn btn-sm btn-primary text-white  btn_id btn_edit" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${
         users[i].id
       } ${(onclick = (e) => {
         this.props.getAllDetails(e , e.target.getAttribute('uid'));
-      })}>Edit</button>    
+      })}>Edit</button>
 
-
-
-
-
-
-      <button type="button" class="btn btn-sm btn-danger btn_id" data-bs-toggle="modal" data-bs-target="#confirmation"  uid=${users[i].id}>Delete</button>
+      <button type="button" class="btn btn-sm btn-danger btn_id btn_delete" data-bs-toggle="modal" data-bs-target="#confirmation"  uid=${users[i].id}>Delete</button>
+      
+      <button type="button" class="btn btn-sm btn-success btn_id btn_active ${users[i].active ? 'disabled': ''} "    uid=${users[i].id}>Active</button>
+      
+      <button type="button" class="btn btn-sm btn-dark btn_id btn_block ${!users[i].active ? 'disabled' : ''}"   uid=${users[i].id}>Block</button>
+      
       `);
         
         this.userTableData.push(user)  
@@ -67,9 +71,10 @@ export class DataTableComp extends Component {
       { "orderable": false,"width": "10px", "targets": 0 },
       { "orderable": false,"width": "40px", "targets": 1 },
       { "orderable": false,"width": "40px", "targets": 2 },
-      { "orderable": false,"width": "60px", "targets": 3 },
+      { "orderable": false,"width": "70px", "targets": 3 },
       { "orderable": false,"width": "15px", "targets": 4 },
-      { "orderable": false,"width": "30px", "targets": 5 },
+      { "orderable": false,"width": "10px", "targets": 5 },
+      { "orderable": false,"width": "60px", "targets": 6 },
     ],
     "buttons": [
       'csvHtml5',
@@ -85,8 +90,6 @@ export class DataTableComp extends Component {
 }
  
 
-
-  
 
   render() {
     return (
@@ -110,7 +113,8 @@ export class DataTableComp extends Component {
                   <th className="headings px-3">Name</th>
                   <th className="headings px-3">Email</th>
                   <th className="headings px-3">Plot#</th>
-                  <th className="headings px-3 ">Update</th>
+                  <th className="headings px-3 ">Status</th>
+                  <th className="headings px-3 ">Actions</th>
                 </tr>
 
 

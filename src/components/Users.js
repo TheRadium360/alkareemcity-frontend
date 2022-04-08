@@ -58,11 +58,89 @@ export default function Users() {
   };
 
 
-  const getAllDetails=( e, id ) => {
-    if ( e.target.classList.contains( 'btn_id' ) ) {
+  const getAllDetails=async ( e, id ) => {
+    // console.log(e.target)
+    const cookie=Cookies.get( "jwt" );
+
+    if ( e.target.classList.contains( 'btn_edit') || e.target.classList.contains( 'btn_delete') ) {
       const data=users.filter( el => el.id===id )
+      
       setDetails( data[ 0 ] )
       setFormVal( data[ 0 ] );
+    }
+    else if(e.target.classList.contains( 'btn_active' ) ){
+      
+      const data = users.map(el=>{
+        
+        if(el.id===id){
+          el.active=true;
+          return el;
+          
+        }
+        
+        else{
+          return el;
+        }
+
+
+      })
+
+
+      try {
+       const res = await Api.patch(`/users/activeuser/${id}`, {},{
+          headers: { Authorization: `Bearer ${cookie}` },
+        } )
+        
+        if(res.data.status==='success'){
+
+          setUsers(data);
+          showAlert("User has been activated again!",'success');
+
+        }
+        else throw new Error("Something went wrong")
+
+      } catch (error) {
+        showAlert(error.message,'danger');
+
+      }
+
+
+    }
+    else if(e.target.classList.contains( 'btn_block' ) ){
+      
+      const data = users.map(el=>{
+        
+        if(el.id===id){
+          el.active=false;
+          return el;
+          
+        }
+        
+        else{
+          return el;
+        }
+
+
+      })
+
+
+      try {
+        const res= await Api.patch(`/users/inactiveuser/${id}`,{} ,{
+          headers: { Authorization: `Bearer ${cookie}` },
+        } )
+
+        if(res.data.status==='success'){
+          setUsers(data);
+          showAlert("User has been blocked",'success');
+
+        }
+        else throw new Error("Something went wrong")
+
+      } catch (error) {
+       showAlert(error.message,'danger');
+
+      }
+   
     }
 
   };
@@ -71,7 +149,7 @@ export default function Users() {
 
   const deleteUser=async ( e ) => {
     const cookie=Cookies.get( "jwt" );
-
+    console.log(details)
     try {
 
     await  Promise.all([

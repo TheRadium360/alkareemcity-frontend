@@ -17,11 +17,10 @@ const FeedbackForm=() => {
 
 
 
-  const [ complaintFormCred, setComplaintFormCred ]=useState( { name: "", email: "", subject: "", description: "" } )
   const { onChangeGeneric,showAlert }=useContext( AppContext );
   const { Cookies, user }=useContext( UsersContext )
-  const formRef= useRef(null)
-
+  const formRef= useRef(null) 
+  const [ complaintFormCred, setComplaintFormCred ]=useState( { name: `${user.firstName} ${user.lastName}`, email: `${user.email}`, subject: "", description: "" } )
   const onChange=onChangeGeneric( complaintFormCred, setComplaintFormCred );
   
 

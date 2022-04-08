@@ -139,3 +139,11 @@ li.paginate_button.active a {
 .btn_disable {
     opacity: 0.6;
 }
+
+
+.btn_id{
+font-size: 10px !important;
+font-weight: 500;
+padding: 2px 4px;
+
+}
