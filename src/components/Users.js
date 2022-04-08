@@ -81,10 +81,10 @@ export default function Users() {
       Api.delete( `plots/${details.plotInformation[0].id}`,
       { headers: { Authorization: `Bearer ${cookie}` } }
     ),
-    Api.delete( `installments/${details.installmentPlan[0].id}`,
+    Api.delete( `installment/${details.installmentPlan[0].id}`,
       { headers: { Authorization: `Bearer ${cookie}` } }
     ),
-    Api.delete( `requestapproval/${details.id}`,
+    Api.delete( `requestapproval/user/${details.id}`,
       { headers: { Authorization: `Bearer ${cookie}` } }
     )
         
