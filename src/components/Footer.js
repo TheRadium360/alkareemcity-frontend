@@ -10,6 +10,7 @@ const Footer = () => {
 
 
   <div className='footer_icons'><i class="fa-brands fa-google"></i> <i class="fa-brands fa-facebook-square"></i> <i class="fa-brands fa-instagram"></i></div>
+
   <pre className='footer_data'>Support       Info       Contact        About</pre>
   <pre className='footer_data2'>Privacy Policy     Term & Condition</pre>
 

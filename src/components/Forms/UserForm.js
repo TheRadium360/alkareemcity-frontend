@@ -33,7 +33,8 @@ const UserForm=( props ) => {
       email: values.email,
       password: values.password,
       CNIC: values.CNIC,
-      passwordConfirm: values.passwordConfirm
+      passwordConfirm: values.passwordConfirm,
+      phone: values.phone
     };
 
     try {
@@ -120,11 +121,15 @@ const UserForm=( props ) => {
               <Input placeholder="Confirm Password" width="60%" name="passwordConfirm" type="password" onChange={onChange} defaultValue={values.passwordConfirm} label='r' labelVal="Confirm Password" />
             </div>
 
+            <div className="col-12  mt-3 text-center">
+              <Input placeholder="Enter Phone no" width="60%" name="phone" type="text" onChange={onChange} defaultValue={values.phone} label='c' labelVal="Phone No" />
+            </div>
+
             <div className='text-center mt-2 container'>
               {/* <button className="btn form_btn me-4" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm} onClick={moveToNext}>Next</button> */}
 
               <div className="col-12 text-center">
-                <button type='submit' className="btn form_btn" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm} >{formVal.userId? 'Update':'Submit'}</button>
+                <button type='submit' className="btn form_btn" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm||!values.phone} >{formVal.userId? 'Update':'Submit'}</button>
               </div>
 
               {/* disabled={userFormStatus==='fail'? true:false} */}

@@ -45,7 +45,7 @@ export default function Sidenavbar() {
       <div className="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
           <div className="p-3">
-            <Link to='/dashboard/profile' className={`img_img logo ${user.role}_logo  rounded-circle mb-5`} />
+            <Link to={`/dashboard/${user.role==='admin'? '':'profile'}`} className={`img_img logo ${user.role}_logo  rounded-circle mb-5`} />
 
             <ul className="list-unstyled components mb-5">
 
@@ -135,7 +135,7 @@ export default function Sidenavbar() {
 
 
                   <li className="nav-item">
-                    <Link className="nav-link" to="/dashboard/profile"><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</Link>
+                    <Link className="nav-link" to={`/dashboard/${user.role==='admin'? '':'profile'}`}><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</Link>
                   </li>
 
                 </ul>

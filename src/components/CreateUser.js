@@ -29,6 +29,7 @@ const CreateUser=() => {
     passwordConfirm: '',
     CNIC: '',
     userId: '',
+    phone: '',
 
     plotNo: '',
     plotPrice: '',
@@ -92,11 +93,13 @@ const CreateUser=() => {
 
   const { step }=formVal;
 
-  const { firstName, lastName, email, CNIC, password, passwordConfirm }=formVal;
+  const { firstName, lastName, email, CNIC, password, passwordConfirm, phone }=formVal;
   const { plotNo, plotPrice, lat1, lng1, lat2, lng2, lat3, lng3, lat4, lng4, block, plotArea, plotType }=formVal;
+
+
   const { plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }=formVal;
 
-  const values1={ firstName, lastName, email, CNIC, password, passwordConfirm }
+  const values1={ firstName, lastName, email, CNIC, password, passwordConfirm, phone }
   const values2={ plotNo, plotPrice, lat1, lng1, lat2, lng2, lat3, lng3, lat4, lng4, block, plotArea, plotType }
   const values3={ plan, totalAmount, possessionAmount, installmentPerMonth, ballotAmount, bookingAmount, halfYearPayment, totalInstallmentCount, planStartDate }
 
