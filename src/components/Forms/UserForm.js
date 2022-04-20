@@ -72,7 +72,7 @@ const UserForm=( props ) => {
 
     }
     catch ( err ) {
-      console.log( err );
+      console.log( err.response.data );
       showAlert( "Something went wrong! Please try again later", "danger" );
     }
   }

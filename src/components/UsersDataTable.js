@@ -28,7 +28,7 @@ export class DataTableComp extends Component {
   
   getAllUsers = async()=>{
    
-    const users=this.props.users
+    const users=this.props.users.reverse();
 
     console.log(users)
     for (let i = 0; i < users.length; i++) {

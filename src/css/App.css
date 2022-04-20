@@ -66,15 +66,14 @@ body {
 }
 
 .signUpInput {
-    border-radius: 30px;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 15px;
-    padding-left: 15px;
-    width: 24rem;
-    height: 50px;
-    background-color: black;
-    border: 2px solid #bd960a;
-    color: white;
+    border-radius: 30px!important;
+    font-family: 'Times New Roman', Times, serif!important;
+    font-size: 15px!important;
+    padding-left: 15px!important;
+    width: 24rem !important;
+    height: 50px!important;
+    border: 2px solid #bd960a!important;
+    /* color: white!important; */
 }
 
 .signUpInput:focus {

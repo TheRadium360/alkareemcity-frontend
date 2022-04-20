@@ -16,7 +16,7 @@ import Users from './components/Users';
 import ApprovalRequest from './components/ApprovalRequest'; 
 import FeedbackForm from './components/FeedbackForm'
 import Feedbacks from './components/Feedbacks'
-
+import "antd/dist/antd.css";
 
 
 // import Flexes from './components/Flexes'
