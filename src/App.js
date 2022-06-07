@@ -16,7 +16,9 @@ import Users from './components/Users';
 import ApprovalRequest from './components/ApprovalRequest'; 
 import FeedbackForm from './components/FeedbackForm'
 import Feedbacks from './components/Feedbacks'
+import SocietyForms from './components/SocietyForms';
 import "antd/dist/antd.css";
+
 
 
 // import Flexes from './components/Flexes'
@@ -89,6 +91,9 @@ function App() {
 
               <Route exact path="installments" role={[ 'user' ]} element={
                 <ProtectedRoute role={[ 'user' ]}> <Installments /></ProtectedRoute>
+              } />
+              <Route exact path="forms" role={[ 'user' ]} element={
+                <ProtectedRoute role={[ 'user' ]}> <SocietyForms /></ProtectedRoute>
               } />
 
               <Route exact path="approval" element={

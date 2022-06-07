@@ -6,7 +6,6 @@ import { FormDropdown } from './FormDropdown';
 import Input from './Input';
 import PlotMap from './PlotMap';
 import UsersContext from '../context/users/UsersContext';
-import FormPDF from './FormPDF';
 // import PlotLeaftet from './PlotLeaftet';
 // import GoogleMapComponent from './GoogleMapComponent';
 
@@ -133,7 +132,6 @@ export default function Plot() {
         </div>
       </form>
 
-      <FormPDF/>
 
     </div>
   )

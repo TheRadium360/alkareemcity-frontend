@@ -42,7 +42,7 @@ export class DataTableComp extends Component {
         user.push(users[i].active===true?'Active':'Blocked');
     
 
-      user.push(`<button type="button" class="btn btn-sm btn-primary text-white  btn_id btn_edit" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${
+      user.push(`<button type="button" class="btn btn-sm btn-primary text-white  btn_id btn_edit ${!users[i].active ? 'disabled': ''}" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${
         users[i].id
       } ${(onclick = (e) => {
         this.props.getAllDetails(e , e.target.getAttribute('uid'));

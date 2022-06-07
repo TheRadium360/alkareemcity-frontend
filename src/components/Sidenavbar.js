@@ -85,7 +85,8 @@ export default function Sidenavbar() {
 
               {user.role==='user'&&<li className={`${location.pathname.endsWith( "plot" )? "active":''}`}>
                 <Link to='/dashboard/plot'><span className="me-3"><FontAwesomeIcon icon={faMountain} /></span>My plot</Link>
-              </li>}
+              </li>}  
+              
 
               {user.role==='user'&&<li className={`${location.pathname.endsWith( "installments" )? "active":''}`}>
                 <Link to='/dashboard/installments'><span className="me-3"><FontAwesomeIcon icon={faMoneyBillTransfer} /></span>Installments</Link>
@@ -98,6 +99,9 @@ export default function Sidenavbar() {
 
 
 
+               {user.role==='user'&&<li className={`${location.pathname.endsWith( "forms" )? "active":''}`}>
+                <Link to='/dashboard/forms'><span className="me-3"><FontAwesomeIcon icon={faMountain} /></span>Forms</Link>
+              </li>}
 
 
 
