@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import InputMask from 'react-input-mask';
-import Input from '../Input';
-import { FormHeading } from '../FormHeading';
+import Input from '../Generic/Input';
+import { FormHeading } from '../Generic/FormHeading';
 import AppContext from '../../context/appState/AppContext';
 import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';

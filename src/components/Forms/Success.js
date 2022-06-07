@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormHeading } from '../FormHeading'
+import { FormHeading } from '../Generic/FormHeading'
 
 class Success extends React.Component {
 

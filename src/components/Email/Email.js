@@ -1,9 +1,9 @@
 import React, { useState, useContext ,useRef} from 'react';
 import emailjs from '@emailjs/browser';
 import AppContext from '../../context/appState/AppContext'
-import Input from '../Input'
-import TextArea from '../TextArea'
-import { FormHeading } from '../FormHeading'
+import Input from '../Generic/Input'
+import TextArea from '../Generic/TextArea'
+import { FormHeading } from '../Generic/FormHeading'
 import Api from '../../Api'
 import UsersContext from '../../context/users/UsersContext'
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useContext } from 'react'
-import Input from '../Input';
-import { FormHeading } from '../FormHeading';
-import { FormDropdown } from '../FormDropdown';
+import Input from '../Generic/Input';
+import { FormHeading } from '../Generic/FormHeading';
+import { FormDropdown } from '../Generic/FormDropdown';
 import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
 import AppContext from '../../context/appState/AppContext';

@@ -1,22 +1,22 @@
 import './css/index.css'
 import React, { useContext } from 'react';
-import SignupForm from './components/SignupForm';
-import Navbar from './components/Navbar';
-import SignInForm from './components/SignInForm';
+import SignupForm from './components/Auth/SignupForm';
+import Navbar from './components/Header/Navbar';
+import SignInForm from './components/Auth/SignInForm';
 import Welcome from './components/Welcome/Welcome'
 import UserState from './context/users/UserState';
 import AppState from './context/appState/AppState';
-import ProtectedRoute from './components/ProtectedRoute';
-import Sidenavbar from './components/Sidenavbar';
-import Installments from './components/Installments'
-import Notification from './components/Notification'
-import CreateUser from './components/CreateUser';
-import Alert from './components/Alert';
-import Users from './components/Users';
-import ApprovalRequest from './components/ApprovalRequest'; 
-import FeedbackForm from './components/FeedbackForm'
-import Feedbacks from './components/Feedbacks'
-import SocietyForms from './components/SocietyForms';
+import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoute';
+import Sidenavbar from './components/Header/Sidenavbar';
+import Installments from './components/Installment/Installments'
+import Notification from './components/Notification/Notification'
+import CreateUser from './components/Users/CreateUser';
+import Alert from './components/Generic/Alert';
+import Users from './components/Users/Users';
+import ApprovalRequest from './components/RequestApproval/ApprovalRequest'; 
+import FeedbackForm from './components/Feedback/FeedbackForm'
+import Feedbacks from './components/Feedback/Feedbacks'
+import SocietyForms from './components/SocietyForms/SocietyForms';
 import "antd/dist/antd.css";
 
 
@@ -30,10 +30,10 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Profile from './components/Profile';
-import Plot from './components/Plot';
-import PayApprove from './components/PayApprove';
-import Error from './components/Error';
+import Profile from './components/Users/Profile';
+import Plot from './components/Plot/Plot';
+import PayApprove from './components/Installment/PayApprove';
+import Error from './components/Generic/Error';
 
 
 function App() {
