@@ -1,5 +1,6 @@
-import React, { useContext, useRef } from 'react'
-import Input from './../Generic/Input'
+import React, { useContext, useRef, useState } from 'react'
+import SimpleInput from './../Generic/Input'
+import Input from './../Generic/EditInput'
 import { FormDropdown } from './../Generic/FormDropdown'
 import { FormHeading } from './../Generic/FormHeading'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,12 +8,32 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import AppContext from '../../context/appState/AppContext';
 import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
+import { InputAdornment, IconButton } from "@material-ui/core";
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import InputMask from 'react-input-mask';
+import TextField from '@mui/material/TextField';
+
 
 {/* <i class="fa-solid fa-pen-to-square"></i> */ }
 
 
 
 export default function ( props ) {
+
+  const [ errorState, setErrorState ]=useState( false )
+  const [ errorMsg, setErrorMsg ]=useState( "" )
+
+
+  const [ showPassword1, setShowPassword1 ]=useState( false );
+  const [ showPassword2, setShowPassword2 ]=useState( false );
+
+  const handleClickPass=() => {
+    setShowPassword1( prev => !prev );
+  }
+  const handleClickConfirmPass=() => {
+    setShowPassword2( prev => !prev );
+  }
+
 
   const { showAlert }=useContext( AppContext );
   const { Cookies }=useContext( UsersContext );
@@ -23,66 +44,79 @@ export default function ( props ) {
     e.preventDefault();
     // console.log( e.target )
     const cookie=Cookies.get( "jwt" );
-    try {
-      const res=await Api.patch(
-        `/users/${props.details._id}`,
-        {
-          firstName: props.formVal.firstName,
-          lastName: props.formVal.lastName,
-          CNIC: props.formVal.CNIC,
-          email: props.formVal.email,
-          password: props.formVal.password,
-          passwordConfirm: props.formVal.passwordConfirm,
-        },
-        {
-          headers: { Authorization: `Bearer ${cookie}` },
-        }
-      );
 
-      console.log( res.data )
-      if ( res.data.status==="success" ) {
-        props.setDetails( res.data.data );
-        props.setDisableInputs( true );
+    if ( props.formVal.password!==props.formVal.passwordConfirm ) {
+
+      setErrorMsg( "Password and Password Confirm are not same" )
+      setErrorState( true );
 
 
-        // CHANGES IN FRONTEND
-        const USERS=props.users;
-
-        const u=USERS.map( ( el ) => {
-          if ( el.id===props.details._id ) {
-            return {
-              ...props.formVal,
-              firstName: props.formVal.firstName,
-              lastName: props.formVal.lastName,
-              CNIC: props.formVal.CNIC,
-              email: props.formVal.email,
-              password: props.formVal.password,
-              passwordConfirm: props.formVal.passwordConfirm,
-
-            }
-          }
-          else {
-            return el;
-          }
-        } )
-        props.setUsers( u )
-
-        closeBtn.current.click();
-
-        showAlert( `User has been update successfully!`, "success" );
-      }
-
-    } catch ( err ) {
-      showAlert( `User not updated! Something went wrong`, "danger" );
     }
+    else {
+      try {
+        const res=await Api.patch(
+          `/users/${props.details._id}`,
+          {
+            firstName: props.formVal.firstName,
+            lastName: props.formVal.lastName,
+            CNIC: props.formVal.CNIC,
+            email: props.formVal.email,
+            password: props.formVal.password,
+            passwordConfirm: props.formVal.passwordConfirm,
+          },
+          {
+            headers: { Authorization: `Bearer ${cookie}` },
+          }
+        );
+
+        console.log( res.data )
+        if ( res.data.status==="success" ) {
+          props.setDetails( res.data.data );
+          props.setDisableInputs( true );
+
+
+          // CHANGES IN FRONTEND
+          const USERS=props.users;
+
+          const u=USERS.map( ( el ) => {
+            if ( el.id===props.details._id ) {
+              return {
+                ...props.formVal,
+                firstName: props.formVal.firstName,
+                lastName: props.formVal.lastName,
+                CNIC: props.formVal.CNIC,
+                email: props.formVal.email,
+                password: props.formVal.password,
+                passwordConfirm: props.formVal.passwordConfirm,
+
+              }
+            }
+            else {
+              return el;
+            }
+          } )
+          props.setUsers( u )
+
+          closeBtn.current.click();
+
+          showAlert( `User has been update successfully!`, "success" );
+        }
+
+      } catch ( err ) {
+        showAlert( `User not updated! Something went wrong`, "danger" );
+      }
+    }
+
 
   };
 
-
+  console.log( "+++++++>", props.details )
 
 
   return (
-    <div>
+
+    <>
+      <div>
         <div
           className="modal fade "
           id="exampleModal"
@@ -101,11 +135,11 @@ export default function ( props ) {
                   type="button"
                   className="btn-close"
                   data-bs-dismiss="modal"
-                aria-label="Close"
-                ref={closeBtn}
+                  aria-label="Close"
+                  ref={closeBtn}
                 />
               </div>
-               { <div className="modal-body">
+              {<div className="modal-body">
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -128,20 +162,20 @@ export default function ( props ) {
                       <div class="accordion-body text-center">
                         <FormHeading value="User Details" />
 
-                      <div className="w-25 ms-auto text-end">
+                        <div className="w-25 ms-auto text-end">
                           <button
                             className=" btn btn-success"
                             onClick={props.handleEdit}
                           >
-                          <FontAwesomeIcon icon={faPenToSquare} />
+                            <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </div>
 
-                      <form onSubmit={handleUserUpdate}>
+                        <form onSubmit={handleUserUpdate}>
                           <div className="container">
                             <div className="row">
                               <div className="col-6 text-end">
-                              
+
                                 <Input
                                   placeholder="Enter CNIC"
                                   defaultValue={props.details.CNIC}
@@ -150,7 +184,11 @@ export default function ( props ) {
                                   type="text"
                                   onChange={props.onChange}
                                   disabled={props.disableInputs}
+                                  mask="99999-9999999-9"
                                 />
+
+
+
 
                                 <p
                                   className="input_label_l"
@@ -169,6 +207,7 @@ export default function ( props ) {
                                   type="email"
                                   onChange={props.onChange}
                                   disabled={props.disableInputs}
+                                  df={props.details.email}
                                 />
                                 <p className="input_label_l">Email</p>
                               </div>
@@ -204,7 +243,7 @@ export default function ( props ) {
                               </div>
 
                               <div className="col-6 text-end mt-3">
-                                <Input
+                                {/* <Input
                                   placeholder="Enter Password"
                                   width="100%"
                                   name="password"
@@ -212,9 +251,22 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={props.disableInputs}
                                   required={false}
-                                />
+                                /> */}
+                                <SimpleInput width="100%" name="password" type={showPassword1? "text":"password"} onChange={props.onChange} disabled={props.disableInputs} required={false}
+                                  defaultValue={props.formVal.password} label='l' InputProps={{
+                                    endAdornment: (
+                                      <InputAdornment position="end">
+                                        <IconButton
+                                          onClick={handleClickPass}
+                                          edge="end"
+                                        >
+                                          {showPassword1? <EyeTwoTone />:<EyeInvisibleOutlined />}
+                                        </IconButton>
+                                      </InputAdornment>
+                                    )
+                                  }} />
                                 <p
-                                  className="input_label_l"
+                                  className="input_label_l mt-2"
                                   style={{ width: "100%" }}
                                 >
                                   Password
@@ -222,7 +274,7 @@ export default function ( props ) {
                               </div>
 
                               <div className="col-6  mt-3">
-                                <Input
+                                {/* <Input
                                   placeholder="Confirm Password"
                                   width="100%"
                                   name="passwordConfirm"
@@ -230,10 +282,28 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={props.disableInputs}
                                   required={false}
-                                />
-                                <p className="input_label_l">
+                                /> */}
+                                <SimpleInput placeholder="Confirm Password" error={errorState} helperText={errorMsg} width="100%" name="passwordConfirm" type={showPassword2? "text":"password"} onChange={props.onChange}
+                                  defaultValue={props.formVal.passwordConfirm} label='r'
+                                  disabled={props.disableInputs}
+                                  required={false}
+                                  InputProps={{
+                                    endAdornment: (
+                                      <InputAdornment position="end">
+                                        <IconButton
+                                          onClick={handleClickConfirmPass}
+                                          edge="end"
+                                        >
+                                          {showPassword2? <EyeTwoTone />:<EyeInvisibleOutlined />}
+                                        </IconButton>
+                                      </InputAdornment>
+                                    )
+                                  }} />
+
+                                <p className="input_label_l mt-2">
                                   Confirm Password
                                 </p>
+
                               </div>
 
                               <div className="text-center mt-2 container">
@@ -273,13 +343,13 @@ export default function ( props ) {
                     >
                       <div class="accordion-body">
                         <FormHeading value="Plot Details" />
-                      <div className="w-25 ms-auto text-end">
+                        <div className="w-25 ms-auto text-end">
                           <button
                             className=" btn btn-success mb-4"
                             disabled={true}
                             onClick={props.handleEdit}
                           >
-                          <FontAwesomeIcon icon={faPenToSquare} />
+                            <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </div>
 
@@ -293,11 +363,11 @@ export default function ( props ) {
                                   backgroundColor="#bd960a"
                                   color="white"
                                   onChange={props.onChange}
-                                  list={["Commercial", "Residential"]}
+                                  list={[ "Commercial", "Residential" ]}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.plotInformation &&
-                                    props.details.plotInformation[0].plotType
+                                    props.details.plotInformation&&
+                                    props.details.plotInformation[ 0 ].plotType
                                   }
                                 />
                               </div>
@@ -308,12 +378,12 @@ export default function ( props ) {
                                   width="100%"
                                   backgroundColor="#bd960a"
                                   color="white"
-                                  list={["Commercial", "Residential"]}
+                                  list={[ "Commercial", "Residential" ]}
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.plotInformation &&
-                                    props.details.plotInformation[0].block
+                                    props.details.plotInformation&&
+                                    props.details.plotInformation[ 0 ].block
                                   }
                                 />
                               </div>
@@ -324,12 +394,12 @@ export default function ( props ) {
                                   width="100%"
                                   backgroundColor="#bd960a"
                                   color="white"
-                                  list={["Commercial", "Residential"]}
+                                  list={[ "Commercial", "Residential" ]}
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.plotInformation &&
-                                    props.details.plotInformation[0].plotArea
+                                    props.details.plotInformation&&
+                                    props.details.plotInformation[ 0 ].plotArea
                                   }
                                 />
                               </div>
@@ -343,8 +413,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.plotInformation &&
-                                    props.details.plotInformation[0].plotNo
+                                    props.details.plotInformation&&
+                                    props.details.plotInformation[ 0 ].plotNo
                                   }
                                   label="l"
                                   labelVal="Plot Number"
@@ -360,8 +430,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.plotInformation &&
-                                    props.details.plotInformation[0].plotPrice
+                                    props.details.plotInformation&&
+                                    props.details.plotInformation[ 0 ].plotPrice
                                   }
                                   label="r"
                                   labelVal="Plot Price"
@@ -377,8 +447,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.plotInformation &&
-                                    props.details.plotInformation[0].cords[0].lat
+                                    props.details.plotInformation&&
+                                    props.details.plotInformation[ 0 ].cords[ 0 ].lat
                                   }
                                   label="l"
                                   labelVal="Latitude(Cordinates)"
@@ -394,8 +464,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.plotInformation &&
-                                    props.details.plotInformation[0].cords[0].lng
+                                    props.details.plotInformation&&
+                                    props.details.plotInformation[ 0 ].cords[ 0 ].lng
                                   }
                                   label="r"
                                   labelVal="Longitude(Cordinates)"
@@ -441,12 +511,12 @@ export default function ( props ) {
                       <div className="accordion-body">
                         <div>
                           <FormHeading value="Installment Details" />
-                        <div className="w-25 ms-auto text-end">
+                          <div className="w-25 ms-auto text-end">
                             <button
                               className=" btn btn-success"
                               onClick={props.handleEdit}
                             >
-                            <FontAwesomeIcon icon={faPenToSquare} />
+                              <FontAwesomeIcon icon={faPenToSquare} />
 
                             </button>
                           </div>
@@ -461,13 +531,12 @@ export default function ( props ) {
                                   width="60%"
                                   backgroundColor="#bd960a"
                                   color="white"
-                                  list={["3 Years", "4 Years", "5 Years"]}
+                                  list={[ "3 Years", "4 Years", "5 Years" ]}
                                   onChange={props.onChange}
-                                  defaultValue={`${
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0]
-                                      .totalInstallmentCount / 12
-                                  } years`}
+                                  defaultValue={`${props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ]
+                                      .totalInstallmentCount/12
+                                    } years`}
                                   disabled={true}
                                 />
                               </div>
@@ -481,8 +550,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0].totalAmount
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ].totalAmount
                                   }
                                   label="r"
                                   labelVal="Total Installment Amount"
@@ -498,8 +567,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0].possesionAmount
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ].possesionAmount
                                   }
                                   label="l"
                                   labelVal="Possession rate"
@@ -515,8 +584,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0]
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ]
                                       .installmentPerMonth
                                   }
                                   label="r"
@@ -533,8 +602,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0].ballotAmount
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ].ballotAmount
                                   }
                                   label="l"
                                   labelVal="Ballot Amount"
@@ -550,8 +619,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0].bookingAmount
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ].bookingAmount
                                   }
                                   label="r"
                                   labelVal="Booking Price"
@@ -567,8 +636,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0].halfYearPayment
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ].halfYearPayment
                                   }
                                   label="l"
                                   labelVal="Half Year Payment"
@@ -584,8 +653,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0]
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ]
                                       .totalInstallmentCount
                                   }
                                   label="r"
@@ -602,8 +671,8 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={true}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    props.details.installmentPlan[0].remainingBalance
+                                    props.details.installmentPlan&&
+                                    props.details.installmentPlan[ 0 ].remainingBalance
                                   }
                                   label="l"
                                   labelVal="Remaining installment amount"
@@ -619,10 +688,10 @@ export default function ( props ) {
                                   onChange={props.onChange}
                                   disabled={props.disableInputs}
                                   defaultValue={
-                                    props.details.installmentPlan &&
-                                    new Date(props.details.installmentPlan[0].dueDate)
+                                    props.details.installmentPlan&&
+                                    new Date( props.details.installmentPlan[ 0 ].dueDate )
                                       .toISOString()
-                                      .split("T")[0]
+                                      .split( "T" )[ 0 ]
                                   }
                                   label="r"
                                   labelVal="Installment Start Date"
@@ -650,8 +719,9 @@ export default function ( props ) {
               </div>}
             </div>
           </div>
-        </div> 
+        </div>
 
-    </div>
+      </div>
+    </>
   )
 }

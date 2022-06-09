@@ -42,16 +42,21 @@ export class DataTableComp extends Component {
         user.push(users[i].active===true?'Active':'Blocked');
     
 
-      user.push(`<button type="button" class="btn btn-sm btn-primary text-white  btn_id btn_edit ${!users[i].active ? 'disabled': ''}" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${
-        users[i].id
-      } ${(onclick = (e) => {
-        this.props.getAllDetails(e , e.target.getAttribute('uid'));
-      })}>Edit</button>
+      user.push( `
+      <button type="button" class="btn btn-sm btn-primary text-white  btn_id btn_edit ${!users[ i ].active? 'disabled':''}" data-bs-toggle="modal" data-bs-target="#exampleModal"  uid=${users[ i ].id
+        } ${( onclick=( e ) => {
+          this.props.getAllDetails( e, e.target.getAttribute( 'uid' ) );
+        } )}>Edit</button>
 
-      <button type="button" class="btn btn-sm btn-danger btn_id btn_delete" data-bs-toggle="modal" data-bs-target="#confirmation"  uid=${users[i].id}>Delete</button>
-      
-      <button type="button" class="btn btn-sm btn-success btn_id btn_active ${users[i].active ? 'disabled': ''} "    uid=${users[i].id}>Active</button>
-      
+      <button type="button" class="btn btn-sm btn-danger btn_id btn_delete" data-bs-toggle="modal" data-bs-target="#confirmation"
+      ${( onclick=( e ) => {
+          this.props.getAllDetails( e, e.target.getAttribute( 'uid' ) );
+        } )}
+
+      uid=${users[ i ].id}>Delete</button>
+
+      <button type="button" class="btn btn-sm btn-success btn_id btn_active ${users[ i ].active? 'disabled':''} "  uid=${users[ i ].id}>Active</button>
+
       <button type="button" class="btn btn-sm btn-dark btn_id btn_block ${!users[i].active ? 'disabled' : ''}"   uid=${users[i].id}>Block</button>
       
       `);
@@ -94,7 +99,6 @@ export class DataTableComp extends Component {
   render() {
     return (
       <>
-      <Confirmation handleClick={this.props.deleteUser} />
 
         {!this.props.users? <div className='text-center'> <div className="spinner-grow" style={{ width: "4rem", height: '4rem', marginTop: "10rem" }} role="status">
 

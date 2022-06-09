@@ -79,7 +79,7 @@ export const Email = () => {
 
 
           <div className="col-12">
-            <Input placeholder="Subject" width="100%" name="subject" type="text" onChange={onChange} />
+              <Input placeholder="Subject" labelVal={"Subject"} width="100%" name="subject" type="text" onChange={onChange} />
           </div>
 
           <div className="col-12">

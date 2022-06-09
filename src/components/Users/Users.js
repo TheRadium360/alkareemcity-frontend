@@ -8,7 +8,7 @@ import Api from "../../Api";
 import UsersContext from "../../context/users/UsersContext";
 import UserDataTable from "./UsersDataTable";
 import EditUsersModal from "./EditUsersModal";
-
+import Confirmation from "../Welcome/Confirmation";
 
 
 
@@ -61,14 +61,17 @@ export default function Users() {
   const getAllDetails=async ( e, id ) => {
     // console.log(e.target)
     const cookie=Cookies.get( "jwt" );
+    console.log( "----->", e.target );
+    console.log( "USER 64: ", e.target.classList.contains( 'btn_edit' )||e.target.classList.contains( 'btn_delete' ) );
 
     if ( e.target.classList.contains( 'btn_edit') || e.target.classList.contains( 'btn_delete') ) {
       const data=users.filter( el => el.id===id )
+      console.log( data )
       
       setDetails( data[ 0 ] )
       setFormVal( data[ 0 ] );
     }
-    else if(e.target.classList.contains( 'btn_active' ) ){
+    else if ( e.target.classList.contains( 'btn_active' ) ) {
       
       const data = users.map(el=>{
         
@@ -206,6 +209,8 @@ export default function Users() {
     (
       <>
         {details&&<EditUsersModal details={details} setDetails={setDetails} formVal={formVal} setFormVal={setFormVal} handleEdit={handleEdit} disableInputs={disableInputs} setDisableInputs={setDisableInputs} setUsers={setUsers} users={users} onChange={onChange} />}
+
+        {details&&<Confirmation handleClick={deleteUser} />}
 
         <FormHeading value="Users" />
 

@@ -1,14 +1,31 @@
 import React, { useContext, useState } from 'react'
-import InputMask from 'react-input-mask';
 import Input from '../Generic/Input';
 import { FormHeading } from '../Generic/FormHeading';
 import AppContext from '../../context/appState/AppContext';
 import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
+import InputMask from 'react-input-mask';
+import TextField from '@mui/material/TextField';
+import { InputAdornment, IconButton } from "@material-ui/core";
+
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 const UserForm=( props ) => {
   const endPoint='users/';
   const { onChange, values, nextStep, userFormStatus, setUserFormStatus, formVal, setFormVal }=props;
+
+  const [ errorState, setErrorState ]=useState( false )
+  const [ errorMsg, setErrorMsg ]=useState( "" )
+
+  const [ showPassword1, setShowPassword1 ]=useState( false );
+  const [ showPassword2, setShowPassword2 ]=useState( false );
+
+  const handleClickPass=() => {
+    setShowPassword1( prev => !prev );
+  }
+  const handleClickConfirmPass=() => {
+    setShowPassword2( prev => !prev );
+  }
 
   const { showAlert, setAlert }=useContext( AppContext );
   const { Cookies }=useContext( UsersContext );
@@ -37,44 +54,57 @@ const UserForm=( props ) => {
       phone: values.phone
     };
 
-    try {
-      let res;
-      if ( !formVal.userId ) {
-        res=await Api.post( endPoint,
-          data,
-          {
-            // withCredentials: true,
-            headers: { Authorization: `Bearer ${cookie}` }
-          }
-        )
+    if ( values.password!==values.passwordConfirm ) {
 
-      } else {
-
-        res=await Api.patch( `users/${formVal.userId}`,
-          data,
-          {
-            // withCredentials: true,
-            headers: { Authorization: `Bearer ${cookie}` }
-          }
-        )
-      }
-
-      // console.log( res.data.status );
-      if ( res.data.status==="success" ) {
-
-        showAlert( `User has been ${formVal.userId? 'updated':'created'} successfully!`, "success" );
-        setUserFormStatus( res.data.status );
-        setFormVal( { ...formVal, userId: res.data.data.id } )
-
-      }
-
+      setErrorMsg( "Password and Password Confirm are not same" )
+      setErrorState( true );
 
 
     }
-    catch ( err ) {
-      console.log( err.response.data );
-      showAlert( "Something went wrong! Please try again later", "danger" );
+    else {
+
+
+      try {
+        let res;
+        if ( !formVal.userId ) {
+          res=await Api.post( endPoint,
+            data,
+            {
+              // withCredentials: true,
+              headers: { Authorization: `Bearer ${cookie}` }
+            }
+          )
+
+        } else {
+
+          res=await Api.patch( `users/${formVal.userId}`,
+            data,
+            {
+              // withCredentials: true,
+              headers: { Authorization: `Bearer ${cookie}` }
+            }
+          )
+        }
+
+        // console.log( res.data.status );
+        if ( res.data.status==="success" ) {
+
+          showAlert( `User has been ${formVal.userId? 'updated':'created'} successfully!`, "success" );
+          setUserFormStatus( res.data.status );
+          setFormVal( { ...formVal, userId: res.data.data.id } )
+
+        }
+
+
+
+      }
+      catch ( err ) {
+        console.log( err.response.data );
+        showAlert( "Something went wrong! Please try again later", "danger" );
+      }
     }
+
+
   }
 
   return (
@@ -92,8 +122,12 @@ const UserForm=( props ) => {
 
             <div className="col-6 text-end mt-3">
 
-              <InputMask mask="99999-9999999-9" maskChar={null} type="text" id="inputCnic" placeholder='Enter CNIC' className='input' onChange={onChange} autoComplete="off" name="CNIC" style={{ width: "60%" }} defaultValue={values.CNIC} required />
-              <p className="input_label_l" style={{ width: "60%" }}>CNIC</p>
+              <InputMask mask="99999-9999999-9" defaultValue={values.CNIC} maskChar={null} type="text" id="inputCnic" onChange={onChange} autoComplete="off" name="CNIC"  >
+                {() => <TextField variant="standard" name="CNIC" defaultValue={values.CNIC} required className='input' label="Enter CNIC" style={{ width: "60%" }} />}
+              </InputMask>
+
+              {/* <p className="input_label_l" style={{ width: "60%" }}>CNIC</p> */}
+
 
             </div>
 
@@ -114,15 +148,42 @@ const UserForm=( props ) => {
 
 
             <div className="col-6 text-end mt-3">
-              <Input placeholder="Enter Password" width="60%" name="password" type="password" onChange={onChange} defaultValue={values.password} label='l' labelVal="Password" />
+              <Input placeholder="Enter Password" width="60%" name="password" type={showPassword1? "text":"password"} onChange={onChange} defaultValue={values.password} label='l' labelVal="Password" InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickPass}
+                      edge="end"
+                    >
+                      {showPassword1? <EyeTwoTone />:<EyeInvisibleOutlined />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }} />
             </div>
 
             <div className="col-6  mt-3">
-              <Input placeholder="Confirm Password" width="60%" name="passwordConfirm" type="password" onChange={onChange} defaultValue={values.passwordConfirm} label='r' labelVal="Confirm Password" />
+              <Input placeholder="Confirm Password" error={errorState} helperText={errorMsg} width="60%" name="passwordConfirm" type={showPassword2? "text":"password"} onChange={onChange} defaultValue={values.passwordConfirm} label='r' labelVal="Confirm Password" InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickConfirmPass}
+                      edge="end"
+                    >
+                      {showPassword2? <EyeTwoTone />:<EyeInvisibleOutlined />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }} />
             </div>
 
             <div className="col-12  mt-3 text-center">
-              <Input placeholder="Enter Phone no" width="60%" name="phone" type="text" onChange={onChange} defaultValue={values.phone} label='c' labelVal="Phone No" />
+              {/* <Input placeholder="Enter Phone no" width="60%" name="phone" type="number" onChange={onChange} defaultValue={values.phone} label='c' labelVal="Phone No" /> */}
+
+              <InputMask mask="0399-99999999" maskChar={null} defaultValue={values.phone} type="text" onChange={onChange} autoComplete="off"   >
+                {() => <TextField variant="standard" name="phone" defaultValue={values.phone} required className='input' label="Enter Phone no" style={{ width: "60%" }} />}
+              </InputMask>
+
             </div>
 
             <div className='text-center mt-2 container'>
