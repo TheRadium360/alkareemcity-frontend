@@ -25,6 +25,8 @@ const SignInForm=() => {
 
   const handleLogin=async ( e ) => {
     e.preventDefault();
+    try{
+      
     const res=await Api.post( endPoint, credentials );
     
     if ( res.data.status==="success" ) {
@@ -52,7 +54,10 @@ const SignInForm=() => {
       }
 
     }
-
+  }catch(err){
+    // console.log(err.response.data)
+    showAlert(err.response.data.message,'danger')
+  }
 
   }
 

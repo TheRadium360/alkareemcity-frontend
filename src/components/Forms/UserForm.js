@@ -94,19 +94,34 @@ const UserForm=( props ) => {
           setFormVal( { ...formVal, userId: res.data.data.id } )
 
         }
+      }
 
 
+    
+
+
+    catch ( err ) {
+      console.log( err.response.data );
+      if(err.response.data.message.includes("email_1 dup key")){
+        showAlert( "User with this email already exist!", "danger" );
 
       }
-      catch ( err ) {
-        console.log( err.response.data );
-        showAlert( "Something went wrong! Please try again later", "danger" );
+      else if(err.response.data.message.includes("CNIC_1 dup key")){
+        showAlert( "User with this CNIC already exist!", "danger" );
       }
+      else if(err.response.data.message.includes("Password and Confirm-password are not same!")){
+        showAlert( "Password and Confirm Password are not same!", "danger" );
+      }
+      else if(err.response.data.message.includes("Password must be of atleast 8 characters long")){
+        showAlert( "Password must be of atleast 8 characters long!", "danger" );
+      }
+      else if(err.response.data.message.includes("Phone No. must be of atleast 11 digits numbers")){
+        showAlert( "Phone No. must be of atleast 11 digits numbers long!", "danger" );
+      }
+
     }
-
-
   }
-
+  }
   return (
     <div>
 

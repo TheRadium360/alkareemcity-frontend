@@ -52,25 +52,25 @@ export default function Sidenavbar() {
 
 
               {user.role==='admin'&&<li className={`${location.pathname.endsWith( "users" )||location.pathname.endsWith( '/' )||location.pathname.endsWith( 'd' )? "active":''}`}>
-                <Link to='/dashboard/users'><span className="me-3"><FontAwesomeIcon icon={faUsers} /></span>Users</Link>
+                <Link to='/dashboard/users'><span className="me-3"><FontAwesomeIcon icon={faUsers} /></span><span className="users_text">Users</span></Link>
               </li>
               }
 
               {user.role==='admin'&&<li className={`${location.pathname.endsWith( "createnewuser" )? "active":''}`}>
-                <Link to='/dashboard/createnewuser'><span className="me-3"><FontAwesomeIcon icon={faUserPlus} /></span>Create New User</Link>
+                <Link to='/dashboard/createnewuser'><span className="me-3"><FontAwesomeIcon icon={faUserPlus} /></span><span className="create_new_user_text">Create New User</span></Link>
               </li>}
 
 
               {user.role==='admin'&&<li className={`${location.pathname.endsWith( "approvalrequests" )? "active":''}`}>
-                <Link to='/dashboard/approvalrequests'><span className="me-3"><FontAwesomeIcon icon={faFileCircleCheck} /></span>Approval Requests</Link>
+                <Link to='/dashboard/approvalrequests'><span className="me-3"><FontAwesomeIcon icon={faFileCircleCheck} /></span><span className="approval_req_text">Approval Requests</span></Link>
               </li>}
 
               {user.role==='admin'&&<li className={`${location.pathname.endsWith( "notification" )? "active":''}`}>
-                <Link to='/dashboard/notification'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span>Notifications</Link>
+                <Link to='/dashboard/notification'><span className="me-3"><FontAwesomeIcon icon={faBell} /></span><span className="notification_text">Notifications</span></Link>
               </li>}
 
               {user.role==='admin'&&<li className={`${location.pathname.endsWith( "feedbacks" )? "active":''}`}>
-                <Link to='/dashboard/feedbacks'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span>Feedbacks</Link>
+                <Link to='/dashboard/feedbacks'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span><span className="feedbacks_text">Feedbacks</span></Link>
               </li>}
 
 
@@ -79,28 +79,28 @@ export default function Sidenavbar() {
               {( user.role==='user' )
                 &&
                 <li className={`${location.pathname.endsWith( "profile" )||location.pathname.endsWith( '/' )||location.pathname.endsWith( 'd' )? "active":''}`}>
-                  <Link to='/dashboard/profile'><span className="me-3"><FontAwesomeIcon icon={faAddressCard} /></span>Profile</Link>
+                  <Link to='/dashboard/profile'><span className="me-3 profile_icon"><FontAwesomeIcon icon={faAddressCard} /></span><span className="profile_text">Profile</span></Link>
                 </li>}
 
 
               {user.role==='user'&&<li className={`${location.pathname.endsWith( "plot" )? "active":''}`}>
-                <Link to='/dashboard/plot'><span className="me-3"><FontAwesomeIcon icon={faMountain} /></span>My plot</Link>
+                <Link to='/dashboard/plot'><span className="me-3 plot_icon"><FontAwesomeIcon icon={faMountain} /></span><span className="plot_text">My plot</span></Link>
               </li>}  
               
 
               {user.role==='user'&&<li className={`${location.pathname.endsWith( "installments" )? "active":''}`}>
-                <Link to='/dashboard/installments'><span className="me-3"><FontAwesomeIcon icon={faMoneyBillTransfer} /></span>Installments</Link>
+                <Link to='/dashboard/installments'><span className="me-3 installment_icon"><FontAwesomeIcon icon={faMoneyBillTransfer} /></span><span className="installment_text">Installments</span></Link>
               </li>
               }
 
               {user.role==='user'&&<li className={`${location.pathname.endsWith( "feedbackform" )? "active":''}`}>
-                <Link to='/dashboard/feedbackform'><span className="me-3"><FontAwesomeIcon icon={faComment} /></span>Feedback Form</Link>
+                <Link to='/dashboard/feedbackform'><span className="me-3 feedback_form_icon"><FontAwesomeIcon icon={faComment} /></span><span className="feedback_form_text">Feedback Form</span></Link>
               </li>}
 
 
 
                {user.role==='user'&&<li className={`${location.pathname.endsWith( "forms" )? "active":''}`}>
-                <Link to='/dashboard/forms'><span className="me-3"><FontAwesomeIcon icon={faMountain} /></span>Forms</Link>
+                <Link to='/dashboard/forms'><span className="me-3 forms_icon"><FontAwesomeIcon icon={faMountain} /></span><span className="forms_text">Forms</span></Link>
               </li>}
 
 
@@ -129,17 +129,17 @@ export default function Sidenavbar() {
         <div id="content">
           <nav className="navbar navbar-expand navbar-light bg-light dashboard_nav">
             <div className="container-fluid">
-              <Link to='/'><span className="text-black"> Al-Kareem-City</span></Link>
+              <Link to='/'><span className="text-black alkareem_city_text"> Al-Kareem-City</span></Link>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="nav navbar-nav ms-auto">
+                <ul className="nav navbar-nav nav_group ms-auto">
 
                   <li className="nav-item">
-                    <Link className="nav-link" to="/login" onClick={handleLogout}><span className="me-2"><FontAwesomeIcon icon={faRightFromBracket} /></span>Logout</Link>
+                    <Link className="nav-link nav_logout" to="/login" onClick={handleLogout}><span className="me-2 logout_icon"><FontAwesomeIcon icon={faRightFromBracket} /></span><span className="logout_text">Logout</span></Link>
                   </li>
 
 
                   <li className="nav-item">
-                    <Link className="nav-link" to={`/dashboard/${user.role==='admin'? '':'profile'}`}><span className="me-2"><FontAwesomeIcon icon={faUser} /></span>{user.firstName}</Link>
+                    <Link className="nav-link nav_user" to={`/dashboard/${user.role==='admin'? '':'profile'}`}><span className="me-2 nav_user_icon"><FontAwesomeIcon icon={faUser} /></span><span className="user_firstname_text">{user.firstName}</span></Link>
                   </li>
 
                 </ul>

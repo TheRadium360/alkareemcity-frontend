@@ -797,4 +797,13 @@ a:hover {
 
 .MuiIconButton-root {
     font-size: 20px !important;
+
+
+
+}
+
+/* ----------------------MEDIA QUERIES---------------------------- */
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+    
 }

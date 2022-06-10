@@ -5,7 +5,7 @@ import Input from '../Generic/Input'
 import TextArea from '../Generic/TextArea'
 import { FormHeading } from '../Generic/FormHeading'
 import UsersContext from '../../context/users/UsersContext'
-
+import './../../css/FeedbackForm.css'
 
 
 
@@ -54,7 +54,7 @@ const FeedbackForm=() => {
 
 
 
-      <div style={{ margin: "2rem 10rem" }}>
+      <div className='feedbackform_main'>
         <div className='my-5'>
           <FormHeading value="Feedback" subHeading="Submit your feedback here" />
         </div>

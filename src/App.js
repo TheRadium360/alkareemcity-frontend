@@ -34,6 +34,7 @@ import Profile from './components/Users/Profile';
 import Plot from './components/Plot/Plot';
 import PayApprove from './components/Installment/PayApprove';
 import Error from './components/Generic/Error';
+import Error404 from './components/Generic/Error404';
 
 
 function App() {
@@ -51,6 +52,10 @@ function App() {
 
 
           <Routes>
+
+              {/* ---------------- Routes that does not exist -------------------------- */}
+              <Route path='*' element={<Error404/>} />
+
             <Route exact path='/' element={<Welcome />} />
 
             <Route exact path="login" element={<SignInForm />} />
@@ -140,6 +145,18 @@ function App() {
 
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
+
+
+
+              
+               
+
+
+
+
+
+
+
             </Route>
 
 

@@ -86,3 +86,37 @@
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
+
+
+
+
+/* ----------------------MEDIA QUERIES---------------------------- */
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+	.profile_text , .plot_text , .installment_text , .feedback_form_text , .forms_text{
+        display: none;
+    }
+    .profile_icon , .plot_icon , .installment_icon , .feedback_form_icon , .forms_icon{
+        margin-right: 0 !important;
+        margin-left: 1.3rem;
+    }
+    .img_img{
+        width: 3rem !important;
+        height: 3rem !important;
+    }
+    .dashboard_nav{
+        height: 3rem;
+    }
+    .alkareem_city_text , .user_firstname_text , .logout_text{
+        font-size: 10px;
+    }
+   
+    .nav_user , .nav_logout{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+   
+    .nav_group{
+        margin-left: 2.3rem !important;
+    }
+}

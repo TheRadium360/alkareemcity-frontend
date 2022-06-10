@@ -1,0 +1,21 @@
+.societyforms_main{
+    padding: 0rem 1rem;
+}
+
+
+
+
+
+
+
+/* ----------------------MEDIA QUERIES---------------------------- */
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+    
+.ant-tabs-nav{
+    margin-left: 2rem !important;
+}
+
+
+
+}

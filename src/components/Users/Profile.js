@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from '../Generic/Input'
+import Input from '../Generic/EditInput'
 import { FormHeading } from '../Generic/FormHeading'
 import { useState, useContext, useEffect } from 'react';
 import UsersContext from '../../context/users/UsersContext';

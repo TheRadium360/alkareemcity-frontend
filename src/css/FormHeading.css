@@ -19,3 +19,15 @@
   margin-left: 0;
   margin-bottom: 0;
 }
+
+
+/* ----------------------MEDIA QUERIES---------------------------- */
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+  .formHeading{
+    font-size: 16px;
+  }
+  .sub_head{
+    font-size: 13px;
+  }
+}
