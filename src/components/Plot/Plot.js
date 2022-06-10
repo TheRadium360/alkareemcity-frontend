@@ -6,6 +6,7 @@ import { FormDropdown } from '../Generic/FormDropdown';
 import Input from '../Generic/Input';
 import PlotMap from './PlotMap';
 import UsersContext from '../../context/users/UsersContext';
+import './../../css/Plot.css'
 
 export default function Plot() {
  
@@ -17,8 +18,10 @@ export default function Plot() {
   return (
     <div className='plotDiv'>
       {/* Plot Map*/}
-      
+      <div className='mb-5'>
+
       <FormHeading value="Plot Location" marginTop='2rem'/>
+      </div>
       <PlotMap {...(user.plotInformation[0])}/>
      {/* <PlotLeaftet/> */}
 

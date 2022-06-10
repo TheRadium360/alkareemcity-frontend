@@ -86,8 +86,9 @@
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
-
-
+.bottom_nav{
+    display: none;
+}
 
 
 /* ----------------------MEDIA QUERIES---------------------------- */
@@ -106,6 +107,7 @@
     }
     .dashboard_nav{
         height: 3rem;
+        width: 100%;
     }
     .alkareem_city_text , .user_firstname_text , .logout_text{
         font-size: 10px;
@@ -116,7 +118,23 @@
         padding-right: 0 !important;
     }
    
-    .nav_group{
-        margin-left: 2.3rem !important;
+ 
+    .bottom_nav{
+        display: block;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .css-1ee5err-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected{
+        color: #bd960a !important;
+    }
+    #sidebar{
+        display: none;
+        width: 0rem !important;
+    }
+    #content{
+        margin-left: 0rem !important;
     }
 }

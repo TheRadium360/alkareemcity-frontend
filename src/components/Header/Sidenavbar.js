@@ -15,7 +15,7 @@ import { faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faMountain } from '@fortawesome/free-solid-svg-icons';
 import { faMoneyBillTransfer } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
-
+import BottomBar from "../BottomBar";
 
 
 
@@ -166,6 +166,9 @@ export default function Sidenavbar() {
 
           </div>
         </div>
+      </div>
+      <div className="bottom_nav">
+        <BottomBar/>
       </div>
 
     </>

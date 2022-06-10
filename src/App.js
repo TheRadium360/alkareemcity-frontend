@@ -141,8 +141,7 @@ function App() {
 
               
 
-
-
+              
               {/* <Route exact path="flexes" element={<Flexes />} /> */}
               {/* <Route exact path="digitalpages" element={<Digitalpages />} /> */}
 

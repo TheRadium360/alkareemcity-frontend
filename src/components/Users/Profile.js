@@ -4,6 +4,7 @@ import { FormHeading } from '../Generic/FormHeading'
 import { useState, useContext, useEffect } from 'react';
 import UsersContext from '../../context/users/UsersContext';
 import Api from '../../Api';
+import './../../css/Profile.css'
 
 export default function Profile() {
   const [ profile, setProfile ]=useState( {} );
@@ -23,7 +24,7 @@ export default function Profile() {
     getProfile()
   }, [] );
   return (
-    <div>
+    <div className='profile_container'>
 
       <div >
         <FormHeading value="My Profile" />
