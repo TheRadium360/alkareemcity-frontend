@@ -16,7 +16,7 @@ const PayApprove=( props ) => {
 
 
 
-  const { approvalRequestCreds, setApprovalRequestCreds }=props;
+  const { approvalRequestCreds, setApprovalRequestCreds,pending,setPending }=props;
 
   const submitBtnRef=useRef( null )
   const closeBtn=useRef( null )
@@ -78,14 +78,9 @@ const PayApprove=( props ) => {
       console.log( res )
       if ( res.data.status==='success' ) {
         closeBtn.current.click();
-        let userId;
-        if ( Cookies.get( 'jwt' ) ) {
-          userId=jwtDecode( Cookies.get( 'jwt' ) ).id;
-          await retrieveUserInfo( userId );
-        }
-    
+       setPending(true);
+       console.log("chal gya");
         showAlert( `Approval request has been submited!`, "success" );
-
       }
       else {
         showAlert( `Something went wrong, please try again later!`, "danger" );

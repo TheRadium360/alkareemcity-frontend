@@ -23,7 +23,18 @@ const UserState=( props ) => {
     const endPoint='users/'+id;
     const res=await Api.get( endPoint );
     setUser( res.data.data );
+    return res.data.data;
+  }
 
+  const getUserInstallment=async ( id ) => {
+    const endPoint='installment/userid/'+id;
+    const res=await Api.get( endPoint );
+    return res.data.data;
+  }
+
+  const getUserPlot=async ( id ) => {
+    const endPoint='plots/userid/'+id;
+    const res=await Api.get( endPoint );
     return res.data.data;
   }
 
@@ -52,7 +63,7 @@ const UserState=( props ) => {
 
   return (
     
-    <UsersContext.Provider value={{ user, setUser, retrieveUserInfo, Cookies }}>
+    <UsersContext.Provider value={{ user, setUser, retrieveUserInfo,getUserInstallment, getUserPlot,Cookies }}>
       {props.children}
     </UsersContext.Provider>
 

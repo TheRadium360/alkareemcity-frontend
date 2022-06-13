@@ -11,21 +11,21 @@ import './../../css/Plot.css'
 export default function Plot() {
  
 
-  const {user}=useContext(UsersContext);
-  const [plotInfo,setPlotInfo]=useState(user.plotInformation[0]);
-  console.log(plotInfo);
+  const {user,getUserPlot}=useContext(UsersContext);
+  const [plotInfo,setPlotInfo]=useState();
 
-  return (
-    <div className='plotDiv'>
-      {/* Plot Map*/}
-      <div className='mb-5'>
+  useEffect(()=>{
+   getUserPlot(user.id).then((res)=>{
+    setPlotInfo(res[0])
+   })
+  },[])
 
-      <FormHeading value="Plot Location" marginTop='2rem'/>
-      </div>
-      <PlotMap {...(user.plotInformation[0])}/>
-     {/* <PlotLeaftet/> */}
-
-      {/* Plot Details*/}
+  
+  
+  return (  plotInfo ?  <div className='plotDiv'>
+   <FormHeading value="Plot Location" marginTop='2rem'/>
+      <PlotMap {...(plotInfo)}/>
+    
       <FormHeading value="Plot Details" />
       <form className='mb-5'>
         <div className="container">
@@ -132,8 +132,8 @@ export default function Plot() {
           </div>
         </div>
       </form>
+   
 
-
-    </div>
+  </div> :<>Add Spinner</>
   )
 }

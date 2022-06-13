@@ -30,7 +30,7 @@ export class DataTableComp extends Component {
    
     const users=this.props.users.reverse();
 
-    console.log(users)
+    console.log("all users>>>>",users)
     for (let i = 0; i < users.length; i++) {
       let user=[];
 
@@ -38,7 +38,8 @@ export class DataTableComp extends Component {
         user.push(users[i].CNIC)
         user.push(`${users[i].firstName} ${users[i].lastName}`)
         user.push(users[i].email)
-        user.push(users[i].plotInformation[0].plotNo)
+        // user.push(users[i].plotInformation[0].plotNo)
+        user.push("publishAPI")
         user.push(users[i].active===true?'Active':'Blocked');
     
 

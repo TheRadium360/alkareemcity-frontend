@@ -45,14 +45,10 @@ const ApprovalRequest=() => {
   const handleClick=( e ) => {
 
     if ( e.target.classList.contains( 'show_table_btn' ) ) {
-
-
       const id=e.target.getAttribute( 'aid' )
       const data=requests.filter( el => el.id===id );
       setModalData( data[ 0 ] )
       e.target.click();
-
-
     }
 
   }

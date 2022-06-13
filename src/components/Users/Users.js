@@ -54,6 +54,7 @@ export default function Users() {
     const res=await Api.get( "users", {
       headers: { Authorization: `Bearer ${cookie}` },
     } );
+    console.log("All users after request>>>>", res.data.data.data );
     setUsers( res.data.data.data );
   };
 
@@ -65,10 +66,11 @@ export default function Users() {
     console.log( "USER 64: ", e.target.classList.contains( 'btn_edit' )||e.target.classList.contains( 'btn_delete' ) );
 
     if ( e.target.classList.contains( 'btn_edit') || e.target.classList.contains( 'btn_delete') ) {
+      console.log("hiiiiiiiii",id)
       const data=users.filter( el => el.id===id )
       console.log( data )
       
-      setDetails( data[ 0 ] )
+      setDetails( data[ 0 ] );
       setFormVal( data[ 0 ] );
     }
     else if ( e.target.classList.contains( 'btn_active' ) ) {
@@ -152,7 +154,7 @@ export default function Users() {
 
   const deleteUser=async ( e ) => {
     const cookie=Cookies.get( "jwt" );
-    console.log(details)
+    console.log("------------>",details)
     try {
 
     await  Promise.all([
