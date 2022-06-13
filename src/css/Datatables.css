@@ -147,3 +147,56 @@ font-weight: 500;
 padding: 2px 4px;
 
 }
+/* ----------------------MEDIA QUERIES---------------------------- */
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+
+    .show_table {
+        margin-left: 0;
+        margin-right: 0;
+    }
+/* 
+    table.table-bordered.dataTable th,
+    table.table-bordered.dataTable td {
+        font-size: 6px;
+    }
+
+    */
+
+    .btn_id {
+        font-size: 5px !important;
+        padding: 2px 3px;
+
+    }
+
+    .btn_active,
+    .btn_block {
+        margin-top: 2px;
+    }
+
+    .dataTables_paginate.paging_simple_numbers {
+        margin-left: 3px;
+    }
+
+    .content_container {
+        width: 120% !important;
+    }
+
+
+
+    .dt-buttons.btn-group.flex-wrap {
+        float: left;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+
+    .dataTables_paginate.paging_simple_numbers {
+        font-size: 10px;
+    }
+
+    .show_table {
+        margin-top: 5rem;
+    }
+}

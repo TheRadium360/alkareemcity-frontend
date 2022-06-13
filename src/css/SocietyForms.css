@@ -2,9 +2,16 @@
     padding: 0rem 1rem;
 }
 
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #bd960a !important;
+}
 
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn:hover {
+    color: #bd960a !important;
 
+}
 
+/* color: #bd960a !important; */
 
 
 

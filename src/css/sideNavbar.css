@@ -107,7 +107,7 @@
     }
     .dashboard_nav{
         height: 3rem;
-        width: 100%;
+        width: 100% !important;
     }
     .alkareem_city_text , .user_firstname_text , .logout_text{
         font-size: 10px;
@@ -137,4 +137,15 @@
     #content{
         margin-left: 0rem !important;
     }
+
+    .navbar-collapse {
+    flex-grow: initial !important;
+
+    }
+
+#content {
+    margin: 0 !important;
+}
+
+
 }

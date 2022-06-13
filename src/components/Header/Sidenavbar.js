@@ -85,8 +85,8 @@ export default function Sidenavbar() {
 
               {user.role==='user'&&<li className={`${location.pathname.endsWith( "plot" )? "active":''}`}>
                 <Link to='/dashboard/plot'><span className="me-3 plot_icon"><FontAwesomeIcon icon={faMountain} /></span><span className="plot_text">My plot</span></Link>
-              </li>}  
-              
+              </li>}
+
 
               {user.role==='user'&&<li className={`${location.pathname.endsWith( "installments" )? "active":''}`}>
                 <Link to='/dashboard/installments'><span className="me-3 installment_icon"><FontAwesomeIcon icon={faMoneyBillTransfer} /></span><span className="installment_text">Installments</span></Link>
@@ -109,17 +109,6 @@ export default function Sidenavbar() {
 
 
 
-
-
-              {/* <li className={`${location.pathname.endsWith("flexes")? "active": ''}`}>
-          <Link to="/dashboard/flexes">Flexes</Link>
-        </li>
-        <li className={`${location.pathname.endsWith("digitalpages")? "active": ''}`}>
-          <Link to="/dashboard/digitalpages">Digital Pages</Link>
-        </li> */}
-              {/* <li className={`${location.pathname.endsWith("complaints")? "active": ''}`}>
-          <Link to='/dashboard/complaints'>Complaints</Link>
-        </li> */}
 
             </ul>
           </div>
@@ -168,7 +157,11 @@ export default function Sidenavbar() {
         </div>
       </div>
       <div className="bottom_nav">
-        <BottomBar/>
+        {
+          user.role==='user'&&<BottomBar />
+
+        }
+
       </div>
 
     </>

@@ -78,14 +78,10 @@ export class DataTableComp extends Component {
       { "orderable": false,"width": "40px", "targets": 2 },
       { "orderable": false,"width": "70px", "targets": 3 },
       { "orderable": false,"width": "15px", "targets": 4 },
-      { "orderable": false,"width": "10px", "targets": 5 },
-      { "orderable": false,"width": "60px", "targets": 6 },
+      { "orderable": false, "width": "15px", "targets": 5 },
+      { "orderable": false, "width": "55px", "targets": 6 },
     ],
-    "buttons": [
-      'csvHtml5',
-      'excelHtml5',
-      'print'
-    ]
+      "buttons": []
     , 
   "data": this.userTableData
   ,

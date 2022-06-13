@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
   return (
-    <Card sx={{ maxWidth: 345  , border:'1px solid golden' }}>
+    <Card sx={{ maxWidth: 345, border: '1px solid golden', marginBottom: "1rem" }}>
       <CardMedia
         component="img"
         height="140"
@@ -24,7 +24,7 @@ export default function MediaCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small"><a href="">Download</a></Button>
+        <Button size="small" ><a href={require( './../example.pdf' )} style={{ color: "#bd960a" }} download={"example.pdf"}>Download</a></Button>
       </CardActions>
     </Card>
   );

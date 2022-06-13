@@ -21,7 +21,9 @@ const UserState=( props ) => {
 
   const retrieveUserInfo=async ( id ) => {
     const endPoint='users/'+id;
-    const res=await Api.get( endPoint );
+    const res=await Api.get( endPoint, {
+      headers: { "Authorization": "Bearer "+Cookies.get( 'jwt' ) }
+    } );
     setUser( res.data.data );
 
     return res.data.data;
