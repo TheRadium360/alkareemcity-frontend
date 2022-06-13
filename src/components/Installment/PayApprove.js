@@ -4,6 +4,7 @@ import './../../css/flex.css'
 import './../../css/ReuestApproval.css';
 import Input from '../Generic/Input';
 import InputMask from 'react-input-mask';
+import TextField from '@mui/material/TextField';
 import $ from 'jquery';
 import { useEffect } from 'react';
 import Api from '../../Api';
@@ -186,9 +187,13 @@ const PayApprove=( props ) => {
                             <div className="row">
 
                               <div className="col-6 text-end mt-3">
-
+                                {/*
                                 <InputMask mask="99999-9999999-9" maskChar={null} type="text" id="inputCnic" placeholder='Enter CNIC' className='input' autoComplete="off" name="CNIC" style={{ width: "100%" , marginTop:'10rem' }} required />
-                                <p className="input_label_l" style={{ width: "100%" }}>CNIC</p>
+                                <p className="input_label_l" style={{ width: "100%" }}>CNIC</p> */}
+
+                                <InputMask mask="99999-9999999-9" maskChar={null} type="text" id="inputCnic" autoComplete="off" name="CNIC"  >
+                                  {() => <TextField variant="standard" name="CNIC" required className='input' label="Enter CNIC" style={{ width: "100%", marginTop: '10rem' }} />}
+                                </InputMask>
 
                               </div>
 

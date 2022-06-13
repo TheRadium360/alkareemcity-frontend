@@ -170,7 +170,6 @@ const InstallmentForm=( props ) => {
 
             <div className='text-center mt-5 container'>
 
-
               <div className="col-12 text-center">
                 <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
                 <button type='submit' className="btn form_btn" disabled={!values.plan||!values.totalAmount||!values.possessionAmount||!values.installmentPerMonth||!values.ballotAmount||!values.bookingAmount||!values.halfYearPayment||!values.totalInstallmentCount} >{formVal.installmentId? 'Update':'Submit'}</button>

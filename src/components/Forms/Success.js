@@ -1,6 +1,7 @@
 import React from 'react'
+import Api from '../../Api';
 import { FormHeading } from '../Generic/FormHeading'
-
+import Cookies from 'js-cookie';
 class Success extends React.Component {
 
 
@@ -12,8 +13,20 @@ class Success extends React.Component {
       this.props.previousStep();
     }
 
-    const finishIt=() => {
+    const finishIt=async () => {
+
+
+
+      const res=await Api.patch( `/users/publish/${this.props.values.userId}`,
+        { plotNo: this.props.values.plotNo },
+        { headers: { Authorization: `Bearer ${Cookies.get( 'jwt' )}` } }
+      )
+      console.log( "----->", res )
+
+
       this.props.setFormVal( {
+
+
         step: 1,
         firstName: '',
         lastName: '',

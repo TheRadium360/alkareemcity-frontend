@@ -47,26 +47,53 @@ export default function Installments() {
   return (
     installmentPlan ? <>
      <FormHeading value="Installment"/>
-     <Row align='center' style={{ marginTop:'3rem'}}>
-     <Statistic
-      style={{
-        margin: '0 70px',
-      }} title="Total" prefix="Rs." value={"1,20,000"} />
-        <Statistic
-          title="Price"
-          prefix="Rs."
-          value={568.08}
-          style={{
-            margin: '0 70px',
-          }}
-        />
-        <Statistic  style={{
-            margin: '0 70px',
-          }} title="Balloting" prefix="Rs." value={3345.08} />
-        <Statistic  style={{
-            margin: '0 70px',
-          }} title="Possession" prefix="Rs." value={3345.08} />
-        </Row>
+      {/* <Row align='center' style={{ marginTop:'3rem'}}> */}
+      <div className="row mx-auto" style={{ width: "90%" }}>
+
+        <div className="col-md-3 col-6 ">
+          <Statistic
+            style={{
+              margin: '0 10px',
+            }} title="Total" prefix="Rs." value={installmentPlan.totalAmount} />
+        </div>
+
+        <div className="col-md-3 col-6 ">
+
+          <Statistic
+            title="Remaining"
+            prefix="Rs."
+            value={installmentPlan.remainingBalance}
+            style={{
+              margin: '0 10px',
+            }}
+          />
+        </div>
+
+
+        <div className="col-md-3 mt-2 col-6">
+          <Statistic style={{
+            margin: '0 10px',
+          }} title="Balloting" prefix="Rs." value={installmentPlan.ballotAmount} />
+        </div>
+
+
+        <div className="col-md-3  mt-2 col-6">
+          <Statistic style={{
+            margin: '0 10px',
+          }} title="Possession" prefix="Rs." value={installmentPlan.possesionAmount} />
+
+
+        </div>
+
+
+
+
+
+
+
+      </div>
+
+      {/* </Row> */}
 
     {/* <div className="row installmentRow">
       <div className="col-6 installmentLeft">
