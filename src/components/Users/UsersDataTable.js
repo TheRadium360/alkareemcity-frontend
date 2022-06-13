@@ -38,8 +38,7 @@ export class DataTableComp extends Component {
         user.push(users[i].CNIC)
         user.push(`${users[i].firstName} ${users[i].lastName}`)
         user.push(users[i].email)
-        // user.push(users[i].plotInformation[0].plotNo)
-        user.push("publishAPI")
+        user.push(users[i].plotNo)
         user.push(users[i].active===true?'Active':'Blocked');
     
 

@@ -13,7 +13,7 @@ import Confirmation from "../Welcome/Confirmation";
 
 
 export default function Users() {
-  const { Cookies }=useContext( UsersContext );
+  const { Cookies ,getUserEditPrefil}=useContext( UsersContext );
   const [ users, setUsers ]=useState( [] );
   const { showAlert }=useContext( AppContext )
 
@@ -66,28 +66,24 @@ export default function Users() {
     console.log( "USER 64: ", e.target.classList.contains( 'btn_edit' )||e.target.classList.contains( 'btn_delete' ) );
 
     if ( e.target.classList.contains( 'btn_edit') || e.target.classList.contains( 'btn_delete') ) {
-      console.log("hiiiiiiiii",id)
-      const data=users.filter( el => el.id===id )
-      console.log( data )
+      // const data=users.filter( el => el.id===id )
+      const res= await getUserEditPrefil(id);
+      console.log( "yeh edit user prefil hai",res )
       
-      setDetails( data[ 0 ] );
-      setFormVal( data[ 0 ] );
+      setDetails( res );
+      setFormVal( res );
     }
     else if ( e.target.classList.contains( 'btn_active' ) ) {
       
-      const data = users.map(el=>{
-        
+      const data = users.map(el=>{   
         if(el.id===id){
           el.active=true;
           return el;
           
-        }
-        
+        }   
         else{
           return el;
         }
-
-
       })
 
 

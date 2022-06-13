@@ -43,7 +43,7 @@ const PayApprove=( props ) => {
     console.log( submitBtnRef.current )
   }
 
-  const { Cookies,retrieveUserInfo }=useContext( UsersContext )
+  const { Cookies }=useContext( UsersContext )
   const { showAlert }=useContext( AppContext );
   
   console.log('approvalRequestCreds',approvalRequestCreds);
