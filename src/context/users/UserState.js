@@ -25,7 +25,30 @@ const UserState=( props ) => {
       headers: { "Authorization": "Bearer "+Cookies.get( 'jwt' ) }
     } );
     setUser( res.data.data );
+    return res.data.data;
+  }
 
+  const getUserInstallment=async ( id ) => {
+    const endPoint='installment/userid/'+id;
+    const res=await Api.get( endPoint,{
+      headers: { Authorization: `Bearer ${ Cookies.get( 'jwt' )}` }
+    } );
+    return res.data.data;
+  }
+
+  const getUserPlot=async ( id ) => {
+    const endPoint='plots/userid/'+id;
+    const res=await Api.get( endPoint ,{
+      headers: { Authorization: `Bearer ${ Cookies.get( 'jwt' )}` }
+    });
+    return res.data.data;
+  }
+
+  const getUserEditPrefil=async ( id ) => {
+    const endPoint='users/edit/'+id;
+    const res=await Api.get( endPoint ,{
+      headers: { Authorization: `Bearer ${ Cookies.get( 'jwt' )}` }
+    });
     return res.data.data;
   }
 
@@ -54,7 +77,7 @@ const UserState=( props ) => {
 
   return (
     
-    <UsersContext.Provider value={{ user, setUser, retrieveUserInfo, Cookies }}>
+    <UsersContext.Provider value={{ user, setUser, retrieveUserInfo,getUserInstallment, getUserPlot,getUserEditPrefil,Cookies }}>
       {props.children}
     </UsersContext.Provider>
 
