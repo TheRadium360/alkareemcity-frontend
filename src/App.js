@@ -35,6 +35,7 @@ import Plot from './components/Plot/Plot';
 import PayApprove from './components/Installment/PayApprove';
 import Error from './components/Generic/Error';
 import Error404 from './components/Generic/Error404';
+import InstallmentTable from './components/Installment/InstallmentTable';
 
 
 function App() {
@@ -55,8 +56,10 @@ function App() {
 
               {/* ---------------- Routes that does not exist -------------------------- */}
               <Route path='*' element={<Error404/>} />
+              <Route path='/inst' element={<InstallmentTable/>} />
 
             <Route exact path='/' element={<Welcome />} />
+
 
             <Route exact path="login" element={<SignInForm />} />
             <Route exact path="signup" element={<SignupForm />} />

@@ -187,7 +187,7 @@ const PayApprove=( props ) => {
 
                               <div className="col-6 text-end mt-3">
 
-                                <InputMask mask="99999-9999999-9" maskChar={null} type="text" id="inputCnic" placeholder='Enter CNIC' className='input' autoComplete="off" name="CNIC" style={{ width: "100%" }} required />
+                                <InputMask mask="99999-9999999-9" maskChar={null} type="text" id="inputCnic" placeholder='Enter CNIC' className='input' autoComplete="off" name="CNIC" style={{ width: "100%" , marginTop:'10rem' }} required />
                                 <p className="input_label_l" style={{ width: "100%" }}>CNIC</p>
 
                               </div>

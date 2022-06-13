@@ -1,11 +1,14 @@
 import React, { useContext, useState,useEffect, useCallback } from 'react';
 import UsersContext from '../../context/users/UsersContext'; 
+import { Row,Statistic } from 'antd';
+
 import DataTableComp from './DataTableComp';
 import{ FormHeading} from '../Generic/FormHeading'
 import '../../css/installment.css';
 import PayApprove from './PayApprove';
 import AppContext from '../../context/appState/AppContext';
 import jwtDecode from 'jwt-decode';
+import InstallmentTable from './InstallmentTable';
 export default function Installments() {
   
   const { getUserInstallment ,Cookies,user}=useContext( UsersContext );
@@ -44,14 +47,35 @@ export default function Installments() {
   return (
     installmentPlan ? <>
      <FormHeading value="Installment"/>
-    <div className="row installmentRow">
+     <Row align='center' style={{ marginTop:'3rem'}}>
+     <Statistic
+      style={{
+        margin: '0 70px',
+      }} title="Total" prefix="Rs." value={"1,20,000"} />
+        <Statistic
+          title="Price"
+          prefix="Rs."
+          value={568.08}
+          style={{
+            margin: '0 70px',
+          }}
+        />
+        <Statistic  style={{
+            margin: '0 70px',
+          }} title="Balloting" prefix="Rs." value={3345.08} />
+        <Statistic  style={{
+            margin: '0 70px',
+          }} title="Possession" prefix="Rs." value={3345.08} />
+        </Row>
+
+    {/* <div className="row installmentRow">
       <div className="col-6 installmentLeft">
           <span className='installmentSubheading'>Total: </span> <span className='installmenSubheadingValue'>{installmentPlan.totalAmount} <small className="fw-bold"> PKR</small> </span>
       </div>
       <div className="col-6 installmentRight">
           <span className='installmentSubheading'>Remaining: </span> <span className='installmenSubheadingValue'>{installmentPlan.remainingBalance}<small className="fw-bold"> PKR</small></span>
       </div>
-    </div>
+    </div> */}
 
 
 
@@ -59,7 +83,10 @@ export default function Installments() {
       <PayApprove approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} pending={pending} setPending={setPending}/>
      
  
-    <DataTableComp installmentPlan={installmentPlan} pending={pending} setPending={setPending} key={pending} />
+    {/* <DataTableComp installmentPlan={installmentPlan} pending={pending} setPending={setPending} key={pending} /> */}
+    <div className='p-sm-5 my-3'>
+    <InstallmentTable  installmentPlan={installmentPlan} pending={pending} setPending={setPending} key={pending}  />
+    </div>
     </>:<>Add Spinner</>
     )
 }

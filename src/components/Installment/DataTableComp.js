@@ -27,18 +27,14 @@ export class DataTableComp extends Component {
 
   componentDidMount(){
   
-    console.log("inside",this.props.installmentPlan.halfYearPayment);
     const {totalAmount,remainingBalance,installmentPerMonth,possesionAmount,installmentCount,ballotPaid,possesion,halfYearPayment,totalInstallmentCount,bookingAmount,ballotAmount,fine,requestCount,}=this.props.installmentPlan;
     const {pending,setPending}=this.props;
-    console.log(setPending);
     // const {requestApprovalInformation}=this.props; 
 
     if(!pending)
     setPending(requestCount+1>installmentCount? true:false);
 
-    console.log("yeh hai pendingCL in installment" , requestCount+1>installmentCount? true:false);
-    console.log("yeh hai pending in installment" , pending);
-    console.log("yeh hai req count ",requestCount);
+   
     let installment;
     for (let index = 1; index <= totalInstallmentCount; index++) {
       installment=[];

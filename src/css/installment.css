@@ -27,3 +27,9 @@
   /* margin-top: 3rem; */
   margin-bottom: 2rem;
 }
+
+.ant-table-thead > tr > th{
+  background-color: #bd960a !important;
+  color: white !important;
+  padding: 8px 8px !important;
+}
