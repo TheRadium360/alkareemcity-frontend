@@ -1,33 +1,36 @@
-import '../../css/App.css';
-import '../../css/index.css'
-import { FaEye } from "react-icons/fa";
+import './../../css/Login.css'
 import Api from '../../Api';
 import React, { useContext, useState } from 'react';
 import UsersContext from '../../context/users/UsersContext';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../context/appState/AppContext';
-import { Input} from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+
+import { Form, Input, Button } from "antd";
+import { LockOutlined, MailOutlined } from '@ant-design/icons';
+
 
 
 const endPoint='users/login';
+const FormItem = Form.Item;
+
 
 const SignInForm=() => {
   const { retrieveUserInfo, user, Cookies }=useContext( UsersContext );
   const { encryptData, showAlert }=useContext( AppContext );
-  const [ credentials, setCredentials ]=useState( {
-    email: "",
-    password: ""
-  } );
+ 
 
   const navigate=useNavigate();
 
 
-  const handleLogin=async ( e ) => {
-    e.preventDefault();
+  const handleLogin=async ( values ) => {
+    let creds = {
+      email:values.email,
+      password:values.password
+    }
     try{
       
-    const res=await Api.post( endPoint, credentials );
+    const res=await Api.post( endPoint, creds );
     
     if ( res.data.status==="success" ) {
 
@@ -36,7 +39,6 @@ const SignInForm=() => {
 
       const encData=encryptData( data );
       window.localStorage.setItem( 'UR', encData )
-      // Cookies.set( 'UR', encData )
 
       if ( res.data.data.user.role==='user' ) {
         showAlert( 'Logged in successfully', 'success' )
@@ -55,47 +57,71 @@ const SignInForm=() => {
 
     }
   }catch(err){
-    // console.log(err.response.data)
     showAlert(err.response.data.message,'danger')
   }
 
   }
 
 
-  const onChange=( e ) => {
-    setCredentials( { ...credentials, [ e.target.name ]: e.target.value } )
-  }
   return (
 
-    <div className='background' style={{ marginTop: "0px", height: "100vh" }}>
-      <div className="clipPath" style={{ paddingTop: "100px", height: '100vh' }}>
-
-
-        <div className='container SignInForm' >
-          <div className='col-3'>
-            <h1 className='text-center text-white mb-5'>Login</h1>
-          </div>
-          <form onSubmit={handleLogin}>
-            <div className="mb-3" >
-
-              <input type="email" onChange={onChange} name="email"
-                placeholder='Email' className='signUpInput' />
-            </div>
-            <div className="mb-3">
-              {/* <input type="password" name='password' onChange={onChange} placeholder='Password' className='signUpInput' /><span className='signin_icon' ><FaEye /></span> */}
-              <Input.Password
-      placeholder="Password" className='signUpInput'
-      iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-      name="password" onChange={onChange} 
-    />
-            </div>
-            <button type='submit' className="btn btn-dark signinButton">SIGN IN</button>
-          </form>
+    <div>
+    <div className={"lContainer"}>
+    <div className="lItem">
+        <div className="loginImage">
+          <img src={require('./../../building.svg')} width="300" style={{position: 'relative'}} alt="login"/>
         </div>
-
-      </div>
+        <div className="loginForm">
+          <h2>Login</h2>
+            <Form  className="login-form" onFinish={handleLogin}>
+            <FormItem
+            name="email"
+            rules={[
+              {
+                required: true,
+                type:'email',
+                message:'Please enter valid email'
+              },
+            ]}
+            >
+             
+              
+                <Input
+                  prefix={<MailOutlined style={{opacity:0.3}} className="site-form-item-icon" />}
+                  placeholder="Email"
+                />
+            </FormItem>
+            <FormItem
+            name="password"
+            rules={[
+              {
+                required: true,
+                message:'Please enter password'
+              },
+            ]}
+            >
+                <Input.Password
+                  prefix={<LockOutlined style={{opacity:0.3}} className="site-form-item-icon" />}
+                  placeholder="Password"
+                />
+                
+            </FormItem>
+            <FormItem>
+            
+              <Button
+                
+                htmlType="submit"
+                className="login-form-button"
+                style={{backgroundColor:'#bd960a', color:'white'}}
+              >
+                Log in
+              </Button>
+            </FormItem>
+          </Form>
+        </div>
     </div>
-
+    </div>
+    </div>
 
   );
 };
