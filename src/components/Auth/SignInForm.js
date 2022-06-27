@@ -32,7 +32,7 @@ const SignInForm=() => {
     if ( res.data.status==="success" ) {
 
       Cookies.set( 'jwt', res.data.token );
-      const data=await retrieveUserInfo( res.data.data.user._id )
+      const data = await retrieveUserInfo( res.data.data.user._id )
 
       const encData=encryptData( data );
       window.localStorage.setItem( 'UR', encData )

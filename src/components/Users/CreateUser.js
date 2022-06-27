@@ -63,7 +63,6 @@ const CreateUser=() => {
   const nextStep=() => {
 
     const { step }=formVal;
-    console.log( formVal )
     setFormVal( { ...formVal, step: step+1 } )
 
 
@@ -75,7 +74,6 @@ const CreateUser=() => {
 
     const { step }=formVal;
 
-    console.log( formVal )
 
     setFormVal( { ...formVal, step: step-1 } )
   }

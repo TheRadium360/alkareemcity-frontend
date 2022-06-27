@@ -81,29 +81,10 @@ const PlotForm=( props ) => {
         )
       }
 
-      console.log( res );
-      console.log( res.data.status );
       if ( res.data.status==="success" ) {
 
         showAlert( `Plot has been ${formVal.plotId? 'updated':'created'} for the user successfully!`, "success" );
-        console.log({ ...formVal, plotId: res.data.data.id ,cords:[
-          {
-          lat:formVal.lat1,
-          lng:formVal.lng1,
-          },
-          {
-          lat:formVal.lat2,
-          lng:formVal.lng2,
-          },
-          {
-          lat:formVal.lat3,
-          lng:formVal.lng3,
-          },
-          {
-          lat:formVal.lat4,
-          lng:formVal.lng4,
-          },
-        ]});
+     
         setPlotFormStatus( res.data.status );
         setFormVal( { ...formVal, plotId: res.data.data.id ,cords:[
         {

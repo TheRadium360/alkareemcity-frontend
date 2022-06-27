@@ -69,7 +69,6 @@ export default function ( props ) {
           }
         );
 
-        console.log( res.data )
         if ( res.data.status==="success" ) {
           props.setDetails( res.data.data );
           props.setDisableInputs( true );
@@ -110,7 +109,6 @@ export default function ( props ) {
 
   };
 
-  console.log( "+++++++>", props.details )
 
 
   return (

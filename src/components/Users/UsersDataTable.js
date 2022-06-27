@@ -30,7 +30,6 @@ export class DataTableComp extends Component {
    
     const users=this.props.users.reverse();
 
-    console.log("all users>>>>",users)
     for (let i = 0; i < users.length; i++) {
       let user=[];
 

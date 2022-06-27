@@ -24,7 +24,6 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
   const {cords}=props;
   // const centerPoint=cords[0];
   const centerPoint=calcCenter(cords);
-  console.log(centerPoint);
 
 
  let defaultProps = {

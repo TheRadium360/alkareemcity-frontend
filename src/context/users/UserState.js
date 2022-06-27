@@ -3,6 +3,7 @@ import UsersContext from './UsersContext';
 import jwtDecode from 'jwt-decode';
 import Api from '../../Api';
 import Cook from 'js-cookie';
+import {useGetUserQuery} from '../../services/nodeApi';
 let CryptoJS=require( "crypto-js" );
 
 
@@ -62,15 +63,15 @@ const UserState=( props ) => {
   let userId;
   useEffect( async () => {
 
-    if ( Cookies.get( 'jwt' ) ) {
-      userId=jwtDecode( Cookies.get( 'jwt' ) ).id;
-      const data=await retrieveUserInfo( userId );
+    // if ( Cookies.get( 'jwt' ) ) {
+    //   userId=jwtDecode( Cookies.get( 'jwt' ) ).id;
+    //   console.log('hi from use effect');
+    //   const data=await retrieveUserInfo( userId );
+    //   // PERSISTING USER STATE(OPTIONAL)
+    //   window.localStorage.removeItem( 'UR' )
+    //   window.localStorage.setItem( 'UR', encryptData( data ) )
 
-      // PERSISTING USER STATE(OPTIONAL)
-      window.localStorage.removeItem( 'UR' )
-      window.localStorage.setItem( 'UR', encryptData( data ) )
-
-    }
+    // }
 
   }, [] )
 

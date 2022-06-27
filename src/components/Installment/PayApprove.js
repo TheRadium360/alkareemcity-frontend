@@ -41,13 +41,11 @@ const PayApprove=( props ) => {
     // if ( btnRef.current.classList.contains( 'file_uploading' ) ) {
       //   btnRef.current.style.display='none';
       // }
-    console.log( submitBtnRef.current )
   }
 
   const { Cookies }=useContext( UsersContext )
   const { showAlert }=useContext( AppContext );
   
-  console.log('approvalRequestCreds',approvalRequestCreds);
 
 
   const cookie=Cookies.get( 'jwt' )
@@ -76,11 +74,9 @@ const PayApprove=( props ) => {
         }
       )
 
-      console.log( res )
       if ( res.data.status==='success' ) {
         closeBtn.current.click();
        setPending(true);
-       console.log("chal gya");
         showAlert( `Approval request has been submited!`, "success" );
       }
       else {

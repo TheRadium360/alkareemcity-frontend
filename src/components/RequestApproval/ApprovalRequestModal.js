@@ -76,12 +76,10 @@ const ApprovalRequestModal=( props ) => {
 
 
     const cookie=Cookies.get( 'jwt' )
-    console.log( cookie )
     const id=data.id;
 
 
 
-    console.log( "accepting ", data );
     // DELETING DATA FROM BACKEND
     // const cookie=Cookies.get( 'jwt' );
     try {
@@ -96,7 +94,6 @@ const ApprovalRequestModal=( props ) => {
       if ( res.data.status==='success' ) {
         // DELETING DATA FROM ARRAY
         const arr=tableData;
-        console.log( tableData )
         const newData=arr.filter( el => {
           return el.id!==id;
         } );
@@ -110,7 +107,6 @@ const ApprovalRequestModal=( props ) => {
 
     } catch ( error ) {
       showAlert( error.response.data.message, 'danger' )
-      console.log( error.response.data.message )
     }
 
 

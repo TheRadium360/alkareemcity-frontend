@@ -54,7 +54,6 @@ export default function Users() {
     const res=await Api.get( "users", {
       headers: { Authorization: `Bearer ${cookie}` },
     } );
-    console.log("All users after request>>>>", res.data.data.data );
     setUsers( res.data.data.data );
   };
 
@@ -62,13 +61,10 @@ export default function Users() {
   const getAllDetails=async ( e, id ) => {
     // console.log(e.target)
     const cookie=Cookies.get( "jwt" );
-    console.log( "----->", e.target );
-    console.log( "USER 64: ", e.target.classList.contains( 'btn_edit' )||e.target.classList.contains( 'btn_delete' ) );
 
     if ( e.target.classList.contains( 'btn_edit') || e.target.classList.contains( 'btn_delete') ) {
       // const data=users.filter( el => el.id===id )
       const res= await getUserEditPrefil(id);
-      console.log( "yeh edit user prefil hai",res )
       
       setDetails( res );
       setFormVal( res );
@@ -150,7 +146,6 @@ export default function Users() {
 
   const deleteUser=async ( e ) => {
     const cookie=Cookies.get( "jwt" );
-    console.log("------------>",details)
     try {
 
     await  Promise.all([

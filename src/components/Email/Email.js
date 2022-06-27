@@ -34,9 +34,6 @@ export const Email = () => {
 
     try{
         
-        console.log(res.data.data.data)
-
-
         if ( res.data.status==="success" ) {
             formRef.current.reset()
             const users=res.data.data.data;

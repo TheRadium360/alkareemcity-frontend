@@ -61,7 +61,6 @@ const InstallmentForm=( props ) => {
 
       let res;
       if ( !formVal.installmentId ) {
-        console.log(data);
         res=await Api.post( 'installment',
           data,
           {
@@ -80,9 +79,6 @@ const InstallmentForm=( props ) => {
           }
         )
       }
-
-      console.log( res );
-      console.log( res.data.status );
       if ( res.data.status==="success" ) {
 
         showAlert( `Installment plan has been ${formVal.installmentId? 'updated':'created'} for the user successfully!`, "success" );
