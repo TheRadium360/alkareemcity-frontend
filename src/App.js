@@ -55,8 +55,7 @@ function App() {
           <Routes>
 
               {/* ---------------- Routes that does not exist -------------------------- */}
-              <Route path='*' element={<Error404/>} />
-              <Route path='/inst' element={<InstallmentTable/>} />
+            <Route path='*' element={<Error404 />} />
 
             <Route exact path='/' element={<Welcome />} />
 

@@ -7,7 +7,7 @@ export default function Alert() {
 
   if ( alert ) {
     return (
-      <div className={`alert alert_box alert-${alert.type} alert-dismissible w-25 mx-auto fade show`} role="alert">
+      <div className={`alert alert_box alert-${alert.type} alert-dismissible w-md-25 w-25 mx-auto fade show`} role="alert">
         <strong>{alert.type==='danger'? "error":alert.type}: </strong> {alert.msg}
       </div>
     )

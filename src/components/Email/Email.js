@@ -6,6 +6,7 @@ import TextArea from '../Generic/TextArea'
 import { FormHeading } from '../Generic/FormHeading'
 import Api from '../../Api'
 import UsersContext from '../../context/users/UsersContext'
+import { Button } from 'antd';
 
 
 export const Email = () => {
@@ -20,6 +21,7 @@ export const Email = () => {
   const onChange=onChangeGeneric( notify, setNotify  );
   
   const formRef=useRef(null);
+  const [ loading, setLoading ]=useState( false )
 
 
 
@@ -37,7 +39,8 @@ export const Email = () => {
         console.log(res.data.data.data)
 
 
-        if ( res.data.status==="success" ) {
+      if ( res.data.status==="success" ) {
+        setLoading( false )
             formRef.current.reset()
             const users=res.data.data.data;
             users.forEach(async (el) => {
@@ -56,7 +59,8 @@ export const Email = () => {
         else
         throw new Error();
     }
-    catch(e){
+    catch ( e ) {
+      setLoading( false )
         showAlert( `Something went wrong!`, "danger" );
     }
 
@@ -87,8 +91,8 @@ export const Email = () => {
           </div>
 
           <div className='text-center'>
-            <button type="submit" className="btn form_btn me-4">Submit</button>
-            <button type="reset" className="btn reset_btn">Reset</button>
+              <Button type="submit" htmlType="submit" loading={loading} onClick={() => setLoading( true )} className="btn form_btn me-4">Submit</Button>
+              <Button type="reset" htmlType="reset" className="btn reset_btn">Reset</Button>
           </div>
 
         </div>

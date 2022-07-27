@@ -8,6 +8,8 @@ import InputMask from 'react-input-mask';
 import TextField from '@mui/material/TextField';
 import { InputAdornment, IconButton } from "@material-ui/core";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Button } from 'antd';
+
 
 const UserForm=( props ) => {
   const endPoint='users/';
@@ -19,9 +21,15 @@ const UserForm=( props ) => {
   const [ showPassword1, setShowPassword1 ]=useState( false );
   const [ showPassword2, setShowPassword2 ]=useState( false );
 
+  const [ loading, setLoading ]=useState( false )
+
+
   const handleClickPass=() => {
+
     setShowPassword1( prev => !prev );
+
   }
+
   const handleClickConfirmPass=() => {
     setShowPassword2( prev => !prev );
   }
@@ -40,8 +48,10 @@ const UserForm=( props ) => {
 
   //?  Form Submission
   const handleUserFormSubmit=async ( e ) => {
+
     e.preventDefault();
 
+    console.log( "hiiiiiiiiii" )
     const cookie=Cookies.get( 'jwt' );
     const data={
       firstName: values.firstName,
@@ -56,6 +66,7 @@ const UserForm=( props ) => {
     if ( values.password!==values.passwordConfirm ) {
 
       setErrorMsg( "Password and Password Confirm are not same" )
+      setLoading( false );
       setErrorState( true );
 
 
@@ -87,7 +98,7 @@ const UserForm=( props ) => {
 
         // console.log( res.data.status );
         if ( res.data.status==="success" ) {
-
+          setLoading( false );
           showAlert( `User has been ${formVal.userId? 'updated':'created'} successfully!`, "success" );
           setUserFormStatus( res.data.status );
           setFormVal( { ...formVal, userId: res.data.data.id } )
@@ -99,8 +110,11 @@ const UserForm=( props ) => {
     
 
 
-    catch ( err ) {
+      catch ( err ) {
+
+        setLoading( false );      
       console.log( err.response.data );
+
       if(err.response.data.message.includes("email_1 dup key")){
         showAlert( "User with this email already exist!", "danger" );
 
@@ -204,13 +218,28 @@ const UserForm=( props ) => {
               {/* <button className="btn form_btn me-4" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm} onClick={moveToNext}>Next</button> */}
 
               <div className="col-12 text-center">
-                <button type='submit' className="btn form_btn" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm||!values.phone} >{formVal.userId? 'Update':'Submit'}</button>
+                {/* <button type='submit' className="btn form_btn" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm||!values.phone} >{formVal.userId? 'Update':'Submit'}</button> */}
+
+
+                <Button
+
+                  loading={loading}
+                  onClick={() => setLoading( true )}
+                  type='submit' className="btn form_btn" disabled={!values.CNIC||!values.email||!values.firstName||!values.lastName||!values.password||!values.passwordConfirm||!values.phone}
+
+                  htmlType="submit"
+                >
+                  {formVal.userId? 'Update':'Submit'}
+                </Button>
+
+
               </div>
 
               {/* disabled={userFormStatus==='fail'? true:false} */}
               <div className="col-12 text-end mb-3">
                 {/* <button className="btn form_next_btn "  onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button> */}
                 <button className="btn form_next_btn " disabled={userFormStatus==='fail'? true:false} onClick={moveToNext}>next <span className='right_arrow'>&#8594;</span></button>
+
 
               </div>
 

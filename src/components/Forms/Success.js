@@ -2,68 +2,78 @@ import React from 'react'
 import Api from '../../Api';
 import { FormHeading } from '../Generic/FormHeading'
 import Cookies from 'js-cookie';
+import { Button } from 'antd';
+
 class Success extends React.Component {
 
-
-
+  state={
+    loading: false
+  }
   render() {
 
     const moveToBack=( e ) => {
       e.preventDefault();
       this.props.previousStep();
+
     }
 
     const finishIt=async () => {
 
-
+      this.setState( { loading: true } )
 
       const res=await Api.patch( `/users/publish/${this.props.values.userId}`,
         { plotNo: this.props.values.plotNo },
         { headers: { Authorization: `Bearer ${Cookies.get( 'jwt' )}` } }
       )
       console.log( "----->", res )
+      if ( res.data.status==="success" ) {
+        this.setState( { loading: false } )
 
 
-      this.props.setFormVal( {
+        this.props.setFormVal( {
 
 
-        step: 1,
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        CNIC: '',
-        userId: '',
+          step: 1,
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          passwordConfirm: '',
+          CNIC: '',
+          userId: '',
 
-        plotNo: '',
-        plotPrice: '',
-        block: '',
-        lat1: '',
-        lng1: '',
-        lat2: '',
-        lng2: '',
-        lat3: '',
-        lng3: '',
-        lat4: '',
-        lng4: '',
-        plotArea: '',
-        plotType: '',
-        plotId: '',
+          plotNo: '',
+          plotPrice: '',
+          block: '',
+          lat1: '',
+          lng1: '',
+          lat2: '',
+          lng2: '',
+          lat3: '',
+          lng3: '',
+          lat4: '',
+          lng4: '',
+          plotArea: '',
+          plotType: '',
+          plotId: '',
 
-        plan: '',
-        totalAmount: '',
-        possessionAmount: '',
-        installmentPerMonth: '',
-        ballotAmount: '',
-        bookingAmount: '',
-        halfYearPayment: '',
-        totalInstallmentCount: '',
-        remainingBalance: '',
-        planStartDate: ''
+          plan: '',
+          totalAmount: '',
+          possessionAmount: '',
+          installmentPerMonth: '',
+          ballotAmount: '',
+          bookingAmount: '',
+          halfYearPayment: '',
+          totalInstallmentCount: '',
+          remainingBalance: '',
+          planStartDate: ''
 
 
-      } )
+        } )
+
+      }
+
+
 
     }
 
@@ -227,8 +237,16 @@ class Success extends React.Component {
 
         <div className='text-center my-4 container'>
 
-          <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-          <button className="btn form_btn mx-2" onClick={finishIt}>Finish</button>
+          <Button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</Button>
+
+          <Button
+            loading={this.state.loading}
+            className="btn form_btn mx-2" onClick={finishIt}
+            htmlType="submit"
+
+          >
+            Finish
+          </Button>
 
 
         </div>

@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useContext } from 'react'
+import React, { useEffect, useRef, useContext, useState } from 'react'
 import Input from '../Generic/Input';
 import { FormHeading } from '../Generic/FormHeading';
 import { FormDropdown } from '../Generic/FormDropdown';
 import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
 import AppContext from '../../context/appState/AppContext';
+import { Button } from 'antd';
 
 
 const PlotForm=( props ) => {
@@ -13,6 +14,8 @@ const PlotForm=( props ) => {
 
   const { showAlert, setAlert }=useContext( AppContext );
   const { Cookies }=useContext( UsersContext );
+
+  const [ loading, setLoading ]=useState( false )
 
   const moveToNext=( e ) => {
     e.preventDefault();
@@ -84,6 +87,7 @@ const PlotForm=( props ) => {
       console.log( res );
       console.log( res.data.status );
       if ( res.data.status==="success" ) {
+        setLoading( false );
 
         showAlert( `Plot has been ${formVal.plotId? 'updated':'created'} for the user successfully!`, "success" );
         console.log({ ...formVal, plotId: res.data.data.id ,cords:[
@@ -131,6 +135,7 @@ const PlotForm=( props ) => {
 
 
     } catch ( error ) {
+      setLoading( false );
 
       console.log( error );
       showAlert( "Something went wrong! Please try again later", "danger" );
@@ -232,11 +237,22 @@ const PlotForm=( props ) => {
             {/* </div> */}
 
             <div className='text-center mt-2 container'>
-              {console.log( !values.plotNo||!values.plotPrice||!values.lat||!values.lng||!values.block||!values.area )}
 
               <div className="col-12 text-center">
-                <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-                <button type='submit' className="btn form_btn" disabled={!values.plotNo||!values.plotPrice||!values.lat1||!values.lng1||!values.lat2||!values.lng2||!values.lat3||!values.lng3||!values.lat4||!values.lng4||!values.block||!values.plotArea}>{formVal.plotId? 'Update':'Submit'}</button>
+                <Button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</Button>
+
+                <Button
+
+                  loading={loading}
+                  onClick={() => setLoading( true )}
+                  type='submit' className="btn form_btn" disabled={!values.plotNo||!values.plotPrice||!values.lat1||!values.lng1||!values.lat2||!values.lng2||!values.lat3||!values.lng3||!values.lat4||!values.lng4||!values.block||!values.plotArea}
+                  htmlType="submit"
+
+                >
+                  {formVal.plotId? 'Update':'Submit'}
+
+                </Button>
+
                 {/* <button type='submit' className="btn form_btn" >{formVal.plotId? 'Update':'Submit'}</button> */}
               </div>
 

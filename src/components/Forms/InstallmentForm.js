@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from '../Generic/Input';
 import { FormHeading } from '../Generic/FormHeading';
 import { FormDropdown } from '../Generic/FormDropdown';
 import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
 import AppContext from '../../context/appState/AppContext';
+import { Button } from 'antd';
 
 
 const InstallmentForm=( props ) => {
@@ -13,7 +14,7 @@ const InstallmentForm=( props ) => {
 
   const { showAlert, setAlert }=useContext( AppContext );
   const { Cookies }=useContext( UsersContext );
-
+  const [ loading, setLoading ]=useState( false )
   // plan: '',
   //   totalAmount: '',
   //     possessionAmount: '',
@@ -84,6 +85,7 @@ const InstallmentForm=( props ) => {
       console.log( res );
       console.log( res.data.status );
       if ( res.data.status==="success" ) {
+        setLoading( false );
 
         showAlert( `Installment plan has been ${formVal.installmentId? 'updated':'created'} for the user successfully!`, "success" );
         setInstallmentFormStatus( res.data.status );
@@ -96,6 +98,7 @@ const InstallmentForm=( props ) => {
 
 
     } catch ( error ) {
+      setLoading( false );
 
       console.log( error );
       showAlert( "Something went wrong! Please try again later", "danger" );
@@ -171,8 +174,21 @@ const InstallmentForm=( props ) => {
             <div className='text-center mt-5 container'>
 
               <div className="col-12 text-center">
-                <button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</button>
-                <button type='submit' className="btn form_btn" disabled={!values.plan||!values.totalAmount||!values.possessionAmount||!values.installmentPerMonth||!values.ballotAmount||!values.bookingAmount||!values.halfYearPayment||!values.totalInstallmentCount} >{formVal.installmentId? 'Update':'Submit'}</button>
+
+                <Button className="btn reset_btn_outline btn-outline-dark mx-2" onClick={moveToBack}>Back</Button>
+
+                <Button
+
+                  loading={loading}
+                  onClick={() => setLoading( true )}
+                  type='submit' className="btn form_btn" disabled={!values.plan||!values.totalAmount||!values.possessionAmount||!values.installmentPerMonth||!values.ballotAmount||!values.bookingAmount||!values.halfYearPayment||!values.totalInstallmentCount}
+                  htmlType="submit"
+
+                >
+                  {formVal.installmentId? 'Update':'Submit'}
+
+                </Button>
+
               </div>
 
 

@@ -594,10 +594,10 @@ a:hover {
 }
 
 .form_btn {
-    color: white;
-    background-color: #bd960a;
-    padding-left: 40px;
-    padding-right: 40px;
+    color: white !important;
+    background-color: #bd960a !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
 }
 
 .form_btn:hover {
