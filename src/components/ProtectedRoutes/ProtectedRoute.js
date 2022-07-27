@@ -22,7 +22,6 @@ const ProtectedRoute=( {
 
   // const UR=Cookies.get( 'UR' );
   const UR=window.localStorage.getItem( 'UR' );
-  console.log( UR )
 
   if ( UR ) {
     user=decryptData( UR )

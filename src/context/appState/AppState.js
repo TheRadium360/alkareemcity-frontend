@@ -14,7 +14,6 @@ const AppState=( props ) => {
   const encryptData=( data ) => {
     // Encrypt
     let ciphertext=CryptoJS.AES.encrypt( JSON.stringify( data ), 'my-secret-key@123' ).toString();
-    console.log( ciphertext, "DATA HAS BEEN ENCRYPTED" )
     return ciphertext;
 
   }

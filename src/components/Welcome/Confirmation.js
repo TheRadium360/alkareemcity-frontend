@@ -4,7 +4,6 @@ const Confirmation=( props ) => {
 
   return (
     <div>
-      {console.log("ENTERING MODDAL",props)}
       {/*Button trigger modal*/}
       {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmation">
         Launch static backdrop modal

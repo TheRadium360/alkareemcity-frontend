@@ -29,7 +29,6 @@ const ApprovalRequest=() => {
       } )
     const requestData=res.data.data.data;
 
-    console.log( res.data.data.data );
     setRequests( requestData );
 
   }
@@ -39,7 +38,6 @@ const ApprovalRequest=() => {
 
   useEffect( () => {
     getRequests();
-    console.log(requests);
   }, [] )
 
   const handleClick=( e ) => {

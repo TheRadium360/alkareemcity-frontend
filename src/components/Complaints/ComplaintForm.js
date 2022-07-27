@@ -23,7 +23,7 @@ const ComplaintForm=() => {
   const handleSubmit=async ( e ) => {
     e.preventDefault();
     const res=await Api.post( '/complaints', complaintFormCred )
-    console.log( res );
+  
 
   }
 

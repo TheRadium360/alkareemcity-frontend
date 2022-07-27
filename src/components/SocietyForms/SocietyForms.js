@@ -8,7 +8,6 @@ const { TabPane } = Tabs;
 
 
 function callback(key) {
-  console.log(key);
 }
 
 export default () => (

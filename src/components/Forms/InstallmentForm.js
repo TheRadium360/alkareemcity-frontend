@@ -62,7 +62,6 @@ const InstallmentForm=( props ) => {
 
       let res;
       if ( !formVal.installmentId ) {
-        console.log(data);
         res=await Api.post( 'installment',
           data,
           {
@@ -81,9 +80,6 @@ const InstallmentForm=( props ) => {
           }
         )
       }
-
-      console.log( res );
-      console.log( res.data.status );
       if ( res.data.status==="success" ) {
         setLoading( false );
 
