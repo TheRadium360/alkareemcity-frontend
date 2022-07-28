@@ -5,9 +5,11 @@ import { useState, useContext, useEffect } from 'react';
 import UsersContext from '../../context/users/UsersContext';
 import Api from '../../Api';
 import './../../css/Profile.css'
+import { Card } from 'antd';
+const { Meta }=Card;
 
 export default function Profile() {
-  const [ profile, setProfile ]=useState( {} );
+  const [ profile, setProfile ]=useState( null );
   const { user, Cookies }=useContext( UsersContext );
 
   const getProfile=async () => {
@@ -24,13 +26,46 @@ export default function Profile() {
     getProfile()
   }, [] );
   return (
+
+    <>
+      {
+        profile!==null?
     <div className='profile_container'>
 
-      <div >
+            {/* <div >
         <FormHeading value="My Profile" />
-      </div>
+      </div> */}
 
-      <form>
+            {/* <div className="col-8 text-center mx-auto">
+        <img src={require( './../../profilePic.png' )} className='img-fluid' alt="" />
+      </div> */}
+
+            <Card
+              hoverable
+              style={{
+                width: 350,
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              cover={<img src={require( './../../profilePic.png' )} className='img-fluid' alt="" />}
+            >
+              <div className='text-center'>
+                <Meta title={profile.firstName+" "+profile.lastName} description={profile.email} />
+              </div>
+
+              <div className='text-center mt-4'>
+                <Meta title="Phone" description={profile.phone} />
+              </div>
+
+              <div className='text-center mt-4'>
+                <Meta title="CNIC" description={profile.CNIC} />
+              </div>
+
+
+              {/* <Meta title="Europe Street beat" description="www.instagram.com" /> */}
+            </Card>
+
+            {/* <form>
 
         <div className="container" >
           <div className="row">
@@ -70,6 +105,11 @@ export default function Profile() {
 
 
       </form>
-    </div>
+       */}
+          </div>:<div className='text-center'> <div className="spinner-grow" style={{ width: "5rem", height: '5rem', marginTop: "11rem" }} role="status">
+
+          </div><div className="" style={{ fontSize: "12px" }}>Loading...</div></div>
+      }
+    </>
   )
 }

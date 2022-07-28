@@ -11,6 +11,8 @@ import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
 import AppContext from '../../context/appState/AppContext';
 import jwtDecode from 'jwt-decode';
+import { message } from 'antd';
+
 
 
 const PossessionModal=( props ) => {
@@ -77,17 +79,20 @@ const PossessionModal=( props ) => {
       if ( res.data.status==='success' ) {
         closeBtn.current.click();
        setPending(true);
-        showAlert( `Approval request has been submited!`, "success" );
+        // showAlert( `Approval request has been submited!`, "success" );
+        message.success( 'Approval request has been submited!' );
       }
       else {
-        showAlert( `Something went wrong, please try again later!`, "danger" );
+        // showAlert( `Something went wrong, please try again later!`, "danger" );
+        message.error( 'Something went wrong, please try again later!' );
       }
 
 
     }
 
     else {
-      showAlert( `CNIC or First name is incorrect!`, "danger" );
+      // showAlert( `CNIC or First name is incorrect!`, "danger" );
+      message.error( 'CNIC or First name is incorrect!' );
 
     }
 

@@ -12,6 +12,7 @@ import { InputAdornment, IconButton } from "@material-ui/core";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import InputMask from 'react-input-mask';
 import TextField from '@mui/material/TextField';
+import { message } from 'antd';
 
 
 {/* <i class="fa-solid fa-pen-to-square"></i> */ }
@@ -98,11 +99,13 @@ export default function ( props ) {
 
           closeBtn.current.click();
 
-          showAlert( `User has been update successfully!`, "success" );
+          // showAlert( `User has been update successfully!`, "success" );
+          message.success( `User has been update successfully!` );
         }
 
       } catch ( err ) {
-        showAlert( `User not updated! Something went wrong`, "danger" );
+        // showAlert( `User not updated! Something went wrong`, "danger" );
+        message.error( `User not updated! Something went wrong` );
       }
     }
 

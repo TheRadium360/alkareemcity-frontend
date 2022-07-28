@@ -7,7 +7,7 @@ import { FormHeading } from '../Generic/FormHeading'
 import Api from '../../Api'
 import UsersContext from '../../context/users/UsersContext'
 import { Button } from 'antd';
-
+import { message } from 'antd';
 
 export const Email=() => {
 
@@ -54,14 +54,16 @@ export const Email=() => {
 
         } );
 
-        showAlert( `Notification sent to all users successfully!`, "success" );
+        // showAlert( `Notification sent to all users successfully!`, "success" );
+        message.success( `Notification sent to all users successfully!` );
       }
       else
         throw new Error();
     }
     catch ( e ) {
       setLoading( false )
-      showAlert( `Something went wrong!`, "danger" );
+      // showAlert( `Something went wrong!`, "danger" );
+      message.error( 'Something went wrong!' );
     }
 
 

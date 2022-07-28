@@ -19,10 +19,10 @@ export default function BottomBar() {
   return (
     <>
      <Box>
-         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '3.5rem' }} elevation={3}>
 
       <BottomNavigation
-      sx={{color:'yellow'}}
+            sx={{ color: 'yellow', fontSize: '46px' }}
     
         showLabels
         value={value}
@@ -31,7 +31,7 @@ export default function BottomBar() {
         }}
         >
              
-        <BottomNavigationAction label="Profile" component={Link} to='/dashboard/profile' icon={<FontAwesomeIcon icon={faAddressCard} />} />
+            <BottomNavigationAction label="Profile" component={Link} to='/dashboard/profile' icon={<FontAwesomeIcon icon={faAddressCard} />} />
         <BottomNavigationAction label="My plot"  component={Link} to='/dashboard/plot' icon={<FontAwesomeIcon icon={faMountain} />} />
         <BottomNavigationAction label="Installments"  component={Link} to='/dashboard/installments' icon={<FontAwesomeIcon icon={faMoneyBillTransfer} />} />
         <BottomNavigationAction label="Feedback"  component={Link} to="/dashboard/feedbackform" icon={<FontAwesomeIcon icon={faComment} />} />

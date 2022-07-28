@@ -6,7 +6,7 @@ import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
 import AppContext from '../../context/appState/AppContext';
 import { Button } from 'antd';
-
+import { message } from 'antd';
 
 const PlotForm=( props ) => {
 
@@ -87,8 +87,10 @@ const PlotForm=( props ) => {
       if ( res.data.status==="success" ) {
         setLoading( false );
 
-        showAlert( `Plot has been ${formVal.plotId? 'updated':'created'} for the user successfully!`, "success" );
-     
+        // showAlert( `Plot has been ${formVal.plotId? 'updated':'created'} for the user successfully!`, "success" );
+
+        message.success( `Plot has been ${formVal.plotId? 'updated':'created'} for the user successfully!` );
+
         setPlotFormStatus( res.data.status );
         setFormVal( { ...formVal, plotId: res.data.data.id ,cords:[
         {
@@ -119,7 +121,8 @@ const PlotForm=( props ) => {
       setLoading( false );
 
       console.log( error );
-      showAlert( "Something went wrong! Please try again later", "danger" );
+      // showAlert( "Something went wrong! Please try again later", "danger" );
+      message.error( "Something went wrong! Please try again later" );
     }
   }
 

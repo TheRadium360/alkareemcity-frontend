@@ -4,6 +4,9 @@ import UsersContext from "../../context/users/UsersContext";
 import Api from "../../Api";
 import FeedbacksDataTable from "./FeedbacksDataTable";
 import AppContext from "../../context/appState/AppContext";
+import { message } from 'antd';
+
+
 
 export default function Feedbacks() {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -27,7 +30,9 @@ export default function Feedbacks() {
       headers: { Authorization: `Bearer ${cookie}` },
     });
     if(res.data.length===0){
-      showAlert("All feedbacks deleted" , "success")
+      // showAlert( "All feedbacks deleted", "success" )
+
+      message.success( "All feedbacks deleted" );
       setFeedbacks([])
     }
   }

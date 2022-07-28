@@ -6,7 +6,7 @@ import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
 import AppContext from '../../context/appState/AppContext';
 import { Button } from 'antd';
-
+import { message } from 'antd';
 
 const InstallmentForm=( props ) => {
   const { values, onChange, nextStep, previousStep, formVal, setFormVal, installmentFormStatus, setInstallmentFormStatus }=props;
@@ -83,7 +83,9 @@ const InstallmentForm=( props ) => {
       if ( res.data.status==="success" ) {
         setLoading( false );
 
-        showAlert( `Installment plan has been ${formVal.installmentId? 'updated':'created'} for the user successfully!`, "success" );
+        // showAlert( `Installment plan has been ${formVal.installmentId? 'updated':'created'} for the user successfully!`, "success" );
+        message.success( `Installment plan has been ${formVal.installmentId? 'updated':'created'} for the user successfully!` );
+
         setInstallmentFormStatus( res.data.status );
         setFormVal( { ...formVal, installmentId: res.data.data.id } )
 
@@ -97,7 +99,8 @@ const InstallmentForm=( props ) => {
       setLoading( false );
 
       console.log( error );
-      showAlert( "Something went wrong! Please try again later", "danger" );
+      // showAlert( "Something went wrong! Please try again later", "danger" );
+      message.error( "Something went wrong! Please try again later" );
     }
   }
 

@@ -134,6 +134,8 @@ export default function Plot() {
       </form>
    
 
-  </div> :<>Add Spinner</>
+  </div>:<div className='text-center'> <div className="spinner-grow" style={{ width: "5rem", height: '5rem', marginTop: "11rem" }} role="status">
+
+  </div><div className="" style={{ fontSize: "12px" }}>Loading...</div></div>
   )
 }

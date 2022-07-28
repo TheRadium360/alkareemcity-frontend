@@ -9,6 +9,7 @@ import UsersContext from "../../context/users/UsersContext";
 import UserDataTable from "./UsersDataTable";
 import EditUsersModal from "./EditUsersModal";
 import Confirmation from "../Welcome/Confirmation";
+import { message } from 'antd';
 
 
 
@@ -91,13 +92,15 @@ export default function Users() {
         if(res.data.status==='success'){
 
           setUsers(data);
-          showAlert("User has been activated again!",'success');
+          // showAlert("User has been activated again!",'success');
+          message.success( "User has been activated again!" );
 
         }
         else throw new Error("Something went wrong")
 
       } catch (error) {
-        showAlert(error.message,'danger');
+        // showAlert( error.message, 'danger' );
+        message.error( error.message );
 
       }
 
@@ -128,13 +131,15 @@ export default function Users() {
 
         if(res.data.status==='success'){
           setUsers(data);
-          showAlert("User has been blocked",'success');
+          // showAlert("User has been blocked",'success');
+          message.success( "User has been blocked" );
 
         }
         else throw new Error("Something went wrong")
 
       } catch (error) {
-       showAlert(error.message,'danger');
+        //  showAlert(error.message,'danger');
+        message.error( error.message );
 
       }
    
@@ -168,9 +173,11 @@ export default function Users() {
   
       const data=users.filter( el => el.id!==details.id )
       setUsers( data )
-      showAlert( 'User deleted!', 'success' )
+      // showAlert( 'User deleted!', 'success' )
+      message.success( "User deleted!" );
     } catch ( err ) {
-      showAlert( "Something went wrong!", 'danger' )
+      // showAlert( "Something went wrong!", 'danger' )
+      message.error( "Something went wrong!" );
 
     }
 

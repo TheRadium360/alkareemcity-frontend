@@ -106,11 +106,11 @@
         height: 3rem !important;
     }
     .dashboard_nav{
-        height: 3rem;
+        height: 4rem;
         width: 100% !important;
     }
     .alkareem_city_text , .user_firstname_text , .logout_text{
-        font-size: 10px;
+        font-size: 16px;
     }
    
     .nav_user , .nav_logout{
@@ -129,6 +129,15 @@
     }
     .css-1ee5err-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected{
         color: #bd960a !important;
+        font-size: 20px;
+        }
+
+        .MuiBottomNavigationAction-label.Mui-selected.css-imwso6-MuiBottomNavigationAction-label {
+            font-size: 1rem;
+        }
+
+        .MuiButtonBase-root.MuiBottomNavigationAction-root.css-1ee5err-MuiButtonBase-root-MuiBottomNavigationAction-root {
+            font-size: 17px;
     }
     #sidebar{
         display: none;

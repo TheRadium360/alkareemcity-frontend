@@ -6,7 +6,7 @@ import TextArea from '../Generic/TextArea'
 import { FormHeading } from '../Generic/FormHeading'
 import UsersContext from '../../context/users/UsersContext'
 import './../../css/FeedbackForm.css'
-
+import { message } from 'antd'
 
 
 
@@ -40,10 +40,13 @@ const FeedbackForm=() => {
     } )
     if ( res.data.status==="success" ) {
       formRef.current.reset()
-      showAlert( `Feedback sent successfully!`, "success" );
+      // showAlert( `Feedback sent successfully!`, "success" );
+      message.success( 'Feedback sent successfully!' );
+
     }
     else{
-      showAlert( `Something went wrong!`, "danger" );
+      // showAlert( `Something went wrong!`, "danger" );
+      message.error( 'Something went wrong!' );
 
     }
 

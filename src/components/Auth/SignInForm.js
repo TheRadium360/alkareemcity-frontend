@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import AppContext from '../../context/appState/AppContext';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-
+// import { message } from 'antd';
 
 
 const endPoint='users/login';
@@ -18,7 +18,10 @@ const FormItem = Form.Item;
 const SignInForm=() => {
   const { retrieveUserInfo, user, Cookies }=useContext( UsersContext );
   const { encryptData, showAlert }=useContext( AppContext );
- 
+
+  const [ loading, setLoading ]=useState( false )
+
+
 
   const navigate=useNavigate();
 
@@ -29,11 +32,11 @@ const SignInForm=() => {
       password:values.password
     }
     try{
-      
+      setLoading( true );
     const res=await Api.post( endPoint, creds );
     
     if ( res.data.status==="success" ) {
-
+      setLoading( false );
       Cookies.set( 'jwt', res.data.token );
       const data = await retrieveUserInfo( res.data.data.user._id )
 
@@ -41,13 +44,17 @@ const SignInForm=() => {
       window.localStorage.setItem( 'UR', encData )
 
       if ( res.data.data.user.role==='user' ) {
-        showAlert( 'Logged in successfully', 'success' )
+        setLoading( false );
+        // showAlert( 'Logged in successfully', 'success' )
+        message.success( 'Logged in successfully' )
         setTimeout( () => {
           navigate( '/dashboard/profile' )
         }, 4000 )
       } else {
 
-        showAlert( 'Logged in successfully', 'success' )
+        setLoading( false );
+        // showAlert( 'Logged in successfully', 'success' )
+        message.success( 'Logged in successfully' )
         setTimeout( () => {
           navigate( '/dashboard' )
         }, 4000 )
@@ -56,8 +63,11 @@ const SignInForm=() => {
       }
 
     }
-  }catch(err){
-    showAlert(err.response.data.message,'danger')
+    } catch ( err ) {
+      setLoading( false );
+      console.log( err.response )
+      message.error( err.response.data.message )
+    // showAlert(err.response.data.message,'danger')
   }
 
   }
@@ -112,7 +122,8 @@ const SignInForm=() => {
                 
                 htmlType="submit"
                 className="login-form-button"
-                style={{backgroundColor:'#bd960a', color:'white'}}
+                  style={{ backgroundColor: '#bd960a', color: 'white' }}
+                  loading={loading}
               >
                 Log in
               </Button>

@@ -117,7 +117,7 @@ export default function Installments() {
       <BallotModal approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} pending={pending} setPending={setPending}/>
  
     {/* <DataTableComp installmentPlan={installmentPlan} pending={pending} setPending={setPending} key={pending} /> */}
-    <div className='p-sm-5 my-3'>
+      <div className='p-sm-5 mt-3 table_table'>
       <div className='text-end'>
     <Button data-bs-toggle="modal" data-bs-target="#BallotModal">Pay Ballot</Button>
     <Button data-bs-toggle="modal" data-bs-target="#PossessionModal">Pay Possession</Button>
@@ -125,6 +125,8 @@ export default function Installments() {
     <InstallmentTable  installmentPlan={installmentPlan} pending={pending} setPending={setPending} key={pending}  />
     
     </div>
-    </>:<>Add Spinner</>
+    </>:<div className='text-center'> <div className="spinner-grow" style={{ width: "5rem", height: '5rem', marginTop: "11rem" }} role="status">
+
+    </div><div className="" style={{ fontSize: "12px" }}>Loading...</div></div>
     )
 }

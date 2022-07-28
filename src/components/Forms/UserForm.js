@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import { InputAdornment, IconButton } from "@material-ui/core";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Button } from 'antd';
-
+import { message } from 'antd';
 
 const UserForm=( props ) => {
   const endPoint='users/';
@@ -99,7 +99,8 @@ const UserForm=( props ) => {
         // console.log( res.data.status );
         if ( res.data.status==="success" ) {
           setLoading( false );
-          showAlert( `User has been ${formVal.userId? 'updated':'created'} successfully!`, "success" );
+          // showAlert( `User has been ${formVal.userId? 'updated':'created'} successfully!`, "success" );
+          message.success( `User has been ${formVal.userId? 'updated':'created'} successfully!` );
           setUserFormStatus( res.data.status );
           setFormVal( { ...formVal, userId: res.data.data.id } )
 
@@ -116,20 +117,24 @@ const UserForm=( props ) => {
       console.log( err.response.data );
 
       if(err.response.data.message.includes("email_1 dup key")){
-        showAlert( "User with this email already exist!", "danger" );
-
+        // showAlert( "User with this email already exist!", "danger" );
+        message.error( "User with this email already exist!" );
       }
       else if(err.response.data.message.includes("CNIC_1 dup key")){
-        showAlert( "User with this CNIC already exist!", "danger" );
+        // showAlert( "User with this CNIC already exist!", "danger" );
+        message.error( "User with this CNIC already exist!" );
       }
       else if(err.response.data.message.includes("Password and Confirm-password are not same!")){
-        showAlert( "Password and Confirm Password are not same!", "danger" );
+        // showAlert( "Password and Confirm Password are not same!", "danger" );
+        message.error( "Password and Confirm Password are not same!" );
       }
       else if(err.response.data.message.includes("Password must be of atleast 8 characters long")){
-        showAlert( "Password must be of atleast 8 characters long!", "danger" );
+        // showAlert( "Password must be of atleast 8 characters long!", "danger" );
+        message.error( "Password must be of atleast 8 characters long!" );
       }
       else if(err.response.data.message.includes("Phone No. must be of atleast 11 digits numbers")){
-        showAlert( "Phone No. must be of atleast 11 digits numbers long!", "danger" );
+        // showAlert( "Phone No. must be of atleast 11 digits numbers long!", "danger" );
+        message.error( "Phone No. must be of atleast 11 digits numbers long!" );
       }
 
     }

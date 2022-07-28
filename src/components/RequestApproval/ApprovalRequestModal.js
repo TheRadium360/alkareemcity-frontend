@@ -18,6 +18,7 @@ import Api from '../../Api';
 import UsersContext from '../../context/users/UsersContext';
 import AppContext from '../../context/appState/AppContext';
 import Confirmation from '../Welcome/Confirmation';
+import { message } from 'antd';
 
 
 
@@ -57,11 +58,13 @@ const ApprovalRequestModal=( props ) => {
           headers: { Authorization: `Bearer ${cookie}` }
         } )
 
-      showAlert( "Request has been rejected", 'success' );
+      // showAlert( "Request has been rejected", 'success' );
+      message.success( "Request has been rejected" );
 
 
     } catch ( error ) {
-      showAlert( 'Something went wrong!', 'danger' )
+      // showAlert( 'Something went wrong!', 'danger' )
+      message.error( 'Something went wrong!' )
     }
 
 
@@ -99,14 +102,16 @@ const ApprovalRequestModal=( props ) => {
         } );
         setRequests( newData );
         closeBtn.current.click();
-        showAlert( "Request has been approved", 'success' );
+        // showAlert( "Request has been approved", 'success' );
+        message.success( "Request has been approved" );
 
       }
 
 
 
     } catch ( error ) {
-      showAlert( error.response.data.message, 'danger' )
+      // showAlert( error.response.data.message, 'danger' )
+      message.error( error.response.data.message )
     }
 
 

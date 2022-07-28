@@ -116,7 +116,7 @@ export default function Sidenavbar() {
 
 
         <div id="content">
-          <nav className="navbar navbar-expand navbar-light bg-light dashboard_nav">
+          <nav className="navbar navbar-expand navbar-light bg-light dashboard_nav" >
             <div className="container-fluid">
               <Link to='/'><span className="text-black alkareem_city_text"> Al-Kareem-City</span></Link>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -126,10 +126,6 @@ export default function Sidenavbar() {
                     <Link className="nav-link nav_logout" to="/login" onClick={handleLogout}><span className="me-2 logout_icon"><FontAwesomeIcon icon={faRightFromBracket} /></span><span className="logout_text">Logout</span></Link>
                   </li>
 
-
-                  <li className="nav-item">
-                    <Link className="nav-link nav_user" to={`/dashboard/${user.role==='admin'? '':'profile'}`}><span className="me-2 nav_user_icon"><FontAwesomeIcon icon={faUser} /></span><span className="user_firstname_text">{user.firstName}</span></Link>
-                  </li>
 
                 </ul>
               </div>
