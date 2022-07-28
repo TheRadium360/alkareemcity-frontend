@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 
-const baseUrl = "http://127.0.0.1:3001";
+const baseUrl = "https://api.alkareemcitylhr.com/api/v1";
 
 export const nodeAPI = createApi({
   reducerPath: "nodeAPI",

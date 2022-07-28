@@ -13,7 +13,7 @@ import AppContext from '../../context/appState/AppContext';
 import jwtDecode from 'jwt-decode';
 
 
-const PayApprove=( props ) => {
+const PossessionModal=( props ) => {
 
 
 
@@ -51,8 +51,6 @@ const PayApprove=( props ) => {
   const cookie=Cookies.get( 'jwt' )
 
   const handleSubmit=async ( e ) => {
-
-
     e.preventDefault();
 
     // console.log( String( approvalRequestCreds.CNIC )===String( e.target.CNIC.value ) )
@@ -142,14 +140,15 @@ const PayApprove=( props ) => {
 
       <div>
 
-        <div className="modal fade " id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade " id="PossessionModal" tabIndex={-1} aria-labelledby="PossessionModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title fw-bold" id="exampleModalLabel">Pay Installment</h5>
+                <h5 className="modal-title fw-bold" id="PossessionModalLabel">Pay Possessioon Amount</h5>
 
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose} ref={closeBtn} />
               </div>
+
               <div className="modal-body">
 
 
@@ -254,6 +253,8 @@ const PayApprove=( props ) => {
   )
 }
 
-export default PayApprove;
+
+
+export default PossessionModal;
 
 

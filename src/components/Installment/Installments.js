@@ -1,6 +1,6 @@
 import React, { useContext, useState,useEffect, useCallback } from 'react';
 import UsersContext from '../../context/users/UsersContext'; 
-import { Row,Statistic } from 'antd';
+import { Button, Row,Statistic } from 'antd';
 
 import DataTableComp from './DataTableComp';
 import{ FormHeading} from '../Generic/FormHeading'
@@ -9,6 +9,11 @@ import PayApprove from './PayApprove';
 import AppContext from '../../context/appState/AppContext';
 import jwtDecode from 'jwt-decode';
 import InstallmentTable from './InstallmentTable';
+import PossessionModal from './PossessionModal'
+import BallotModal from './BallotModal'
+
+
+
 export default function Installments() {
   
   const { getUserInstallment ,Cookies,user}=useContext( UsersContext );
@@ -108,11 +113,17 @@ export default function Installments() {
 
       {/* Installment */}
       <PayApprove approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} pending={pending} setPending={setPending}/>
-     
+      <PossessionModal approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} pending={pending} setPending={setPending}/>
+      <BallotModal approvalRequestCreds={approvalRequestCreds} setApprovalRequestCreds={setApprovalRequestCreds} pending={pending} setPending={setPending}/>
  
     {/* <DataTableComp installmentPlan={installmentPlan} pending={pending} setPending={setPending} key={pending} /> */}
     <div className='p-sm-5 my-3'>
+      <div className='text-end'>
+    <Button data-bs-toggle="modal" data-bs-target="#BallotModal">Pay Ballot</Button>
+    <Button data-bs-toggle="modal" data-bs-target="#PossessionModal">Pay Possession</Button>
+      </div>
     <InstallmentTable  installmentPlan={installmentPlan} pending={pending} setPending={setPending} key={pending}  />
+    
     </div>
     </>:<>Add Spinner</>
     )
