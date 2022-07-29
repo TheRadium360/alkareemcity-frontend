@@ -153,8 +153,10 @@ export default function Sidenavbar() {
         </div>
       </div>
       <div className="bottom_nav">
-        {
+        { 
+
           user.role==='user'&&<BottomBar />
+
 
         }
 

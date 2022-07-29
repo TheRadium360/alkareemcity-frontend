@@ -7,3 +7,20 @@
     }
 
 }
+@media(min-width: 501px) {
+    .ant-card-meta-title {
+        font-size: 1.2rem;
+    }
+
+    .ant-card-meta-description {
+        font-size: 1.2rem;
+    }
+
+    .ant-card.ant-card-bordered.ant-card-hoverable {
+
+        width: 450px !important;
+    }
+
+
+
+}

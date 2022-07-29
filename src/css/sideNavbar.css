@@ -117,8 +117,19 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-   
- 
+    /* .bottom_navbar {
+        position: fixed;
+        bottom: 0px;
+        height: 5rem;
+
+    }
+
+    */
+    /* .inside_bottom_nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    } */
     .bottom_nav{
         display: block;
         position: fixed;
@@ -127,18 +138,25 @@
         width: 100%;
         text-align: center;
     }
-    .css-1ee5err-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected{
-        color: #bd960a !important;
-        font-size: 20px;
-        }
+/* .MuiBottomNavigation-root.css-l08sfx-MuiBottomNavigation-root {
 
-        .MuiBottomNavigationAction-label.Mui-selected.css-imwso6-MuiBottomNavigationAction-label {
-            font-size: 1rem;
-        }
+    font-size: 22px !important;
 
-        .MuiButtonBase-root.MuiBottomNavigationAction-root.css-1ee5err-MuiButtonBase-root-MuiBottomNavigationAction-root {
-            font-size: 17px;
     }
+
+    .css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
+        color: #bd960a !important;
+        font-size: 24px !important;
+        }
+*/
+
+    	.Mui-selected {
+    	    color: #bd960a !important;
+    	    font-size: 26px !important;
+    	}
+        	.MuiBottomNavigationAction-label {
+        	    font-size: 18px !important;
+        	}
     #sidebar{
         display: none;
         width: 0rem !important;

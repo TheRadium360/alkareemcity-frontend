@@ -43,7 +43,7 @@ export default function Profile() {
             <Card
               hoverable
               style={{
-                width: 350,
+                width: 370,
                 marginLeft: "auto",
                 marginRight: "auto",
               }}

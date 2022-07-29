@@ -5,7 +5,7 @@ export const FormHeading = (props) => {
   return(
     <>
    <div className="headingBox" style={{marginTop:props.marginTop}}>
-   <h1 className="formHeading">
+        <h1 className="formHeading fw-bold">
   {props.value}
   </h1>
       </div>

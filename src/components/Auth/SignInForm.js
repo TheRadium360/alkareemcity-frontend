@@ -65,8 +65,8 @@ const SignInForm=() => {
     }
     } catch ( err ) {
       setLoading( false );
-      console.log( err.response )
-      message.error( err.response.data.message )
+      // console.log( err.response )
+      message.error( err.response? err.response.data.message:'Your internet connection is slow!' )
     // showAlert(err.response.data.message,'danger')
   }
 
